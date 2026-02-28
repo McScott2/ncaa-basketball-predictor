@@ -487,7 +487,41 @@ def print_summary(results):
     print("     • 100 naira stake until we confirm consistency")
     print("     • Never bet more than you can afford to lose")
     print_separator('═')
+  
+def save_to_log(results):
+    """Writes session predictions to the JSON log for the dashboard"""
+    LOG_FILE = 'nba_predictions_log.json'
+    try:
+        with open(LOG_FILE, 'r') as f:
+            log = json.load(f)
+    except:
+        log = []
 
+    today_str = datetime.now().strftime('%Y-%m-%d')
+    new_entry = {
+        "date": today_str,
+        "last_updated": datetime.now().strftime('%Y-%m-%d, %H:%M'),
+        "predictions": [{
+            "matchup": r['matchup'],
+            "pick": r['pick'],
+            "confidence": round(r['conf'] * 100, 1),
+            "est_total": round(r['total'], 1),
+            "ou_pick": r['ou'],
+            "ou_line": 224.5,
+            "result": "pending"
+        } for r in results]
+    }
+
+    # Replace today's entry if it exists, 
+    existing = next((i for i, item in enumerate(log) if item["date"] == today_str), None)
+    if existing is not None:
+        log[existing] = new_entry
+    else:
+        log.append(new_entry)
+
+    with open(LOG_FILE, 'w') as f:
+        json.dump(log, f, indent=2)
+    print(f"✅ Dashboard data saved to {LOG_FILE}")
 # ── MAIN ──────────────────────────────────────────────────────────────────
 def main():
     print()
