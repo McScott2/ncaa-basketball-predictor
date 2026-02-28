@@ -1,0 +1,214 @@
+{
+  "updated": "2026-02-28 20:06",
+  "stats": {
+    "total_hits": 0,
+    "total_picks": 0,
+    "accuracy": 0,
+    "best_day": null,
+    "best_pct": null,
+    "days_tracked": 0
+  },
+  "nba_today": {
+    "date": "2026-02-28",
+    "predictions": [
+      {
+        "matchup": "San Antonio Spurs @ New York Knicks",
+        "pick": "San Antonio Spurs",
+        "conf": 0.6157386277253736,
+        "ou": "OVER",
+        "ou_line": 224.7,
+        "total": 228.50690862944157,
+        "god": false,
+        "tipoff": "07:00 PM WAT",
+        "day": "TOMORROW",
+        "edge": 3.8,
+        "strong_ou": false,
+        "line_source": "Model",
+        "result": "pending"
+      },
+      {
+        "matchup": "Cleveland Cavaliers @ Brooklyn Nets",
+        "pick": "Cleveland Cavaliers",
+        "conf": 0.95,
+        "ou": "UNDER",
+        "ou_line": 229.5,
+        "total": 223.808345177665,
+        "god": true,
+        "tipoff": "09:30 PM WAT",
+        "day": "TOMORROW",
+        "edge": 5.7,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Milwaukee Bucks @ Chicago Bulls",
+        "pick": "Chicago Bulls",
+        "conf": 0.502774261430587,
+        "ou": "UNDER",
+        "ou_line": 225.1,
+        "total": 216.9096569543147,
+        "god": false,
+        "tipoff": "09:30 PM WAT",
+        "day": "TOMORROW",
+        "edge": 8.2,
+        "strong_ou": false,
+        "line_source": "Model",
+        "result": "pending"
+      },
+      {
+        "matchup": "Minnesota Timberwolves @ Denver Nuggets",
+        "pick": "Denver Nuggets",
+        "conf": 0.8399552130495246,
+        "ou": "OVER",
+        "ou_line": 224.4,
+        "total": 227.39313705583754,
+        "god": true,
+        "tipoff": "09:30 PM WAT",
+        "day": "TOMORROW",
+        "edge": 3.0,
+        "strong_ou": false,
+        "line_source": "Model",
+        "result": "pending"
+      },
+      {
+        "matchup": "Memphis Grizzlies @ Indiana Pacers",
+        "pick": "Indiana Pacers",
+        "conf": 0.9035626885537168,
+        "ou": "UNDER",
+        "ou_line": 234.6,
+        "total": 228.64549492385788,
+        "god": true,
+        "tipoff": "11:00 PM WAT",
+        "day": "TOMORROW",
+        "edge": 6.0,
+        "strong_ou": false,
+        "line_source": "Model",
+        "result": "pending"
+      },
+      {
+        "matchup": "Portland Trail Blazers @ Atlanta Hawks",
+        "pick": "Atlanta Hawks",
+        "conf": 0.9290004237586883,
+        "ou": "UNDER",
+        "ou_line": 229.5,
+        "total": 227.30395939086299,
+        "god": true,
+        "tipoff": "12:00 AM WAT",
+        "day": "TOMORROW",
+        "edge": 2.2,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Detroit Pistons @ Orlando Magic",
+        "pick": "Detroit Pistons",
+        "conf": 0.7939156190621309,
+        "ou": "OVER",
+        "ou_line": 221.0,
+        "total": 223.1328426395939,
+        "god": true,
+        "tipoff": "12:00 AM WAT",
+        "day": "TOMORROW",
+        "edge": 2.1,
+        "strong_ou": false,
+        "line_source": "Model",
+        "result": "pending"
+      },
+      {
+        "matchup": "Philadelphia 76ers @ Boston Celtics",
+        "pick": "Boston Celtics",
+        "conf": 0.916634648332828,
+        "ou": "OVER",
+        "ou_line": 225.7,
+        "total": 228.12496700507617,
+        "god": true,
+        "tipoff": "02:00 AM WAT",
+        "day": "TOMORROW",
+        "edge": 2.4,
+        "strong_ou": false,
+        "line_source": "Model",
+        "result": "pending"
+      },
+      {
+        "matchup": "Oklahoma City Thunder @ Dallas Mavericks",
+        "pick": "Oklahoma City Thunder",
+        "conf": 0.9303707575490043,
+        "ou": "OVER",
+        "ou_line": 227.3,
+        "total": 230.41690355329953,
+        "god": true,
+        "tipoff": "02:00 AM WAT",
+        "day": "TOMORROW",
+        "edge": 3.1,
+        "strong_ou": false,
+        "line_source": "Model",
+        "result": "pending"
+      },
+      {
+        "matchup": "New Orleans Pelicans @ LA Clippers",
+        "pick": "LA Clippers",
+        "conf": 0.8006281550566913,
+        "ou": "UNDER",
+        "ou_line": 244.5,
+        "total": 221.93274111675123,
+        "god": true,
+        "tipoff": "03:00 AM WAT",
+        "day": "TOMORROW",
+        "edge": 22.6,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Sacramento Kings @ Los Angeles Lakers",
+        "pick": "Los Angeles Lakers",
+        "conf": 0.9280044574631201,
+        "ou": "OVER",
+        "ou_line": 227.5,
+        "total": 229.86422335025384,
+        "god": true,
+        "tipoff": "03:30 AM WAT",
+        "day": "TOMORROW",
+        "edge": 2.4,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      }
+    ]
+  },
+  "ncaa_today": null,
+  "nba_history": [
+    {
+      "date": "2026-02-28",
+      "result": {},
+      "total": 11
+    },
+    {
+      "date": "2026-02-27",
+      "result": {},
+      "total": 5
+    },
+    {
+      "date": "2026-02-26",
+      "result": {},
+      "total": 10
+    },
+    {
+      "date": "2026-02-25",
+      "result": {},
+      "total": 11
+    },
+    {
+      "date": "2026-02-24",
+      "result": {},
+      "total": 6
+    },
+    {
+      "date": "2026-02-22",
+      "result": {},
+      "total": 11
+    }
+  ]
+}
