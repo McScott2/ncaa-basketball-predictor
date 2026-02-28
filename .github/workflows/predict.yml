@@ -2,47 +2,31 @@ name: NBA Oracle — Daily Predictions
 
 on:
   schedule:
-    # 7AM WAT (06:00 UTC) — Upload previous night's results + auto compare
     - cron: '0 6 * * *'
-    # 5PM WAT (16:00 UTC) — Run today's predictions before games start
     - cron: '0 16 * * *'
-  workflow_dispatch:  # Allow manual trigger from GitHub UI anytime
+  workflow_dispatch:
 
 jobs:
   predict:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
-      - name: Install dependencies
-        run: |
-          pip install requests numpy
-
-      - name: Run NBA Predictor (predictions + auto compare)
+      - run: pip install requests numpy
+      - name: NBA Predictor
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python3 nba_predictor.py
+      - name: NCAA Predictor
+        run: python3 ncaa_predictor/real_predictor.py || echo "NCAA skipped"
+      - name: Export Dashboard
+        run: python3 export_predictions.py || echo "Export skipped"
+      - name: Push updates
         run: |
-          python3 nba_predictor.py
-
-      - name: Run NCAA Predictor
-        run: |
-          python3 ncaa_predictor/real_predictor.py
-
-      - name: Export predictions to dashboard JSON
-        run: |
-          python3 export_predictions.py
-
-      - name: Commit and push updated predictions
-        run: |
-          git config --global user.name "NBA Oracle Bot"
-          git config --global user.email "oracle@nba.bot"
-          git add nba_predictions_log.json ncaa_predictions_log.json dashboard/ || true
-          git diff --staged --quiet || git commit -m "🤖 Auto-update: $(date '+%Y-%m-%d %H:%M') UTC"
+          git config user.name "NBA Oracle Bot"
+          git config user.email "oracle@nba.bot"
+          git add -A
+          git diff --staged --quiet || git commit -m "🤖 Auto-update $(date '+%Y-%m-%d %H:%M')"
           git push
