@@ -232,7 +232,12 @@
         "result": "hit",
         "god": false
       }
-    ]
+    ],
+    "result": {
+      "hits": 5,
+      "total": 5,
+      "pct": 100.0
+    }
   },
   {
     "date": "2026-02-26",
@@ -357,7 +362,12 @@
         "result": "hit",
         "god": false
       }
-    ]
+    ],
+    "result": {
+      "hits": 7,
+      "total": 10,
+      "pct": 70.0
+    }
   },
   {
     "date": "2026-02-25",
@@ -494,7 +504,12 @@
         "result": "hit",
         "god": false
       }
-    ]
+    ],
+    "result": {
+      "hits": 8,
+      "total": 11,
+      "pct": 72.7
+    }
   },
   {
     "date": "2026-02-24",
@@ -571,7 +586,12 @@
         "result": "miss",
         "god": false
       }
-    ]
+    ],
+    "result": {
+      "hits": 4,
+      "total": 6,
+      "pct": 66.7
+    }
   },
   {
     "date": "2026-02-22",
@@ -708,6 +728,11 @@
         "result": "hit",
         "god": false
       }
-    ]
+    ],
+    "result": {
+      "hits": 10,
+      "total": 11,
+      "pct": 90.9
+    }
   }
 ]

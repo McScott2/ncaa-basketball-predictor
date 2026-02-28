@@ -1,12 +1,12 @@
 {
-  "updated": "2026-02-28 20:06",
+  "updated": "2026-02-28 20:24",
   "stats": {
-    "total_hits": 0,
-    "total_picks": 0,
-    "accuracy": 0,
-    "best_day": null,
-    "best_pct": null,
-    "days_tracked": 0
+    "total_hits": 34,
+    "total_picks": 43,
+    "accuracy": 79.1,
+    "best_day": "2026-02-27",
+    "best_pct": 100.0,
+    "days_tracked": 5
   },
   "nba_today": {
     "date": "2026-02-28",
@@ -187,27 +187,47 @@
     },
     {
       "date": "2026-02-27",
-      "result": {},
+      "result": {
+        "hits": 5,
+        "total": 5,
+        "pct": 100.0
+      },
       "total": 5
     },
     {
       "date": "2026-02-26",
-      "result": {},
+      "result": {
+        "hits": 7,
+        "total": 10,
+        "pct": 70.0
+      },
       "total": 10
     },
     {
       "date": "2026-02-25",
-      "result": {},
+      "result": {
+        "hits": 8,
+        "total": 11,
+        "pct": 72.7
+      },
       "total": 11
     },
     {
       "date": "2026-02-24",
-      "result": {},
+      "result": {
+        "hits": 4,
+        "total": 6,
+        "pct": 66.7
+      },
       "total": 6
     },
     {
       "date": "2026-02-22",
-      "result": {},
+      "result": {
+        "hits": 10,
+        "total": 11,
+        "pct": 90.9
+      },
       "total": 11
     }
   ]
