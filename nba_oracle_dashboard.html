@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NBA Oracle — Prediction Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c10;
+    --bg2: #0d1219;
+    --bg3: #111820;
+    --border: rgba(255,255,255,0.06);
+    --accent: #f97316;
+    --accent2: #fb923c;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #eab308;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --dim: #334155;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* GRID BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(249,115,22,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(249,115,22,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HEADER */
+  header {
+    position: relative;
+    z-index: 10;
+    padding: 32px 40px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(180deg, rgba(249,115,22,0.05) 0%, transparent 100%);
+  }
+
+  .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .logo-main {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 3px;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .logo-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--accent);
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .live-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--green);
+  }
+
+  .live-dot {
+    width: 7px; height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+
+  #refresh-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 8px 18px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  #refresh-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* STATS BAR */
+  .stats-bar {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat-cell {
+    padding: 20px 32px;
+    border-right: 1px solid var(--border);
+  }
+  .stat-cell:last-child { border-right: none; }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+
+  .stat-value.accent { color: var(--accent); }
+  .stat-value.green { color: var(--green); }
+  .stat-value.white { color: #fff; }
+
+  .stat-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  /* MAIN LAYOUT */
+  .main {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    min-height: calc(100vh - 160px);
+  }
+
+  /* LEFT PANEL */
+  .left-panel {
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+  }
+
+  .panel-header {
+    padding: 20px 32px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg2);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+
+  .panel-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #fff;
+  }
+
+  .tab-group {
+    display: flex;
+    gap: 2px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 3px;
+    border-radius: 3px;
+  }
+
+  .tab {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 5px 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    color: var(--muted);
+    border: none;
+    background: transparent;
+    transition: all 0.2s;
+  }
+
+  .tab.active {
+    background: var(--accent);
+    color: #000;
+    font-weight: 600;
+  }
+
+  /* DAY BLOCK */
+  .day-block {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .day-header {
+    padding: 14px 32px;
+    background: var(--bg2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .day-header:hover { background: var(--bg3); }
+
+  .day-date {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: #fff;
+  }
+
+  .day-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .day-accuracy {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .day-accuracy.great { color: var(--green); }
+  .day-accuracy.good { color: var(--yellow); }
+  .day-accuracy.poor { color: var(--red); }
+
+  .day-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+  }
+
+  .day-badge.today {
+    background: rgba(249,115,22,0.15);
+    border: 1px solid rgba(249,115,22,0.4);
+    color: var(--accent);
+  }
+
+  .day-badge.past {
+    background: rgba(100,116,139,0.1);
+    border: 1px solid rgba(100,116,139,0.2);
+    color: var(--muted);
+  }
+
+  .chevron {
+    color: var(--muted);
+    transition: transform 0.2s;
+    font-size: 14px;
+  }
+
+  .day-block.open .chevron { transform: rotate(180deg); }
+
+  .day-games {
+    display: none;
+  }
+
+  .day-block.open .day-games { display: block; }
+
+  /* GAME ROW */
+  .game-row {
+    padding: 14px 32px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+    transition: background 0.15s;
+  }
+
+  .game-row:hover { background: rgba(255,255,255,0.02); }
+
+  .game-row.hit { border-left: 3px solid var(--green); }
+  .game-row.miss { border-left: 3px solid var(--red); }
+  .game-row.pending { border-left: 3px solid var(--dim); }
+
+  .game-matchup {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .game-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.5px;
+  }
+
+  .pill.ou {
+    background: rgba(249,115,22,0.1);
+    border: 1px solid rgba(249,115,22,0.25);
+    color: var(--accent2);
+  }
+
+  .pill.win-pick {
+    background: rgba(99,102,241,0.1);
+    border: 1px solid rgba(99,102,241,0.25);
+    color: #a5b4fc;
+  }
+
+  .pill.god {
+    background: rgba(249,115,22,0.2);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+  }
+
+  .pill.conf {
+    background: rgba(100,116,139,0.1);
+    border: 1px solid rgba(100,116,139,0.2);
+    color: var(--muted);
+  }
+
+  .game-result {
+    text-align: right;
+  }
+
+  .result-score {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .result-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+
+  .result-badge.hit {
+    background: rgba(34,197,94,0.15);
+    border: 1px solid rgba(34,197,94,0.3);
+    color: var(--green);
+  }
+
+  .result-badge.miss {
+    background: rgba(239,68,68,0.12);
+    border: 1px solid rgba(239,68,68,0.25);
+    color: var(--red);
+  }
+
+  .result-badge.pending {
+    background: rgba(100,116,139,0.1);
+    border: 1px solid rgba(100,116,139,0.2);
+    color: var(--muted);
+  }
+
+  /* RIGHT PANEL */
+  .right-panel {
+    overflow-y: auto;
+    background: var(--bg2);
+  }
+
+  .accuracy-chart {
+    padding: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .chart-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 100px;
+  }
+
+  .chart-bar-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    height: 100%;
+    justify-content: flex-end;
+  }
+
+  .chart-bar {
+    width: 100%;
+    border-radius: 2px 2px 0 0;
+    transition: height 0.8s cubic-bezier(0.34,1.56,0.64,1);
+    min-height: 4px;
+  }
+
+  .chart-bar.great { background: var(--green); }
+  .chart-bar.good { background: var(--yellow); }
+  .chart-bar.poor { background: var(--red); }
+  .chart-bar.pending { background: var(--dim); }
+
+  .chart-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .chart-pct {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text);
+    text-align: center;
+  }
+
+  /* MODEL RECORD */
+  .model-record {
+    padding: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .record-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .record-row:last-child { border-bottom: none; }
+
+  .record-label {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .record-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* STREAK */
+  .streak-section {
+    padding: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .streak-dots {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .streak-dot {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+
+  .streak-dot.hit { background: rgba(34,197,94,0.2); border: 1.5px solid var(--green); color: var(--green); }
+  .streak-dot.miss { background: rgba(239,68,68,0.15); border: 1.5px solid var(--red); color: var(--red); }
+  .streak-dot.pending { background: rgba(100,116,139,0.1); border: 1.5px solid var(--dim); color: var(--muted); }
+
+  /* EMPTY STATE */
+  .empty-state {
+    padding: 60px 32px;
+    text-align: center;
+    color: var(--muted);
+  }
+
+  .empty-icon { font-size: 48px; margin-bottom: 16px; }
+  .empty-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--dim); margin-bottom: 8px; }
+  .empty-text { font-size: 13px; line-height: 1.6; }
+
+  /* LOADING */
+  .loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    gap: 20px;
+    transition: opacity 0.4s;
+  }
+
+  .loading-overlay.hidden { opacity: 0; pointer-events: none; }
+
+  .loading-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    letter-spacing: 6px;
+    color: var(--accent);
+  }
+
+  .loading-bar-track {
+    width: 200px;
+    height: 2px;
+    background: var(--border);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+
+  .loading-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 1px;
+    animation: loading 1.5s ease-in-out infinite;
+  }
+
+  @keyframes loading {
+    0% { width: 0%; margin-left: 0; }
+    50% { width: 60%; margin-left: 20%; }
+    100% { width: 0%; margin-left: 100%; }
+  }
+
+  .loading-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--muted);
+  }
+
+  /* NOTIFICATION */
+  .notification {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 14px 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+    border-radius: 3px;
+    transform: translateY(100px);
+    transition: transform 0.3s;
+    z-index: 200;
+    max-width: 320px;
+  }
+
+  .notification.show { transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .main { grid-template-columns: 1fr; }
+    .right-panel { border-top: 1px solid var(--border); }
+    .stats-bar { grid-template-columns: repeat(3, 1fr); }
+    header { padding: 20px; }
+    .logo-main { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loader">
+  <div class="loading-logo">NBA ORACLE</div>
+  <div class="loading-bar-track"><div class="loading-bar-fill"></div></div>
+  <div class="loading-text">LOADING PREDICTION DATABASE</div>
+</div>
+
+<header>
+  <div class="logo">
+    <span class="logo-main">NBA ORACLE</span>
+    <span class="logo-tag">v4.0</span>
+  </div>
+  <div class="header-right">
+    <div class="live-badge">
+      <div class="live-dot"></div>
+      TRACKING LIVE
+    </div>
+    <button id="refresh-btn" onclick="loadData()">↻ REFRESH</button>
+  </div>
+</header>
+
+<div class="stats-bar" id="stats-bar">
+  <div class="stat-cell">
+    <div class="stat-label">Overall Accuracy</div>
+    <div class="stat-value accent" id="stat-accuracy">—</div>
+    <div class="stat-sub" id="stat-record">Loading...</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">Days Tracked</div>
+    <div class="stat-value white" id="stat-days">—</div>
+    <div class="stat-sub">since launch</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">Best Day</div>
+    <div class="stat-value green" id="stat-best">—</div>
+    <div class="stat-sub" id="stat-best-date">—</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">Total Picks</div>
+    <div class="stat-value white" id="stat-total">—</div>
+    <div class="stat-sub">games predicted</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">Current Streak</div>
+    <div class="stat-value accent" id="stat-streak">—</div>
+    <div class="stat-sub" id="stat-streak-label">—</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="left-panel">
+    <div class="panel-header">
+      <span class="panel-title">PREDICTION HISTORY</span>
+      <div class="tab-group">
+        <button class="tab active" onclick="filterGames('all', this)">ALL</button>
+        <button class="tab" onclick="filterGames('hits', this)">HITS ✓</button>
+        <button class="tab" onclick="filterGames('misses', this)">MISSES ✗</button>
+        <button class="tab" onclick="filterGames('pending', this)">PENDING</button>
+      </div>
+    </div>
+    <div id="history-container">
+      <div class="empty-state">
+        <div class="empty-icon">🏀</div>
+        <div class="empty-title">Loading predictions...</div>
+        <div class="empty-text">Fetching your prediction database</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-panel">
+    <div class="accuracy-chart">
+      <div class="chart-title">DAILY ACCURACY TREND</div>
+      <div class="chart-bars" id="chart-bars"></div>
+    </div>
+
+    <div class="model-record" id="model-record">
+      <div class="chart-title" style="margin-bottom:16px">MODEL RECORD</div>
+      <div class="record-row">
+        <span class="record-label">NBA O/U Accuracy</span>
+        <span class="record-val" id="rec-ou">—</span>
+      </div>
+      <div class="record-row">
+        <span class="record-label">Win Pick Accuracy</span>
+        <span class="record-val" id="rec-win">—</span>
+      </div>
+      <div class="record-row">
+        <span class="record-label">God Picks (≥70%)</span>
+        <span class="record-val" id="rec-god">—</span>
+      </div>
+      <div class="record-row">
+        <span class="record-label">Avg Confidence</span>
+        <span class="record-val" id="rec-conf">—</span>
+      </div>
+      <div class="record-row">
+        <span class="record-label">Last Updated</span>
+        <span class="record-val" id="rec-updated">—</span>
+      </div>
+    </div>
+
+    <div class="streak-section">
+      <div class="chart-title" style="margin-bottom:4px">PICK STREAK</div>
+      <div style="font-size:12px; color:var(--muted); margin-bottom:10px;">Last 30 individual picks</div>
+      <div class="streak-dots" id="streak-dots"></div>
+    </div>
+  </div>
+</div>
+
+<div class="notification" id="notification"></div>
+
+<script>
+let allData = [];
+let currentFilter = 'all';
+
+// SAMPLE DATA used as fallback when no JSON found
+const SAMPLE_DATA = [
+  {
+    date: "2026-02-27",
+    label: "Feb 27",
+    predictions: [
+      { matchup: "Cavaliers @ Pistons", pick: "Pistons", ou_pick: "OVER", ou_line: 227.5, estimated: 229, confidence: 53.9, actual_total: 241, actual_away: 119, actual_home: 122, result: "hit", is_today: false },
+      { matchup: "Nets @ Celtics", pick: "Celtics", ou_pick: "OVER", ou_line: 209.5, estimated: 227, confidence: 95.0, actual_total: 259, actual_away: 111, actual_home: 148, result: "hit", god: true, is_today: false },
+      { matchup: "Knicks @ Bucks", pick: "Knicks", ou_pick: "OVER", ou_line: 218.5, estimated: 224, confidence: 65.9, actual_total: 225, actual_away: 127, actual_home: 98, result: "hit", is_today: false },
+      { matchup: "Grizzlies @ Mavericks", pick: "Mavericks", ou_pick: "UNDER", ou_line: 238.5, estimated: 217, confidence: 71.3, actual_total: 229, actual_away: 124, actual_home: 105, result: "hit", is_today: false },
+      { matchup: "Nuggets @ Thunder", pick: "Thunder", ou_pick: "OVER", ou_line: 233.5, estimated: 234, confidence: 76.0, actual_total: 248, actual_away: 121, actual_home: 127, result: "hit", is_today: false }
+    ]
+  },
+  {
+    date: "2026-02-26",
+    label: "Feb 26",
+    predictions: [
+      { matchup: "Hornets @ Pacers", pick: "Pacers", ou_pick: "OVER", ou_line: 229.5, estimated: 230, confidence: 79.3, actual_total: 242, actual_away: 133, actual_home: 109, result: "hit", is_today: false },
+      { matchup: "Heat @ 76ers", pick: "76ers", ou_pick: "UNDER", ou_line: 239.5, estimated: 226, confidence: 62.4, actual_total: 241, actual_away: 117, actual_home: 124, result: "miss", is_today: false },
+      { matchup: "Wizards @ Hawks", pick: "Hawks", ou_pick: "UNDER", ou_line: 237.5, estimated: 219, confidence: 89.5, actual_total: 222, actual_away: 96, actual_home: 126, result: "hit", god: true, is_today: false },
+      { matchup: "Spurs @ Nets", pick: "Spurs", ou_pick: "OVER", ou_line: 224.5, estimated: 232, confidence: 95.0, actual_total: 236, actual_away: 126, actual_home: 110, result: "hit", god: true, is_today: false },
+      { matchup: "Rockets @ Magic", pick: "Rockets", ou_pick: "OVER", ou_line: 215.5, estimated: 221, confidence: 60.5, actual_total: 221, actual_away: 113, actual_home: 108, result: "hit", is_today: false },
+      { matchup: "Blazers @ Bulls", pick: "Bulls", ou_pick: "UNDER", ou_line: 234.5, estimated: 218, confidence: 77.5, actual_total: 233, actual_away: 121, actual_home: 112, result: "hit", is_today: false },
+      { matchup: "Kings @ Mavericks", pick: "Mavericks", ou_pick: "UNDER", ou_line: 236.5, estimated: 215, confidence: 76.0, actual_total: 251, actual_away: 130, actual_home: 121, result: "miss", is_today: false },
+      { matchup: "Lakers @ Suns", pick: "Suns", ou_pick: "OVER", ou_line: 220.5, estimated: 224, confidence: 54.5, actual_total: 223, actual_away: 110, actual_home: 113, result: "hit", is_today: false },
+      { matchup: "Pelicans @ Jazz", pick: "Pelicans", ou_pick: "UNDER", ou_line: 242.5, estimated: 215, confidence: 52.0, actual_total: 247, actual_away: 129, actual_home: 118, result: "miss", is_today: false },
+      { matchup: "Timberwolves @ Clippers", pick: "Timberwolves", ou_pick: "UNDER", ou_line: 225.5, estimated: 210, confidence: 59.7, actual_total: 182, actual_away: 94, actual_home: 88, result: "hit", is_today: false }
+    ]
+  },
+  {
+    date: "2026-02-25",
+    label: "Feb 25",
+    predictions: [
+      { matchup: "76ers @ Pacers", pick: "Pacers", ou_pick: "OVER", ou_line: 109.5, estimated: 236, confidence: 79.3, actual_total: 249, actual_away: 135, actual_home: 114, result: "hit", is_today: false },
+      { matchup: "Wizards @ Hawks", pick: "Hawks", ou_pick: "OVER", ou_line: 225.5, estimated: 234, confidence: 89.5, actual_total: 217, actual_away: 98, actual_home: 119, result: "miss", god: true, is_today: false },
+      { matchup: "Mavericks @ Nets", pick: "Nets", ou_pick: "UNDER", ou_line: 239.5, estimated: 223, confidence: 62.4, actual_total: 237, actual_away: 123, actual_home: 114, result: "hit", is_today: false },
+      { matchup: "Thunder @ Raptors", pick: "Thunder", ou_pick: "OVER", ou_line: 106.5, estimated: 233, confidence: 76.0, actual_total: 223, actual_away: 116, actual_home: 107, result: "hit", is_today: false },
+      { matchup: "Knicks @ Cavaliers", pick: "Cavaliers", ou_pick: "OVER", ou_line: 219.5, estimated: 224, confidence: 65.9, actual_total: 203, actual_away: 94, actual_home: 109, result: "miss", is_today: false },
+      { matchup: "Hornets @ Bulls", pick: "Bulls", ou_pick: "UNDER", ou_line: 246.5, estimated: 227, confidence: 77.5, actual_total: 230, actual_away: 131, actual_home: 99, result: "hit", is_today: false },
+      { matchup: "Heat @ Bucks", pick: "Bucks", ou_pick: "OVER", ou_line: 213.5, estimated: 225, confidence: 58.2, actual_total: 245, actual_away: 117, actual_home: 128, result: "hit", is_today: false },
+      { matchup: "Warriors @ Pelicans", pick: "Pelicans", ou_pick: "UNDER", ou_line: 240.5, estimated: 226, confidence: 52.5, actual_total: 222, actual_away: 109, actual_home: 113, result: "hit", is_today: false },
+      { matchup: "Celtics @ Suns", pick: "Celtics", ou_pick: "OVER", ou_line: 97.5, estimated: 228, confidence: 54.4, actual_total: 178, actual_away: 97, actual_home: 81, result: "miss", is_today: false },
+      { matchup: "Timberwolves @ Blazers", pick: "Timberwolves", ou_pick: "UNDER", ou_line: 249.5, estimated: 220, confidence: 83.2, actual_total: 245, actual_away: 124, actual_home: 121, result: "hit", is_today: false },
+      { matchup: "Magic @ Lakers", pick: "Lakers", ou_pick: "UNDER", ou_line: 243.5, estimated: 222, confidence: 76.5, actual_total: 219, actual_away: 110, actual_home: 109, result: "hit", is_today: false }
+    ]
+  },
+  {
+    date: "2026-02-24",
+    label: "Feb 24",
+    predictions: [
+      { matchup: "Cavaliers @ Thunder", pick: "Thunder", ou_pick: "OVER", ou_line: 225.7, estimated: 229, confidence: 62.7, actual_total: 234, actual_away: 113, actual_home: 121, result: "hit", is_today: false },
+      { matchup: "Raptors @ Spurs", pick: "Spurs", ou_pick: "OVER", ou_line: 227.4, estimated: 233, confidence: 62.2, actual_total: 217, actual_away: 110, actual_home: 107, result: "miss", is_today: false },
+      { matchup: "Grizzlies @ Warriors", pick: "Warriors", ou_pick: "OVER", ou_line: 224.9, estimated: 226, confidence: 67.0, actual_total: 245, actual_away: 112, actual_home: 133, result: "hit", is_today: false },
+      { matchup: "Kings @ Rockets", pick: "Rockets", ou_pick: "UNDER", ou_line: 226.3, estimated: 204, confidence: 90.9, actual_total: 225, actual_away: 97, actual_home: 128, result: "hit", god: true, is_today: false },
+      { matchup: "Cavaliers @ Bucks", pick: "Cavaliers", ou_pick: "OVER", ou_line: 224.5, estimated: 226, confidence: 83.3, actual_total: 234, actual_away: 116, actual_home: 118, result: "hit", is_today: false },
+      { matchup: "Celtics @ Nuggets", pick: "Celtics", ou_pick: "OVER", ou_line: 228.2, estimated: 233, confidence: 54.4, actual_total: 187, actual_away: 84, actual_home: 103, result: "miss", is_today: false }
+    ]
+  },
+  {
+    date: "2026-02-22",
+    label: "Feb 22",
+    predictions: [
+      { matchup: "Cavaliers @ Thunder", pick: "Thunder", ou_pick: "OVER", ou_line: 224.0, estimated: 228, confidence: 65.0, actual_total: 234, actual_away: 113, actual_home: 121, result: "hit", is_today: false },
+      { matchup: "Nets @ Hawks", pick: "Hawks", ou_pick: "OVER", ou_line: 218.0, estimated: 224, confidence: 58.0, actual_total: 219, actual_away: 104, actual_home: 115, result: "hit", is_today: false },
+      { matchup: "Raptors @ Bucks", pick: "Bucks", ou_pick: "OVER", ou_line: 220.0, estimated: 226, confidence: 70.0, actual_total: 216, actual_away: 122, actual_home: 94, result: "miss", is_today: false },
+      { matchup: "Nuggets @ Warriors", pick: "Warriors", ou_pick: "OVER", ou_line: 226.0, estimated: 231, confidence: 63.0, actual_total: 245, actual_away: 117, actual_home: 128, result: "hit", is_today: false },
+      { matchup: "Mavericks @ Pacers", pick: "Pacers", ou_pick: "OVER", ou_line: 220.0, estimated: 225, confidence: 68.0, actual_total: 264, actual_away: 134, actual_home: 130, result: "hit", is_today: false },
+      { matchup: "Hornets @ Wizards", pick: "Wizards", ou_pick: "OVER", ou_line: 225.0, estimated: 226, confidence: 55.0, actual_total: 241, actual_away: 129, actual_home: 112, result: "hit", is_today: false },
+      { matchup: "Celtics @ Lakers", pick: "Celtics", ou_pick: "UNDER", ou_line: 225.0, estimated: 218, confidence: 78.0, actual_total: 200, actual_away: 111, actual_home: 89, result: "hit", is_today: false },
+      { matchup: "76ers @ Timberwolves", pick: "Timberwolves", ou_pick: "OVER", ou_line: 228.0, estimated: 243, confidence: 72.0, actual_total: 243, actual_away: 135, actual_home: 108, result: "hit", is_today: false },
+      { matchup: "Knicks @ Bulls", pick: "Knicks", ou_pick: "UNDER", ou_line: 215.0, estimated: 208, confidence: 62.0, actual_total: 204, actual_away: 105, actual_home: 99, result: "hit", is_today: false },
+      { matchup: "Blazers @ Suns", pick: "Blazers", ou_pick: "UNDER", ou_line: 210.0, estimated: 198, confidence: 58.0, actual_total: 169, actual_away: 92, actual_home: 77, result: "hit", is_today: false },
+      { matchup: "Magic @ Clippers", pick: "Clippers", ou_pick: "UNDER", ou_line: 225.0, estimated: 214, confidence: 55.0, actual_total: 220, actual_away: 111, actual_home: 109, result: "hit", is_today: false }
+    ]
+  }
+];
+
+function getAccuracyClass(pct) {
+  if (pct >= 70) return 'great';
+  if (pct >= 55) return 'good';
+  if (pct === 0) return 'pending';
+  return 'poor';
+}
+
+function calcDayStats(day) {
+  const preds = day.predictions || [];
+  const withResult = preds.filter(p => p.result !== 'pending');
+  const hits = preds.filter(p => p.result === 'hit').length;
+  const total = withResult.length;
+  const pct = total > 0 ? Math.round((hits / total) * 100) : null;
+  return { hits, total, pct, pending: preds.length - withResult.length };
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return 'Unknown';
+  try {
+    const d = new Date(dateStr + 'T12:00:00');
+    return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+  } catch { return dateStr; }
+}
+
+function renderHistory(data, filter) {
+  const container = document.getElementById('history-container');
+  container.innerHTML = '';
+
+  if (!data || data.length === 0) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-title">NO DATA YET</div><div class="empty-text">Run your prediction engine to start tracking results.</div></div>`;
+    return;
+  }
+
+  data.forEach((day, di) => {
+    const stats = calcDayStats(day);
+    const pct = stats.pct;
+    const isToday = di === 0;
+    const accClass = pct !== null ? getAccuracyClass(pct) : 'pending';
+
+    let filteredPreds = day.predictions || [];
+    if (filter === 'hits') filteredPreds = filteredPreds.filter(p => p.result === 'hit');
+    else if (filter === 'misses') filteredPreds = filteredPreds.filter(p => p.result === 'miss');
+    else if (filter === 'pending') filteredPreds = filteredPreds.filter(p => p.result === 'pending');
+
+    if (filter !== 'all' && filteredPreds.length === 0) return;
+
+    const block = document.createElement('div');
+    block.className = 'day-block' + (isToday ? ' open' : '');
+    block.innerHTML = `
+      <div class="day-header" onclick="toggleDay(this)">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <span class="day-date">${formatDate(day.date)}</span>
+          <span class="day-badge ${isToday ? 'today' : 'past'}">${isToday ? 'TODAY' : 'FINAL'}</span>
+        </div>
+        <div class="day-meta">
+          <span class="day-accuracy ${accClass}">${pct !== null ? pct + '%' : '—'}${stats.total > 0 ? ' · ' + stats.hits + '/' + stats.total : ''}</span>
+          <span class="chevron">▾</span>
+        </div>
+      </div>
+      <div class="day-games" id="games-${di}">
+        ${filteredPreds.map(p => renderGameRow(p)).join('')}
+      </div>`;
+    container.appendChild(block);
+  });
+}
+
+function renderGameRow(p) {
+  const rowClass = p.result === 'pending' ? 'pending' : p.result;
+  const resultLabel = p.result === 'hit' ? '✓ HIT' : p.result === 'miss' ? '✗ MISS' : '— TBD';
+  const resultClass = p.result === 'pending' ? 'pending' : p.result;
+  const scoreStr = (p.actual_away !== undefined && p.actual_home !== undefined)
+    ? `${p.actual_away}–${p.actual_home} · Total: ${p.actual_total}`
+    : 'Awaiting result';
+
+  return `
+    <div class="game-row ${rowClass}">
+      <div>
+        <div class="game-matchup">${p.matchup || 'Unknown matchup'}</div>
+        <div class="game-details">
+          ${p.ou_pick ? `<span class="pill ou">${p.ou_pick} ${p.ou_line}</span>` : ''}
+          ${p.pick ? `<span class="pill win-pick">Pick: ${p.pick}</span>` : ''}
+          ${p.god ? `<span class="pill god">🔥 GOD PICK</span>` : ''}
+          ${p.confidence ? `<span class="pill conf">${p.confidence.toFixed(1)}% conf</span>` : ''}
+          ${p.estimated ? `<span class="pill conf">Est: ${p.estimated} pts</span>` : ''}
+        </div>
+      </div>
+      <div class="game-result">
+        <div class="result-score">${scoreStr}</div>
+        <div class="result-badge ${resultClass}">${resultLabel}</div>
+      </div>
+    </div>`;
+}
+
+function renderChart(data) {
+  const container = document.getElementById('chart-bars');
+  container.innerHTML = '';
+  const recent = [...data].reverse().slice(-10);
+  recent.forEach(day => {
+    const stats = calcDayStats(day);
+    const pct = stats.pct || 0;
+    const cls = getAccuracyClass(pct);
+    const height = Math.max(4, pct);
+    const shortDate = day.date ? day.date.slice(5) : '?';
+    container.innerHTML += `
+      <div class="chart-bar-wrap">
+        <div class="chart-pct">${pct > 0 ? pct + '%' : ''}</div>
+        <div class="chart-bar ${cls}" style="height:${height}px;"></div>
+        <div class="chart-label">${shortDate}</div>
+      </div>`;
+  });
+}
+
+function renderStats(data) {
+  let totalHits = 0, totalPicks = 0;
+  let bestPct = 0, bestDate = '';
+  let ouHits = 0, ouTotal = 0, winHits = 0, winTotal = 0;
+  let godHits = 0, godTotal = 0, confSum = 0, confCount = 0;
+
+  data.forEach(day => {
+    const preds = day.predictions || [];
+    preds.forEach(p => {
+      if (p.result !== 'pending') {
+        totalPicks++;
+        if (p.result === 'hit') totalHits++;
+        if (p.ou_pick) { ouTotal++; if (p.result === 'hit') ouHits++; }
+        if (p.pick) { winTotal++; if (p.result === 'hit') winHits++; }
+        if (p.god) { godTotal++; if (p.result === 'hit') godHits++; }
+        if (p.confidence) { confSum += p.confidence; confCount++; }
+      }
+    });
+    const stats = calcDayStats(day);
+    if (stats.pct !== null && stats.pct > bestPct) { bestPct = stats.pct; bestDate = day.date; }
+  });
+
+  const overallPct = totalPicks > 0 ? Math.round((totalHits / totalPicks) * 100) : 0;
+
+  document.getElementById('stat-accuracy').textContent = overallPct + '%';
+  document.getElementById('stat-record').textContent = totalHits + ' hits / ' + totalPicks + ' picks';
+  document.getElementById('stat-days').textContent = data.length;
+  document.getElementById('stat-best').textContent = bestPct + '%';
+  document.getElementById('stat-best-date').textContent = bestDate ? formatDate(bestDate) : '—';
+  document.getElementById('stat-total').textContent = totalPicks;
+
+  // Streak
+  const allPicks = [];
+  [...data].reverse().forEach(day => {
+    (day.predictions || []).forEach(p => { if (p.result !== 'pending') allPicks.push(p.result); });
+  });
+  let streak = 0, streakType = '';
+  for (let i = allPicks.length - 1; i >= 0; i--) {
+    if (i === allPicks.length - 1) { streakType = allPicks[i]; streak = 1; }
+    else if (allPicks[i] === streakType) streak++;
+    else break;
+  }
+  document.getElementById('stat-streak').textContent = streak + (streakType === 'hit' ? '🔥' : '');
+  document.getElementById('stat-streak-label').textContent = streakType === 'hit' ? 'win streak' : streakType === 'miss' ? 'loss streak' : '—';
+
+  // Model record
+  document.getElementById('rec-ou').textContent = ouTotal > 0 ? Math.round((ouHits/ouTotal)*100) + '% (' + ouHits + '/' + ouTotal + ')' : '—';
+  document.getElementById('rec-win').textContent = winTotal > 0 ? Math.round((winHits/winTotal)*100) + '% (' + winHits + '/' + winTotal + ')' : '—';
+  document.getElementById('rec-god').textContent = godTotal > 0 ? Math.round((godHits/godTotal)*100) + '% (' + godHits + '/' + godTotal + ')' : '—';
+  document.getElementById('rec-conf').textContent = confCount > 0 ? (confSum/confCount).toFixed(1) + '%' : '—';
+  document.getElementById('rec-updated').textContent = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+
+  // Streak dots
+  const dotsContainer = document.getElementById('streak-dots');
+  dotsContainer.innerHTML = '';
+  allPicks.slice(-30).forEach(r => {
+    const d = document.createElement('div');
+    d.className = 'streak-dot ' + r;
+    d.textContent = r === 'hit' ? '✓' : '✗';
+    dotsContainer.appendChild(d);
+  });
+}
+
+function toggleDay(header) {
+  const block = header.closest('.day-block');
+  block.classList.toggle('open');
+}
+
+function filterGames(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderHistory(allData, filter);
+}
+
+function showNotification(msg) {
+  const el = document.getElementById('notification');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3500);
+}
+
+async function loadData() {
+  // Try to fetch real predictions log from same directory (GitHub Pages)
+  const possiblePaths = [
+    './nba_predictions_log.json',
+    'nba_predictions_log.json',
+    './predictions_log.json'
+  ];
+
+  let loaded = false;
+  for (const path of possiblePaths) {
+    try {
+      const res = await fetch(path);
+      if (res.ok) {
+        const raw = await res.json();
+        // Support both array format and {entries: [...]} format
+        allData = Array.isArray(raw) ? raw : (raw.entries || raw.data || []);
+        if (allData.length > 0) {
+          // Sort by date descending
+          allData.sort((a, b) => new Date(b.date) - new Date(a.date));
+          loaded = true;
+          showNotification('✓ Loaded live prediction database (' + allData.length + ' days)');
+          break;
+        }
+      }
+    } catch (e) { /* try next */ }
+  }
+
+  if (!loaded) {
+    // Use sample data as fallback
+    allData = SAMPLE_DATA;
+    showNotification('ℹ Using sample data — commit nba_predictions_log.json to GitHub to load real data');
+  }
+
+  renderHistory(allData, currentFilter);
+  renderChart(allData);
+  renderStats(allData);
+
+  document.getElementById('loader').classList.add('hidden');
+}
+
+// INIT
+window.addEventListener('load', () => {
+  setTimeout(loadData, 600);
+});
+</script>
+</body>
+</html>
