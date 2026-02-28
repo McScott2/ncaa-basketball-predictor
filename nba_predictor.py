@@ -670,3 +670,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+if results:
+        print_summary(results)
+        save_to_log(results) # <--- Add this
