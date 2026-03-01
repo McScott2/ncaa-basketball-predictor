@@ -21,9 +21,41 @@ import math
 from datetime import datetime, timedelta
 
 # ── CONFIG ────────────────────────────────────────────────────────────────
-ODDS_API_KEY = "0f51d878b8a4991349ceb3229a470f1c"
-NBA_LEAGUE   = "basketball_nba"
-LOG_FILE     = "nba_predictions_log.json"
+ODDS_API_KEY  = "0f51d878b8a4991349ceb3229a470f1c"
+NBA_LEAGUE    = "basketball_nba"
+LOG_FILE      = "nba_predictions_log.json"
+STATS_CACHE   = "nba_team_stats.json"
+
+# ── LOAD CACHED STATS (from fetch_nba_stats.py) ───────────────────────────
+_stats_cache = None
+def load_stats_cache():
+    global _stats_cache
+    if _stats_cache: return _stats_cache
+    if os.path.exists(STATS_CACHE):
+        with open(STATS_CACHE) as f:
+            _stats_cache = json.load(f)
+        print(f"  📦 Loaded stats cache: {len(_stats_cache['teams'])} teams ({_stats_cache['fetched_at']})")
+    return _stats_cache
+
+def get_cached_team(team_name):
+    """Look up a team in the stats cache by name"""
+    cache = load_stats_cache()
+    if not cache: return None
+    name_lower = team_name.lower()
+    # Try exact match
+    if name_lower in cache['name_to_id']:
+        tid = cache['name_to_id'][name_lower]
+        return cache['teams'].get(tid)
+    # Try last word (e.g. "Lakers", "Celtics")
+    last = name_lower.split()[-1]
+    if last in cache['abbr_to_id']:
+        tid = cache['abbr_to_id'][last]
+        return cache['teams'].get(tid)
+    # Try partial match
+    for cname, tid in cache['name_to_id'].items():
+        if last in cname or cname.split()[-1] in name_lower:
+            return cache['teams'].get(tid)
+    return None
 
 # ── MATH ──────────────────────────────────────────────────────────────────
 def sigmoid(x):
@@ -49,30 +81,36 @@ def get_scoreboard(date_str=None):
         url = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard"
     return safe_get(url)
 
-def get_team_stats(team_id):
+def get_team_stats(team_id, team_name=None):
+    """Get team stats — cache first (rich data), ESPN fallback (ppg only)"""
+    if team_name:
+        cached = get_cached_team(team_name)
+        if cached:
+            return cached
+    # Fallback: ESPN
     url = f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/{team_id}/statistics"
     data = safe_get(url)
     stats = {
-        'ppg':110.0,'opp_ppg':110.0,
+        'ppg':112.0,'opp_ppg':112.0,
         'fgm':40.0,'fga':88.0,
         'fg3m':12.0,'fg3a':34.0,
         'ftm':18.0,'fta':23.0,
         'orb':10.0,'drb':33.0,
         'ast':25.0,'tov':13.0,
         'stl':7.0,'blk':5.0,
-        'ortg':112.0,'drtg':112.0,'pace':98.0
+        'ortg':112.0,'drtg':112.0,'pace':98.5,
+        'efg_pct':0.53,'net_rtg':0.0,
     }
     if not data: return stats
     try:
         mapping = {
-            'avgPoints':'ppg','avgPointsAllowed':'opp_ppg',
+            'avgPoints':'ppg',
             'avgFieldGoalsMade':'fgm','avgFieldGoalsAttempted':'fga',
             'avgThreePointFieldGoalsMade':'fg3m','avgThreePointFieldGoalsAttempted':'fg3a',
             'avgFreeThrowsMade':'ftm','avgFreeThrowsAttempted':'fta',
             'avgOffensiveRebounds':'orb','avgDefensiveRebounds':'drb',
             'avgAssists':'ast','avgTurnovers':'tov',
             'avgSteals':'stl','avgBlocks':'blk',
-            'offensiveRating':'ortg','defensiveRating':'drtg','pace':'pace',
         }
         for cat in data.get('results',{}).get('stats',{}).get('categories',[]):
             for s in cat.get('stats',[]):
@@ -590,8 +628,8 @@ def main():
 
             print(f"  ⏳ Analyzing: {away_name} @ {home_name}...", flush=True)
 
-            hs  = get_team_stats(home_id)
-            as_ = get_team_stats(away_id)
+            hs  = get_team_stats(home_id, home_name)
+            as_ = get_team_stats(away_id, away_name)
             hf  = get_recent_form(home_id)
             af  = get_recent_form(away_id)
             h_rec  = get_team_record(home_id)

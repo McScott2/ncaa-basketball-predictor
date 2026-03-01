@@ -29,6 +29,18 @@ jobs:
       - name: Install dependencies
         run: pip install requests numpy
 
+      - name: Fetch NBA advanced stats (stats.nba.com)
+        run: |
+          python3 fetch_nba_stats.py
+          echo "✅ Stats fetched"
+          cat nba_team_stats.json | python3 -c "
+          import json,sys
+          d=json.load(sys.stdin)
+          print(f'Teams loaded: {len(d[\"teams\"])}')
+          okc=next((t for t in d[\"teams\"].values() if \"Thunder\" in t[\"name\"]),None)
+          if okc: print(f'OKC: ppg={okc[\"ppg\"]:.1f} opp={okc.get(\"opp_ppg\",0):.1f} ortg={okc.get(\"ortg\",0):.1f} drtg={okc.get(\"drtg\",0):.1f} pace={okc.get(\"pace\",0):.1f}')
+          "
+
       - name: Run NBA predictor
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
