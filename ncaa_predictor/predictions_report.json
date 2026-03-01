@@ -1,0 +1,75 @@
+{
+  "timestamp": "2026-02-21T17:58:37.129392",
+  "total_predictions": 2,
+  "summary_stats": {
+    "avg_confidence": "0.63609993",
+    "max_confidence": "0.63611233",
+    "min_confidence": "0.63608754",
+    "std_confidence": "1.2397766e-05"
+  },
+  "predictions": [
+    {
+      "prediction": "0.81804377",
+      "confidence": "0.63608754",
+      "agreement": 0.7993950707152491,
+      "individual_models": {
+        "xgboost": "0.9468132",
+        "lightgbm": 0.850148519102409,
+        "catboost": 0.48591779705875165,
+        "neural_network": "0.99991626"
+      },
+      "game_info": {
+        "matchup": "Texas vs Oklahoma State",
+        "date": "2026-02-21"
+      }
+    },
+    {
+      "prediction": "0.81805617",
+      "confidence": "0.63611233",
+      "agreement": 0.7993812244343956,
+      "individual_models": {
+        "xgboost": "0.9468132",
+        "lightgbm": 0.850148519102409,
+        "catboost": 0.48591779705875165,
+        "neural_network": "0.99997824"
+      },
+      "game_info": {
+        "matchup": "UCLA vs Stanford",
+        "date": "2026-02-21"
+      }
+    }
+  ],
+  "high_confidence_picks": [],
+  "consensus_predictions": [
+    {
+      "prediction": "0.81804377",
+      "confidence": "0.63608754",
+      "agreement": 0.7993950707152491,
+      "individual_models": {
+        "xgboost": "0.9468132",
+        "lightgbm": 0.850148519102409,
+        "catboost": 0.48591779705875165,
+        "neural_network": "0.99991626"
+      },
+      "game_info": {
+        "matchup": "Texas vs Oklahoma State",
+        "date": "2026-02-21"
+      }
+    },
+    {
+      "prediction": "0.81805617",
+      "confidence": "0.63611233",
+      "agreement": 0.7993812244343956,
+      "individual_models": {
+        "xgboost": "0.9468132",
+        "lightgbm": 0.850148519102409,
+        "catboost": 0.48591779705875165,
+        "neural_network": "0.99997824"
+      },
+      "game_info": {
+        "matchup": "UCLA vs Stanford",
+        "date": "2026-02-21"
+      }
+    }
+  ]
+}
