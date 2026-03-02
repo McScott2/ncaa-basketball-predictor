@@ -1,240 +1,126 @@
 #!/usr/bin/env python3
 """
-fetch_nba_stats.py
-Pulls full NBA team stats from stats.nba.com and saves to nba_team_stats.json
-Run this BEFORE nba_predictor.py in GitHub Actions.
-
-Stats pulled:
-  Base  — ppg, opp_ppg, fgm, fga, fg3m, fg3a, ftm, fta, orb, drb, ast, tov, stl, blk
-  Advanced — pace, ortg, drtg, net_rtg, efg_pct, tov_pct, orb_pct, ft_rate, ts_pct
+fetch_nba_stats.py — balldontlie.io (no blocking, free)
 """
-
-import requests
-import json
-import os
+import requests, json, os
 from datetime import datetime
 
 OUT_FILE = 'nba_team_stats.json'
+API_KEY  = os.environ.get('BALLDONTLIE_KEY', '')
+BASE     = 'https://api.balldontlie.io/v1'
+HEADERS  = {'Authorization': API_KEY} if API_KEY else {}
 
-HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-                  'Chrome/120.0.0.0 Safari/537.36',
-    'Referer':    'https://www.nba.com/',
-    'Origin':     'https://www.nba.com',
-    'x-nba-stats-origin': 'stats',
-    'x-nba-stats-token':  'true',
-    'Accept':             'application/json, text/plain, */*',
-    'Accept-Language':    'en-US,en;q=0.9',
-    'Connection':         'keep-alive',
+NBA_AVG = {
+    'ppg':113.5,'opp_ppg':113.5,'pace':98.5,
+    'ortg':114.0,'drtg':114.0,'net_rtg':0.0,
+    'efg_pct':0.535,'tov_pct':12.8,'orb_pct':25.0,'ft_rate':0.21,
+    'fgm':41.5,'fga':88.0,'fg3m':13.5,'fg3a':37.0,
+    'ftm':17.0,'fta':22.0,'orb':10.0,'drb':33.0,
+    'ast':26.0,'tov':13.0,'stl':7.5,'blk':4.5,
 }
 
-BASE_URL = 'https://stats.nba.com/stats/leaguedashteamstats'
-SEASON   = '2024-25'
-
-def fetch(measure_type):
-    params = {
-        'MeasureType':   measure_type,
-        'PerMode':       'PerGame',
-        'Season':        SEASON,
-        'SeasonType':    'Regular Season',
-        'LeagueID':      '00',
-        'LastNGames':    '0',
-        'Month':         '0',
-        'OpponentTeamID':'0',
-        'PaceAdjust':    'N',
-        'PlusMinus':     'N',
-        'Rank':          'N',
-        'Conference':    '',
-        'Division':      '',
-        'GameScope':     '',
-        'GameSegment':   '',
-        'Location':      '',
-        'Outcome':       '',
-        'PORound':       '0',
-        'Period':        '0',
-        'PlayerExperience': '',
-        'PlayerPosition':   '',
-        'ShotClockRange':   '',
-        'StarterBench':     '',
-        'TeamID':        '0',
-        'TwoWay':        '0',
-        'VsConference':  '',
-        'VsDivision':    '',
-        'DateFrom':      '',
-        'DateTo':        '',
-    }
-    print(f"  Fetching {measure_type} stats...", end='', flush=True)
-    r = requests.get(BASE_URL, headers=HEADERS, params=params, timeout=30)
-    r.raise_for_status()
-    data = r.json()
-    headers = data['resultSets'][0]['headers']
-    rows    = data['resultSets'][0]['rowSet']
-    print(f" ✓ ({len(rows)} teams)")
-    return headers, rows
-
-def fetch_recent_form(team_id, n=10):
-    """Fetch last N games for a team"""
-    params = {
-        'MeasureType':    'Base',
-        'PerMode':        'PerGame',
-        'Season':         SEASON,
-        'SeasonType':     'Regular Season',
-        'LeagueID':       '00',
-        'LastNGames':     str(n),
-        'Month':          '0',
-        'OpponentTeamID': '0',
-        'PaceAdjust':     'N',
-        'PlusMinus':      'N',
-        'Rank':           'N',
-        'TeamID':         str(team_id),
-        'DateFrom': '', 'DateTo': '',
-        'Conference': '', 'Division': '', 'GameScope': '',
-        'GameSegment': '', 'Location': '', 'Outcome': '',
-        'PORound': '0', 'Period': '0', 'PlayerExperience': '',
-        'PlayerPosition': '', 'ShotClockRange': '', 'StarterBench': '',
-        'TwoWay': '0', 'VsConference': '', 'VsDivision': '',
-    }
+def safe_get(url, params=None, hdrs=None):
     try:
-        r = requests.get(BASE_URL, headers=HEADERS, params=params, timeout=20)
+        r = requests.get(url, headers=hdrs or HEADERS, params=params, timeout=15)
         r.raise_for_status()
-        data = r.json()
-        hdrs = data['resultSets'][0]['headers']
-        rows = data['resultSets'][0]['rowSet']
-        if not rows: return None
-        row = rows[0]
-        d   = dict(zip(hdrs, row))
-        return {
-            'ppg_l10':     d.get('PTS', 0),
-            'opp_ppg_l10': d.get('OPP_PTS', d.get('PTS', 0)),
-            'wins_l10':    d.get('W', 5),
-            'losses_l10':  d.get('L', 5),
-        }
-    except:
+        return r.json()
+    except Exception as e:
+        print(f" ⚠️  {e}")
         return None
 
 def main():
-    print()
-    print("=" * 60)
-    print("  NBA STATS FETCHER")
-    print(f"  Season: {SEASON}")
+    print("\n" + "="*60)
+    print("  NBA STATS FETCHER — balldontlie.io")
     print(f"  Time: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
-    print("=" * 60)
-    print()
+    print("="*60 + "\n")
 
-    # --- BASE STATS ---
-    base_hdrs, base_rows = fetch('Base')
-    # --- ADVANCED STATS ---
-    adv_hdrs, adv_rows = fetch('Advanced')
-    # --- OPPONENT STATS (points allowed) ---
-    opp_hdrs, opp_rows = fetch('Opponent')
-
-    # Build team lookup: TEAM_ID -> dict of all stats
+    # 1. Teams
+    print("  Fetching team list...", end='', flush=True)
+    data = safe_get(f"{BASE}/teams", params={'per_page':100})
     teams = {}
+    if data:
+        for t in data.get('data',[]):
+            tid = str(t['id'])
+            teams[tid] = {'id':tid,'name':t['full_name'],'abbr':t.get('abbreviation',''),**NBA_AVG}
+    print(f" ✓ ({len(teams)} teams)")
 
-    for row in base_rows:
-        d = dict(zip(base_hdrs, row))
-        tid  = str(d['TEAM_ID'])
-        name = d['TEAM_NAME']
-        teams[tid] = {
-            'id':      tid,
-            'name':    name,
-            # Offense
-            'ppg':     d.get('PTS', 110),
-            'fgm':     d.get('FGM', 40),
-            'fga':     d.get('FGA', 88),
-            'fg3m':    d.get('FG3M', 12),
-            'fg3a':    d.get('FG3A', 34),
-            'ftm':     d.get('FTM', 18),
-            'fta':     d.get('FTA', 23),
-            'orb':     d.get('OREB', 10),
-            'drb':     d.get('DREB', 33),
-            'ast':     d.get('AST', 25),
-            'tov':     d.get('TOV', 13),
-            'stl':     d.get('STL', 7),
-            'blk':     d.get('BLK', 5),
-            'fg_pct':  d.get('FG_PCT', 0.47),
-            'fg3_pct': d.get('FG3_PCT', 0.36),
-            'ft_pct':  d.get('FT_PCT', 0.78),
-            'wins':    d.get('W', 30),
-            'losses':  d.get('L', 30),
-        }
-
-    for row in adv_rows:
-        d   = dict(zip(adv_hdrs, row))
-        tid = str(d['TEAM_ID'])
-        if tid in teams:
+    # 2. Season averages
+    print("  Fetching season averages...", end='', flush=True)
+    data = safe_get(f"{BASE}/season_averages", params={'season':2024,'per_page':100})
+    count = 0
+    if data:
+        for row in data.get('data',[]):
+            tname = row.get('team',{}).get('full_name','')
+            tid   = next((k for k,v in teams.items() if v['name']==tname), None)
+            if not tid: continue
+            fgm=row.get('fgm',NBA_AVG['fgm']); fga=row.get('fga',NBA_AVG['fga']); fg3m=row.get('fg3m',NBA_AVG['fg3m'])
             teams[tid].update({
-                'pace':    d.get('PACE', 98.5),
-                'ortg':    d.get('OFF_RATING', 112),
-                'drtg':    d.get('DEF_RATING', 112),
-                'net_rtg': d.get('NET_RATING', 0),
-                'efg_pct': d.get('EFG_PCT', 0.53),
-                'tov_pct': d.get('TM_TOV_PCT', 13),
-                'orb_pct': d.get('OREB_PCT', 25),
-                'ft_rate': d.get('FTA_RATE', 0.22),
-                'ts_pct':  d.get('TS_PCT', 0.57),
-                'pie':     d.get('PIE', 0.5),
+                'ppg':row.get('pts',NBA_AVG['ppg']),'orb':row.get('oreb',NBA_AVG['orb']),
+                'drb':row.get('dreb',NBA_AVG['drb']),'ast':row.get('ast',NBA_AVG['ast']),
+                'tov':row.get('turnover',NBA_AVG['tov']),'stl':row.get('stl',NBA_AVG['stl']),
+                'blk':row.get('blk',NBA_AVG['blk']),'fgm':fgm,'fga':fga,'fg3m':fg3m,
+                'fg3a':row.get('fg3a',NBA_AVG['fg3a']),'ftm':row.get('ftm',NBA_AVG['ftm']),
+                'fta':row.get('fta',NBA_AVG['fta']),'fg_pct':row.get('fg_pct',0.47),
+                'fg3_pct':row.get('fg3_pct',0.36),'ft_pct':row.get('ft_pct',0.78),
+                'efg_pct':(fgm+0.5*fg3m)/max(fga,1),
             })
+            count += 1
+    print(f" ✓ ({count} teams updated)")
 
-    for row in opp_rows:
-        d   = dict(zip(opp_hdrs, row))
-        tid = str(d['TEAM_ID'])
-        if tid in teams:
-            teams[tid].update({
-                'opp_ppg':    d.get('OPP_PTS', 110),
-                'opp_fgm':    d.get('OPP_FGM', 40),
-                'opp_fga':    d.get('OPP_FGA', 88),
-                'opp_fg3m':   d.get('OPP_FG3M', 12),
-                'opp_fg3a':   d.get('OPP_FG3A', 34),
-                'opp_efg_pct':d.get('OPP_EFG_PCT', 0.53),
-                'opp_tov_pct':d.get('OPP_TOV_PCT', 13),
-            })
+    # 3. opp_ppg from ESPN standings
+    print("  Fetching opp_ppg from ESPN...", end='', flush=True)
+    data = safe_get("https://site.api.espn.com/apis/site/v2/sports/basketball/nba/standings",
+                    hdrs={'User-Agent':'Mozilla/5.0'})
+    count = 0
+    if data:
+        for conf in data.get('children',[]):
+            for entry in conf.get('standings',{}).get('entries',[]):
+                tname = entry.get('team',{}).get('displayName','')
+                for s in entry.get('stats',[]):
+                    if s.get('name')=='avgPointsAgainst':
+                        val = float(s.get('value',0))
+                        if val > 0:
+                            last = tname.split()[-1].lower()
+                            tid  = next((k for k,v in teams.items() if last in v['name'].lower()),None)
+                            if tid: teams[tid]['opp_ppg']=val; count+=1
+    print(f" ✓ ({count} teams with opp_ppg)")
 
-    # Fetch recent form for each team (last 10 games)
-    print()
-    print("  Fetching L10 form for each team...")
-    import time
-    for i, (tid, t) in enumerate(teams.items()):
-        form = fetch_recent_form(tid)
-        if form:
-            teams[tid].update(form)
-        else:
-            teams[tid].update({
-                'ppg_l10': t['ppg'], 'opp_ppg_l10': t.get('opp_ppg', 110),
-                'wins_l10': 5, 'losses_l10': 5,
-            })
-        if i % 5 == 0:
-            time.sleep(0.5)  # be polite to the API
-
-    # Also build a name->id lookup for ESPN game matching
-    name_to_id = {t['name'].lower(): tid for tid, t in teams.items()}
-    # Add common abbreviations
-    abbr_map = {}
+    # 4. Derive advanced metrics
+    print("  Computing ortg/drtg/pace...", end='', flush=True)
     for tid, t in teams.items():
-        parts = t['name'].split()
-        abbr_map[parts[-1].lower()] = tid  # last word e.g. "Lakers"
+        ppg=t.get('ppg',113.5); opp=t.get('opp_ppg',113.5)
+        fga=t.get('fga',88); fta=t.get('fta',22); tov=t.get('tov',13)
+        orb=t.get('orb',10); drb=t.get('drb',33); stl=t.get('stl',7.5); blk=t.get('blk',4.5)
+        poss=max(fga-orb+tov+0.44*fta,70)
+        ortg=(ppg/poss)*100; drtg=(opp/poss)*100-(drb-33)*0.15-(stl-7.5)*0.40-(blk-4.5)*0.25
+        pace=98.5+(fga-88)*0.15-(tov-13)*0.10
+        teams[tid].update({
+            'ortg':round(ortg,1),'drtg':round(drtg,1),'pace':round(pace,1),
+            'net_rtg':round(ortg-drtg,1),'tov_pct':round(tov/max(fga+0.44*fta+tov,1)*100,1),
+            'orb_pct':round(orb/max(orb+drb,1)*100,1),'ft_rate':round(fta/max(fga,1),3),
+            'form_score':0.0,'ppg_l10':ppg,'opp_ppg_l10':opp,'wins_l10':5,'losses_l10':5,
+        })
+    print(" ✓")
 
-    output = {
-        'fetched_at': datetime.now().strftime('%Y-%m-%d %H:%M'),
-        'season':     SEASON,
-        'teams':      teams,
-        'name_to_id': name_to_id,
-        'abbr_to_id': abbr_map,
-    }
+    name_to_id = {t['name'].lower():tid for tid,t in teams.items()}
+    abbr_to_id = {}
+    for tid,t in teams.items():
+        abbr_to_id[t.get('abbr','').lower()]=tid
+        abbr_to_id[t['name'].split()[-1].lower()]=tid
 
-    with open(OUT_FILE, 'w') as f:
-        json.dump(output, f, indent=2)
-
+    output = {'fetched_at':datetime.now().strftime('%Y-%m-%d %H:%M'),
+              'season':'2024-25','teams':teams,'name_to_id':name_to_id,'abbr_to_id':abbr_to_id}
+    with open(OUT_FILE,'w') as f: json.dump(output,f,indent=2)
     print(f"\n  ✅ {len(teams)} teams saved to {OUT_FILE}")
-    print(f"  Stats: ppg, opp_ppg, pace, ortg, drtg, net_rtg, efg_pct, tov_pct, orb_pct, L10 form")
 
-    # Quick sanity check
-    print("\n  Sample — OKC Thunder:")
-    okc = next((t for t in teams.values() if 'Thunder' in t['name']), None)
-    if okc:
-        print(f"    ppg={okc.get('ppg'):.1f}  opp_ppg={okc.get('opp_ppg',0):.1f}  "
-              f"pace={okc.get('pace',0):.1f}  ortg={okc.get('ortg',0):.1f}  "
-              f"drtg={okc.get('drtg',0):.1f}")
+    # Sanity check
+    print("\n  Sample stats:")
+    for kw in ['Thunder','Lakers','Celtics']:
+        t = next((v for v in teams.values() if kw in v['name']),None)
+        if t:
+            print(f"    {kw:12} ppg={t.get('ppg',0):.1f}  opp={t.get('opp_ppg',0):.1f}  "
+                  f"ortg={t.get('ortg',0):.1f}  drtg={t.get('drtg',0):.1f}  "
+                  f"pace={t.get('pace',0):.1f}  net={t.get('net_rtg',0):.1f}")
 
 if __name__ == '__main__':
     main()
