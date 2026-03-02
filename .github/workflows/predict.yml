@@ -2,11 +2,9 @@ name: NBA Oracle — Daily Predictions
 
 on:
   schedule:
-    # 7:00 AM WAT (06:00 UTC) — auto compare last night's results
     - cron: '0 6 * * *'
-    # 5:00 PM WAT (16:00 UTC) — generate today's predictions
     - cron: '0 16 * * *'
-  workflow_dispatch: # allow manual trigger
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -14,33 +12,32 @@ permissions:
 jobs:
   predict:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
-        run: pip install requests numpy
+      - run: pip install requests numpy
 
-      - name: Run NBA predictor
-        env:
-          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
-        run: python3 nba_predictor.py || echo "NBA predictor completed"
+      - name: Fetch NBA stats
+        run: python3 fetch_nba_stats.py || echo "Stats fetch failed"
 
-      - name: Export dashboard JSON
+      - name: Run predictor
+        run: python3 nba_predictor.py || echo "Predictor completed"
+
+      - name: Export dashboard
         run: python3 export_predictions.py || echo "Export completed"
 
-      - name: Commit and push updates
+      - name: Push updates
         run: |
-          git config user.name  "NBA Oracle Bot"
+          git config user.name "NBA Oracle Bot"
           git config user.email "bot@nba-oracle.com"
-          git add nba_predictions_log.json dashboard/predictions.json || true
+          git pull origin main --rebase
+          git add nba_predictions_log.json dashboard/predictions.json nba_team_stats.json || true
           git diff --staged --quiet || git commit -m "🏀 Auto update: $(date +'%Y-%m-%d %H:%M UTC')"
           git push || echo "Nothing to push"
