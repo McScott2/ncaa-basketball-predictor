@@ -37,7 +37,6 @@ jobs:
         run: |
           git config user.name "NBA Oracle Bot"
           git config user.email "bot@nba-oracle.com"
-          git pull origin main --rebase
           git add nba_predictions_log.json dashboard/predictions.json nba_team_stats.json || true
           git diff --staged --quiet || git commit -m "🏀 Auto update: $(date +'%Y-%m-%d %H:%M UTC')"
           git push || echo "Nothing to push"
