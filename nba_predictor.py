@@ -42,19 +42,21 @@ def get_cached_team(team_name):
     cache = load_stats_cache()
     if not cache: return None
     name_lower = team_name.lower()
-    # Try exact match
+    teams = cache['teams']
+    # Try exact match via name_to_id
     if name_lower in cache['name_to_id']:
-        tid = cache['name_to_id'][name_lower]
-        return cache['teams'].get(tid)
-    # Try last word (e.g. "Lakers", "Celtics")
+        key = cache['name_to_id'][name_lower]
+        return teams.get(key)
+    # Try last word e.g. "Lakers", "Celtics"
     last = name_lower.split()[-1]
     if last in cache['abbr_to_id']:
-        tid = cache['abbr_to_id'][last]
-        return cache['teams'].get(tid)
-    # Try partial match
-    for cname, tid in cache['name_to_id'].items():
-        if last in cname or cname.split()[-1] in name_lower:
-            return cache['teams'].get(tid)
+        key = cache['abbr_to_id'][last]
+        return teams.get(key)
+    # Try partial match directly in teams dict
+    for key, t in teams.items():
+        tname = t.get('name','').lower()
+        if last in tname or tname.split()[-1] in name_lower:
+            return t
     return None
 
 # ── MATH ──────────────────────────────────────────────────────────────────
