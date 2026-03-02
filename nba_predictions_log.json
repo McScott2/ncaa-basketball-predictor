@@ -209,5 +209,79 @@
       "total": 10,
       "pct": 70.0
     }
+  },
+  {
+    "date": "2026-03-02",
+    "predictions": [
+      {
+        "matchup": "Houston Rockets @ Washington Wizards",
+        "pick": "Houston Rockets",
+        "conf": 0.6294158902012664,
+        "ou": "UNDER",
+        "ou_line": 224.5,
+        "total": 212.2,
+        "fh_ou": "UNDER",
+        "fh_line": 106.6,
+        "god": false,
+        "tipoff": "01:00 AM WAT",
+        "day": "TODAY",
+        "edge": 12.3,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Boston Celtics @ Milwaukee Bucks",
+        "pick": "Boston Celtics",
+        "conf": 0.6994580835924273,
+        "ou": "OVER",
+        "ou_line": 215.5,
+        "total": 225.1,
+        "fh_ou": "OVER",
+        "fh_line": 102.4,
+        "god": false,
+        "tipoff": "01:30 AM WAT",
+        "day": "TODAY",
+        "edge": 9.6,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Denver Nuggets @ Utah Jazz",
+        "pick": "Denver Nuggets",
+        "conf": 0.815235907962708,
+        "ou": "UNDER",
+        "ou_line": 243.5,
+        "total": 217.4,
+        "fh_ou": "UNDER",
+        "fh_line": 115.7,
+        "god": true,
+        "tipoff": "03:00 AM WAT",
+        "day": "TODAY",
+        "edge": 26.1,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "LA Clippers @ Golden State Warriors",
+        "pick": "Golden State Warriors",
+        "conf": 0.6564681186829869,
+        "ou": "UNDER",
+        "ou_line": 216.5,
+        "total": 210.5,
+        "fh_ou": "UNDER",
+        "fh_line": 102.8,
+        "god": false,
+        "tipoff": "04:00 AM WAT",
+        "day": "TODAY",
+        "edge": 6.0,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      }
+    ],
+    "saved_at": "2026-03-02 16:53"
   }
 ]
