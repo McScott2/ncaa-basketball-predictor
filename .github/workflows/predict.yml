@@ -25,8 +25,10 @@ jobs:
       - run: pip install requests numpy
 
       - name: Fetch NBA stats
+        env:
+          BALLDONTLIE_KEY: ${{ secrets.BALLDONTLIE_KEY }}
         run: python3 fetch_nba_stats.py || echo "Stats fetch failed"
-
+        
       - name: Run predictor
         run: python3 nba_predictor.py || echo "Predictor completed"
 
