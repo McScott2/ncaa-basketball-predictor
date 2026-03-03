@@ -25,10 +25,8 @@ jobs:
       - run: pip install requests numpy
 
       - name: Fetch NBA stats
-        env:
-          BALLDONTLIE_KEY: ${{ secrets.BALLDONTLIE_KEY }}
-        run: python3 fetch_nba_stats.py || echo "Stats fetch failed"
-        
+        run: python3 fetch_nba_stats.py
+
       - name: Run predictor
         run: python3 nba_predictor.py || echo "Predictor completed"
 
@@ -39,6 +37,11 @@ jobs:
         run: |
           git config user.name "NBA Oracle Bot"
           git config user.email "bot@nba-oracle.com"
+          git fetch origin main
+          git reset --hard origin/main
+          python3 fetch_nba_stats.py
+          python3 nba_predictor.py || true
+          python3 export_predictions.py || true
           git add nba_predictions_log.json dashboard/predictions.json nba_team_stats.json || true
           git diff --staged --quiet || git commit -m "🏀 Auto update: $(date +'%Y-%m-%d %H:%M UTC')"
           git push || echo "Nothing to push"
