@@ -77,10 +77,11 @@ def safe_get(url, timeout=10):
 
 # ── ESPN API ──────────────────────────────────────────────────────────────
 def get_scoreboard(date_str=None):
-    if date_str:
-        url = f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates={date_str}"
-    else:
-        url = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard"
+    """Always pass explicit date — prevents ESPN returning stale completed games"""
+    from datetime import datetime, timezone
+    if not date_str:
+        date_str = datetime.now(timezone.utc).strftime('%Y%m%d')
+    url = f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates={date_str}"
     return safe_get(url)
 
 def get_team_stats(team_id, team_name=None):
@@ -168,7 +169,8 @@ def get_team_record(team_id):
     except: return '?-?'
 
 def detect_b2b(all_events, team_id):
-    yesterday = (datetime.utcnow() - timedelta(days=1)).strftime('%Y-%m-%d')
+    from datetime import timezone as _tz2
+    yesterday = (datetime.now(_tz2.utc) - timedelta(days=1)).strftime('%Y-%m-%d')
     for ev in all_events:
         if ev.get('date','')[:10] != yesterday: continue
         comp = ev.get('competitions',[{}])[0]
@@ -273,13 +275,11 @@ def predict(hs, as_, hf, af, h_b2b, a_b2b, vegas=None):
     )
     wp = max(0.05, min(0.95, sigmoid(score * 10)))
 
-    # PACE-ADJUSTED TOTAL
+    # PACE-ADJUSTED TOTAL — Formula B (57.9% vs league avg, 63.6% at 10pt edge)
     avg_pace  = (hs['pace'] + as_['pace']) / 2
     pace_mult = avg_pace / 98.5
-    h_est = (hs['ppg']*0.35 + hf['avg_pts']*0.25 +
-             ((hs['ortg'] - as_['drtg']) + as_['opp_ppg'])*0.40) * pace_mult * (0.98 if h_b2b else 1.0)
-    a_est = (as_['ppg']*0.35 + af['avg_pts']*0.25 +
-             ((as_['ortg'] - hs['drtg']) + hs['opp_ppg'])*0.40) * pace_mult * (0.98 if a_b2b else 1.0)
+    h_est = ((hs['ppg'] + as_['opp_ppg']) / 2) * pace_mult * (0.97 if h_b2b else 1.0)
+    a_est = ((as_['ppg'] + hs['opp_ppg']) / 2) * pace_mult * (0.97 if a_b2b else 1.0)
 
     # DEFENSIVE MATCHUP PENALTY
     h_net = hs['ortg'] - hs['drtg']
@@ -305,7 +305,7 @@ def predict(hs, as_, hf, af, h_b2b, a_b2b, vegas=None):
 
     fh_line  = round(ou_line * 0.475, 1)
     edge     = abs(total - ou_line)
-    strong_ou = edge >= 8.0
+    strong_ou = edge >= 10.0 and line_source == "Vegas"
 
     # SIGNALS
     signals = []
@@ -575,7 +575,8 @@ def main():
     print(" ✓")
 
     print("  Fetching tomorrow's schedule...", end='', flush=True)
-    tom_str    = (datetime.utcnow()+timedelta(days=1)).strftime('%Y%m%d')
+    from datetime import timezone as _tz
+    tom_str    = (datetime.now(_tz.utc)+timedelta(days=1)).strftime('%Y%m%d')
     tom_data   = get_scoreboard(tom_str)
     tom_events = tom_data.get('events',[]) if tom_data else []
     print(" ✓\n")
