@@ -228,7 +228,10 @@
         "edge": 13.3,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 241,
+        "actual_home": 118,
+        "actual_away": 123
       },
       {
         "matchup": "Boston Celtics @ Milwaukee Bucks",
@@ -245,7 +248,10 @@
         "edge": 9.6,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 189,
+        "actual_home": 81,
+        "actual_away": 108
       },
       {
         "matchup": "Denver Nuggets @ Utah Jazz",
@@ -262,7 +268,10 @@
         "edge": 26.1,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 253,
+        "actual_home": 125,
+        "actual_away": 128
       },
       {
         "matchup": "LA Clippers @ Golden State Warriors",
@@ -279,9 +288,17 @@
         "edge": 5.0,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 215,
+        "actual_home": 101,
+        "actual_away": 114
       }
     ],
-    "saved_at": "2026-03-02 17:52"
+    "saved_at": "2026-03-02 17:52",
+    "result": {
+      "hits": 1,
+      "total": 4,
+      "pct": 25.0
+    }
   }
 ]

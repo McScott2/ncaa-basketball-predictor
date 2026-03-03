@@ -1,87 +1,14 @@
 {
-  "updated": "2026-03-02 18:04",
+  "updated": "2026-03-03 07:02",
   "stats": {
-    "total_hits": 7,
-    "total_picks": 10,
-    "accuracy": 70.0,
+    "total_hits": 8,
+    "total_picks": 14,
+    "accuracy": 57.1,
     "best_day": "2026-03-01",
     "best_pct": 70.0,
-    "days_tracked": 1
+    "days_tracked": 2
   },
-  "nba_today": {
-    "date": "2026-03-02",
-    "predictions": [
-      {
-        "matchup": "Houston Rockets @ Washington Wizards",
-        "pick": "Houston Rockets",
-        "conf": 0.6294158902012664,
-        "ou": "UNDER",
-        "ou_line": 225.5,
-        "total": 212.2,
-        "fh_ou": "UNDER",
-        "fh_line": 107.1,
-        "god": false,
-        "tipoff": "01:00 AM WAT",
-        "day": "TODAY",
-        "edge": 13.3,
-        "strong_ou": true,
-        "line_source": "Vegas",
-        "result": "pending"
-      },
-      {
-        "matchup": "Boston Celtics @ Milwaukee Bucks",
-        "pick": "Boston Celtics",
-        "conf": 0.6994580835924273,
-        "ou": "OVER",
-        "ou_line": 215.5,
-        "total": 225.1,
-        "fh_ou": "OVER",
-        "fh_line": 102.4,
-        "god": false,
-        "tipoff": "01:30 AM WAT",
-        "day": "TODAY",
-        "edge": 9.6,
-        "strong_ou": true,
-        "line_source": "Vegas",
-        "result": "pending"
-      },
-      {
-        "matchup": "Denver Nuggets @ Utah Jazz",
-        "pick": "Denver Nuggets",
-        "conf": 0.815235907962708,
-        "ou": "UNDER",
-        "ou_line": 243.5,
-        "total": 217.4,
-        "fh_ou": "UNDER",
-        "fh_line": 115.7,
-        "god": true,
-        "tipoff": "03:00 AM WAT",
-        "day": "TODAY",
-        "edge": 26.1,
-        "strong_ou": true,
-        "line_source": "Vegas",
-        "result": "pending"
-      },
-      {
-        "matchup": "LA Clippers @ Golden State Warriors",
-        "pick": "Golden State Warriors",
-        "conf": 0.6564681186829869,
-        "ou": "UNDER",
-        "ou_line": 215.5,
-        "total": 210.5,
-        "fh_ou": "UNDER",
-        "fh_line": 102.4,
-        "god": false,
-        "tipoff": "04:00 AM WAT",
-        "day": "TODAY",
-        "edge": 5.0,
-        "strong_ou": false,
-        "line_source": "Vegas",
-        "result": "pending"
-      }
-    ],
-    "saved_at": "2026-03-02 17:52"
-  },
+  "nba_today": null,
   "nba_history": [
     {
       "date": "2026-03-01",
@@ -312,7 +239,10 @@
           "edge": 13.3,
           "strong_ou": true,
           "line_source": "Vegas",
-          "result": "pending"
+          "result": "miss",
+          "actual_total": 241,
+          "actual_home": 118,
+          "actual_away": 123
         },
         {
           "matchup": "Boston Celtics @ Milwaukee Bucks",
@@ -329,7 +259,10 @@
           "edge": 9.6,
           "strong_ou": true,
           "line_source": "Vegas",
-          "result": "pending"
+          "result": "miss",
+          "actual_total": 189,
+          "actual_home": 81,
+          "actual_away": 108
         },
         {
           "matchup": "Denver Nuggets @ Utah Jazz",
@@ -346,7 +279,10 @@
           "edge": 26.1,
           "strong_ou": true,
           "line_source": "Vegas",
-          "result": "pending"
+          "result": "miss",
+          "actual_total": 253,
+          "actual_home": 125,
+          "actual_away": 128
         },
         {
           "matchup": "LA Clippers @ Golden State Warriors",
@@ -363,10 +299,18 @@
           "edge": 5.0,
           "strong_ou": false,
           "line_source": "Vegas",
-          "result": "pending"
+          "result": "hit",
+          "actual_total": 215,
+          "actual_home": 101,
+          "actual_away": 114
         }
       ],
-      "total": 4
+      "total": 4,
+      "result": {
+        "hits": 1,
+        "total": 4,
+        "pct": 25.0
+      }
     }
   ]
 }
