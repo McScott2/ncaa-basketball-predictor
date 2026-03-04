@@ -1,17 +1,13 @@
 #!/usr/bin/env python3
 """
-NBA ORACLE v5 — God Mode Prediction Engine
-Upgrades over v4:
-  - Pythagorean Win Expectation (NBA exponent 13.91)
-  - Pace-adjusted offensive/defensive ratings
-  - Four Factors model (eFG%, TOV%, ORB%, FTR)
-  - Recent form L10 with streak detection
-  - Back-to-back fatigue detection
-  - Defensive matchup penalty (elite D vs elite D)
-  - Real Vegas O/U lines via The Odds API
-  - 8pt minimum edge threshold for O/U picks
-  - TODAY-only saving (no tomorrow date bug)
-  - Auto compare + auto save to JSON
+NBA ORACLE v6 — God Mode Prediction Engine
+Fixes over v5:
+  - Removed systematic UNDER bias (defensive penalty was too aggressive)
+  - Calibrated team score estimates against real NBA avg (~226 pts/game)
+  - Win pick accuracy now tracked separately from O/U accuracy
+  - Terminal output now matches JSON (consistent rounding)
+  - Defensive matchup penalty is now symmetric (affects both sides equally)
+  - O/U edge threshold raised to 12pt for stronger signal
 """
 
 import requests
@@ -26,7 +22,37 @@ NBA_LEAGUE    = "basketball_nba"
 LOG_FILE      = "nba_predictions_log.json"
 STATS_CACHE   = "nba_team_stats.json"
 
-# ── LOAD CACHED STATS (from fetch_nba_stats.py) ───────────────────────────
+# Real NBA 2024-25 average total: ~226 pts/game
+NBA_AVG_TOTAL = 226.0
+NBA_AVG_PACE  = 98.5
+
+# ── LOAD SELF-TUNED WEIGHTS ───────────────────────────────────────────────
+WEIGHTS_FILE = "model_weights.json"
+DEFAULT_WEIGHTS = {
+    'pythagorean':  0.30,
+    'efficiency':   0.30,
+    'four_factors': 0.20,
+    'form':         0.15,
+    'home_adv':     0.045,
+    'total_bias':   0.0,
+    'pace_weight':  1.0,
+    'def_penalty':  0.98,
+    'b2b_penalty':  0.97,
+    'strong_ou_threshold': 12.0,
+}
+
+def load_weights():
+    if os.path.exists(WEIGHTS_FILE):
+        with open(WEIGHTS_FILE) as f:
+            saved = json.load(f)
+        w = {**DEFAULT_WEIGHTS, **saved.get('weights', {})}
+        print(f"  🧠 Loaded tuned weights (version {saved.get('version', 1)})")
+        return w
+    return DEFAULT_WEIGHTS.copy()
+
+W = load_weights()
+
+# ── LOAD CACHED STATS ─────────────────────────────────────────────────────
 _stats_cache = None
 def load_stats_cache():
     global _stats_cache
@@ -38,21 +64,17 @@ def load_stats_cache():
     return _stats_cache
 
 def get_cached_team(team_name):
-    """Look up a team in the stats cache by name"""
     cache = load_stats_cache()
     if not cache: return None
     name_lower = team_name.lower()
     teams = cache['teams']
-    # Try exact match via name_to_id
     if name_lower in cache['name_to_id']:
         key = cache['name_to_id'][name_lower]
         return teams.get(key)
-    # Try last word e.g. "Lakers", "Celtics"
     last = name_lower.split()[-1]
     if last in cache['abbr_to_id']:
         key = cache['abbr_to_id'][last]
         return teams.get(key)
-    # Try partial match directly in teams dict
     for key, t in teams.items():
         tname = t.get('name','').lower()
         if last in tname or tname.split()[-1] in name_lower:
@@ -77,32 +99,30 @@ def safe_get(url, timeout=10):
 
 # ── ESPN API ──────────────────────────────────────────────────────────────
 def get_scoreboard(date_str=None):
-    """Always pass explicit date — prevents ESPN returning stale completed games"""
-    from datetime import datetime, timezone
+    from datetime import timezone
     if not date_str:
         date_str = datetime.now(timezone.utc).strftime('%Y%m%d')
     url = f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates={date_str}"
     return safe_get(url)
 
 def get_team_stats(team_id, team_name=None):
-    """Get team stats — cache first (rich data), ESPN fallback (ppg only)"""
     if team_name:
         cached = get_cached_team(team_name)
         if cached:
             return cached
-    # Fallback: ESPN
     url = f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/{team_id}/statistics"
     data = safe_get(url)
+    # Defaults calibrated to real NBA 2024-25 averages
     stats = {
-        'ppg':112.0,'opp_ppg':112.0,
+        'ppg':113.0,'opp_ppg':113.0,
         'fgm':40.0,'fga':88.0,
         'fg3m':12.0,'fg3a':34.0,
         'ftm':18.0,'fta':23.0,
         'orb':10.0,'drb':33.0,
         'ast':25.0,'tov':13.0,
         'stl':7.0,'blk':5.0,
-        'ortg':112.0,'drtg':112.0,'pace':98.5,
-        'efg_pct':0.53,'net_rtg':0.0,
+        'ortg':113.0,'drtg':113.0,'pace':98.5,
+        'efg_pct':0.535,'net_rtg':0.0,
     }
     if not data: return stats
     try:
@@ -127,7 +147,7 @@ def get_team_stats(team_id, team_name=None):
 def get_recent_form(team_id, num=10):
     url = f"https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/{team_id}/schedule"
     data = safe_get(url)
-    result = {'wins':5,'losses':5,'avg_pts':110.0,'avg_opp':110.0,
+    result = {'wins':5,'losses':5,'avg_pts':113.0,'avg_opp':113.0,
               'form_score':0.0,'streak':0,'streak_type':'W'}
     if not data: return result
     try:
@@ -231,7 +251,10 @@ def predict(hs, as_, hf, af, h_b2b, a_b2b, vegas=None):
     2. Adjusted Efficiency Matchup (30%)
     3. Four Factors (20%)
     4. Recent Form L10 (15%)
-    5. Home Court + B2B adjustments
+    5. Home Court + B2B adjustments (5%)
+
+    FIX v6: Total estimation calibrated to NBA avg ~226 pts.
+    Defensive penalty is now mild and symmetric — no UNDER bias.
     """
     # 1. PYTHAGOREAN
     h_pyth = pythagorean_wp(hs['ppg'], hs['opp_ppg'])
@@ -267,51 +290,59 @@ def predict(hs, as_, hf, af, h_b2b, a_b2b, vegas=None):
     b2b_adj  = (-0.04 if h_b2b else 0) + (0.04 if a_b2b else 0)
 
     score = (
-        pyth_edge   * 0.30 +
-        eff_edge    * 0.30 +
-        four_factors* 0.20 +
-        form_edge   * 0.15 +
-        home_adv + b2b_adj
+        pyth_edge    * W['pythagorean'] +
+        eff_edge     * W['efficiency'] +
+        four_factors * W['four_factors'] +
+        form_edge    * W['form'] +
+        W['home_adv'] + b2b_adj
     )
     wp = max(0.05, min(0.95, sigmoid(score * 10)))
 
-    # PACE-ADJUSTED TOTAL — Formula B (57.9% vs league avg, 63.6% at 10pt edge)
+    # ── CALIBRATED TOTAL ESTIMATE ─────────────────────────────────────────
+    # FIX v6: Blend team offense with opponent defense, pace-adjusted.
+    # Anchored so league-average teams produce ~226 pts combined.
     avg_pace  = (hs['pace'] + as_['pace']) / 2
-    pace_mult = avg_pace / 98.5
-    h_est = ((hs['ppg'] + as_['opp_ppg']) / 2) * pace_mult * (0.97 if h_b2b else 1.0)
-    a_est = ((as_['ppg'] + hs['opp_ppg']) / 2) * pace_mult * (0.97 if a_b2b else 1.0)
+    pace_mult = avg_pace / NBA_AVG_PACE
 
-    # DEFENSIVE MATCHUP PENALTY
+    h_est = ((hs['ppg'] * 0.6) + (as_['opp_ppg'] * 0.4)) * pace_mult
+    a_est = ((as_['ppg'] * 0.6) + (hs['opp_ppg'] * 0.4)) * pace_mult
+
+    # B2B fatigue — uses self-tuned penalty
+    if h_b2b: h_est *= W['b2b_penalty']
+    if a_b2b: a_est *= W['b2b_penalty']
+
+    # ── DEFENSIVE MATCHUP — uses self-tuned penalty ───────────────────────
     h_net = hs['ortg'] - hs['drtg']
     a_net = as_['ortg'] - as_['drtg']
-    both_def = h_net < 2.0 and a_net < 2.0
-    one_def  = h_net < 0.0 or a_net < 0.0
-    if both_def:
-        h_est *= 0.94; a_est *= 0.94
-    elif one_def:
-        h_est *= 0.97; a_est *= 0.97
+    both_elite_def = h_net < -2.0 and a_net < -2.0
 
-    total = h_est + a_est
+    if both_elite_def:
+        h_est *= W['def_penalty']
+        a_est *= W['def_penalty']
 
-    # O/U LINE — Vegas if available, else dynamic model
+    # total_bias corrects systematic over/under estimation (self-tuned nightly)
+    total = h_est + a_est + W['total_bias']
+
+    # ── O/U LINE ──────────────────────────────────────────────────────────
     if vegas and vegas.get('total'):
         ou_line     = vegas['total']
         line_source = 'Vegas'
     else:
         ou_line = round(
             (hs['ppg'] + as_['ppg'] + hs['opp_ppg'] + as_['opp_ppg']) / 2 +
-            (avg_pace - 98.5) * 0.8, 1)
+            (avg_pace - NBA_AVG_PACE) * 0.8, 1)
         line_source = 'Model'
 
-    fh_line  = round(ou_line * 0.475, 1)
-    edge     = abs(total - ou_line)
-    strong_ou = edge >= 10.0 and line_source == "Vegas"
+    fh_line   = round(ou_line * 0.475, 1)
+    edge      = round(abs(total - ou_line), 1)
+    # FIX v6: Raised to 12pt — reduces noise, improves O/U signal quality
+    strong_ou = edge >= W['strong_ou_threshold'] and line_source == "Vegas"
 
-    # SIGNALS
+    # ── SIGNALS ───────────────────────────────────────────────────────────
     signals = []
-    if h_b2b: signals.append(f"😴 {' '.join(hs.get('name','Home').split()[-1:])} on B2B — fatigue")
-    if a_b2b: signals.append(f"😴 {' '.join(as_.get('name','Away').split()[-1:])} on B2B — fatigue")
-    if both_def: signals.append("🛡️  DEFENSIVE MATCHUP — expect lower scoring")
+    if h_b2b: signals.append("😴 Home team on B2B — fatigue penalty applied")
+    if a_b2b: signals.append("😴 Away team on B2B — fatigue penalty applied")
+    if both_elite_def: signals.append("🛡️  ELITE DEFENSIVE MATCHUP — both teams top D")
     if h_pyth > a_pyth + 0.08: signals.append(f"📊 Home Pythagorean edge +{h_pyth-a_pyth:.2f}")
     if a_pyth > h_pyth + 0.08: signals.append(f"📊 Away Pythagorean edge +{a_pyth-h_pyth:.2f}")
     if hs['ortg'] > as_['drtg'] + 5: signals.append(f"⚔️  Home offense dominates ({hs['ortg']:.1f} vs {as_['drtg']:.1f} drtg)")
@@ -325,10 +356,9 @@ def predict(hs, as_, hf, af, h_b2b, a_b2b, vegas=None):
     if total > 240: signals.append("💨 High-pace shootout expected")
     elif total < 215: signals.append("🛡️  Grind expected — low scoring")
 
-    # Vegas value bet detection
     value_flag = None
     if vegas and vegas.get('h2h'):
-        v_wp = vegas['h2h']['home_implied']
+        v_wp   = vegas['h2h']['home_implied']
         v_edge = wp - v_wp
         if abs(v_edge) >= 0.05:
             side = "HOME" if v_edge > 0 else "AWAY"
@@ -338,10 +368,10 @@ def predict(hs, as_, hf, af, h_b2b, a_b2b, vegas=None):
     return {
         'wp':wp,'total':total,'h_est':h_est,'a_est':a_est,
         'ou_line':ou_line,'ou':'OVER' if total>ou_line else 'UNDER',
-        'fh_est':round(total*0.475,0),'fh_line':fh_line,
+        'fh_est':round(total*0.475,1),'fh_line':fh_line,
         'fh_ou':'OVER' if total*0.475>fh_line else 'UNDER',
-        'edge':round(edge,1),'strong_ou':strong_ou,'line_source':line_source,
-        'both_def':both_def,'signals':signals,'value':value_flag,
+        'edge':edge,'strong_ou':strong_ou,'line_source':line_source,
+        'both_def':both_elite_def,'signals':signals,'value':value_flag,
         'h_pyth':h_pyth,'a_pyth':a_pyth,
     }
 
@@ -358,7 +388,7 @@ def print_game(home, away, h_rec, a_rec, tipoff, p, idx):
 
     print(f"{'═'*68}")
     tags = ""
-    if god:         tags += "  🔥 GOD PICK"
+    if god:            tags += "  🔥 GOD PICK"
     if p['strong_ou']: tags += "  💰 STRONG O/U"
     if p['both_def']:  tags += "  🛡️ DEF MATCHUP"
     print(f"  GAME {idx}{tags}")
@@ -371,15 +401,15 @@ def print_game(home, away, h_rec, a_rec, tipoff, p, idx):
     print(f"            {away.split()[-1][:12]:<12} {int((1-wp)*100)}%"
           f"  ←→  {int(wp*100)}% {home.split()[-1][:12]}")
     print()
-
     print(f"  🏆 PICK:        {pick}")
     print(f"  📊 CONFIDENCE:  {bar(conf)}")
     print()
-    print(f"  Full Game:   Est {p['total']:.0f} pts  |  {p['ou']} {p['ou_line']}  "
+    # FIX v6: round() for terminal matches JSON storage (no floating point drift)
+    print(f"  Full Game:   Est {round(p['total'])} pts  |  {p['ou']} {p['ou_line']}  "
           f"[Edge: {p['edge']}pt | {p['line_source']}]")
-    print(f"  First Half:  Est {p['fh_est']:.0f} pts  |  {p['fh_ou']} {p['fh_line']}")
-    print(f"  🏠 {home[:28]:<28}  Est {p['h_est']:.0f} pts")
-    print(f"  ✈️  {away[:28]:<28}  Est {p['a_est']:.0f} pts")
+    print(f"  First Half:  Est {round(p['fh_est'])} pts  |  {p['fh_ou']} {p['fh_line']}")
+    print(f"  🏠 {home[:28]:<28}  Est {round(p['h_est'])} pts")
+    print(f"  ✈️  {away[:28]:<28}  Est {round(p['a_est'])} pts")
     print(f"  📈 Pythagorean:  Home {p['h_pyth']:.3f}  |  Away {p['a_pyth']:.3f}")
 
     if p['signals']:
@@ -394,15 +424,16 @@ def print_summary(summary):
     print(f"{'═'*68}")
     print("  📊  SUMMARY")
     print(f"{'═'*68}")
-    god      = [s for s in summary if s['conf'] >= 0.70]
-    strong   = [s for s in summary if s['strong_ou']]
-    overs    = [s for s in summary if s['ou']=='OVER']
-    avg_c    = sum(s['conf'] for s in summary)/len(summary)
-    print(f"  Total games       : {len(summary)}")
-    print(f"  Avg confidence    : {avg_c*100:.1f}%")
-    print(f"  God picks (≥70%)  : {len(god)}")
-    print(f"  Strong O/U (≥8pt) : {len(strong)}")
-    print(f"  Overs / Unders    : {len(overs)} / {len(summary)-len(overs)}")
+    god    = [s for s in summary if s['conf'] >= 0.70]
+    strong = [s for s in summary if s['strong_ou']]
+    overs  = [s for s in summary if s['ou']=='OVER']
+    unders = [s for s in summary if s['ou']=='UNDER']
+    avg_c  = sum(s['conf'] for s in summary)/len(summary)
+    print(f"  Total games        : {len(summary)}")
+    print(f"  Avg confidence     : {avg_c*100:.1f}%")
+    print(f"  God picks (≥70%)   : {len(god)}")
+    print(f"  Strong O/U (≥12pt) : {len(strong)}")
+    print(f"  Overs / Unders     : {len(overs)} / {len(unders)}")
     print()
     if god:
         print("  🔥 GOD PICKS — WIN PICKS:")
@@ -411,7 +442,7 @@ def print_summary(summary):
             print(f"        {s['conf']*100:.1f}% conf  |  {s['tipoff']}")
         print()
     if strong:
-        print("  💰 STRONG O/U PICKS (8pt+ edge):")
+        print("  💰 STRONG O/U PICKS (12pt+ edge):")
         for s in strong:
             parts = s['matchup'].split(' @ ')
             away_s = parts[0].split()[-1] if len(parts)>1 else s['matchup']
@@ -419,12 +450,12 @@ def print_summary(summary):
             print(f"     ✅ {away_s} @ {home_s}")
             print(f"        {s['ou']} {s['ou_line']}  |  Edge: {s['edge']}pt  |  {s['tipoff']}")
         print()
-    print("  ⚠️  Max 5 picks. Bet only God Picks + Strong O/U.")
+    print("  ⚠️  Bet only God Picks + Strong O/U. Max 5 picks.")
     print("  ⚠️  Never stake more than you can afford to lose.")
     print(f"{'═'*68}")
     print()
 
-# ── SAVE PREDICTIONS (TODAY ONLY) ────────────────────────────────────────
+# ── SAVE PREDICTIONS ──────────────────────────────────────────────────────
 def save_predictions(summary):
     log = []
     if os.path.exists(LOG_FILE):
@@ -440,15 +471,15 @@ def save_predictions(summary):
 
     log = [e for e in log if e['date'] != date_str]
     log.append({
-        'date':     date_str,
+        'date':        date_str,
         'predictions': today_only,
-        'saved_at': datetime.now().strftime('%Y-%m-%d %H:%M')
+        'saved_at':    datetime.now().strftime('%Y-%m-%d %H:%M')
     })
     with open(LOG_FILE, 'w') as f:
         json.dump(log, f, indent=2)
     print(f"  💾 {len(today_only)} predictions saved to {LOG_FILE}")
 
-# ── AUTO COMPARE YESTERDAY ────────────────────────────────────────────────
+# ── AUTO COMPARE ──────────────────────────────────────────────────────────
 def auto_compare():
     if not os.path.exists(LOG_FILE): return
     with open(LOG_FILE) as f:
@@ -470,7 +501,9 @@ def auto_compare():
         print("  ⚠️  Could not fetch yesterday's results")
         return
 
-    hits=0; misses=0
+    # FIX v6: Track O/U and win picks separately
+    ou_hits=0;  ou_total=0
+    win_hits=0; win_total=0
 
     for pred in entry['predictions']:
         matchup  = pred['matchup']
@@ -489,7 +522,7 @@ def auto_compare():
             h = comp['competitors'][0]['team']['displayName'].lower()
             a = comp['competitors'][1]['team']['displayName'].lower()
             if (away_last in a or away_last in h) and (home_last in h or home_last in a):
-                hs = int(comp['competitors'][0].get('score') or 0)
+                hs  = int(comp['competitors'][0].get('score') or 0)
                 as_ = int(comp['competitors'][1].get('score') or 0)
                 status = ev['status']['type']['description']
                 winner = comp['competitors'][0]['team']['displayName'] if hs > as_ \
@@ -504,31 +537,46 @@ def auto_compare():
             print(f"  ⏳ {parts[0].split()[-1]} @ {parts[1].split()[-1]} — no result yet")
             continue
 
-        hit  = (ou=='OVER' and result['total']>ou_line) or \
-               (ou=='UNDER' and result['total']<ou_line)
-        icon = "✅" if hit else "❌"
-        if hit: hits+=1
-        else:   misses+=1
+        ou_hit  = (ou=='OVER'  and result['total'] > ou_line) or \
+                  (ou=='UNDER' and result['total'] < ou_line)
+        # FIX v6: also check win pick
+        win_hit = pick.split()[-1].lower() in result['winner'].lower()
 
-        print(f"  {icon} {result['away'].split()[-1]:<12} @ {result['home'].split()[-1]:<14}"
+        ou_icon  = "✅" if ou_hit  else "❌"
+        win_icon = "✅" if win_hit else "❌"
+
+        if ou_hit:  ou_hits  += 1
+        if win_hit: win_hits += 1
+        ou_total  += 1
+        win_total += 1
+
+        print(f"  {result['away'].split()[-1]:<12} @ {result['home'].split()[-1]:<14}"
               f" {result['a_score']}-{result['h_score']} (Total: {result['total']})")
-        print(f"     Pred: {ou} {ou_line:<8} | Pick: {pick.split()[-1]:<15} | {conf*100:.1f}%")
+        print(f"     O/U: {ou_icon} {ou} {ou_line:<6} | "
+              f"WIN: {win_icon} Picked {pick.split()[-1]:<14} | "
+              f"Actual: {result['winner'].split()[-1]}")
         print()
 
-    total = hits+misses
-    if total > 0:
-        pct = hits/total*100
-        print(f"  📊  {yesterday}: {hits}/{total} = {pct:.1f}%")
-        if pct >= 70:   print("  🔥 STRONG — Model is working!")
-        elif pct >= 55: print("  ✅ DECENT — Minor tuning needed")
-        else:           print("  ⚠️  NEEDS REVIEW")
+    if ou_total > 0:
+        ou_pct  = ou_hits  / ou_total  * 100
+        win_pct = win_hits / win_total * 100 if win_total > 0 else 0
 
-        # Save result to log
+        print(f"  📊  O/U  Accuracy : {ou_hits}/{ou_total} = {ou_pct:.1f}%")
+        print(f"  📊  WIN  Accuracy : {win_hits}/{win_total} = {win_pct:.1f}%")
+        combined = (ou_hits+win_hits) / (ou_total+win_total) * 100
+        print(f"  📊  COMBINED      : {combined:.1f}%")
+
+        if ou_pct >= 70:   print("  🔥 STRONG — Model is working!")
+        elif ou_pct >= 55: print("  ✅ DECENT — Minor tuning needed")
+        else:              print("  ⚠️  NEEDS REVIEW")
+
         with open(LOG_FILE) as f: log = json.load(f)
         for e in log:
             if e['date'] == yesterday:
-                e['result'] = {'hits':hits,'total':total,'pct':round(pct,1)}
-                # Also update individual predictions with actual results
+                e['result'] = {
+                    'hits':ou_hits,'total':ou_total,'pct':round(ou_pct,1),
+                    'win_hits':win_hits,'win_total':win_total,'win_pct':round(win_pct,1)
+                }
                 for pred in e['predictions']:
                     parts = pred['matchup'].split(' @ ')
                     if len(parts) != 2: continue
@@ -539,16 +587,19 @@ def auto_compare():
                         h = comp['competitors'][0]['team']['displayName'].lower()
                         a = comp['competitors'][1]['team']['displayName'].lower()
                         if (away_last in a or away_last in h) and (home_last in h or home_last in a):
-                            hs = int(comp['competitors'][0].get('score') or 0)
+                            hs  = int(comp['competitors'][0].get('score') or 0)
                             as_ = int(comp['competitors'][1].get('score') or 0)
                             status = ev['status']['type']['description']
                             if status in ['Final','Final/OT']:
                                 pred['actual_total'] = hs+as_
                                 pred['actual_home']  = hs
                                 pred['actual_away']  = as_
-                                hit2 = (pred['ou']=='OVER' and hs+as_>pred['ou_line']) or \
-                                       (pred['ou']=='UNDER' and hs+as_<pred['ou_line'])
-                                pred['result'] = 'hit' if hit2 else 'miss'
+                                winner = comp['competitors'][0]['team']['displayName'] if hs > as_ \
+                                         else comp['competitors'][1]['team']['displayName']
+                                ou_hit2  = (pred['ou']=='OVER'  and hs+as_ > pred['ou_line']) or \
+                                           (pred['ou']=='UNDER' and hs+as_ < pred['ou_line'])
+                                pred['result']     = 'hit' if ou_hit2 else 'miss'
+                                pred['win_result'] = 'hit' if pred['pick'].split()[-1].lower() in winner.lower() else 'miss'
                             break
         with open(LOG_FILE,'w') as f: json.dump(log, f, indent=2)
         print(f"  💾 Results saved to {LOG_FILE}")
@@ -558,17 +609,15 @@ def auto_compare():
 def main():
     print()
     print(f"{'═'*68}")
-    print("  🏀  NBA ORACLE v5 — GOD MODE PREDICTION ENGINE")
+    print("  🏀  NBA ORACLE v6 — GOD MODE PREDICTION ENGINE")
     print(f"  📅  {datetime.now().strftime('%A, %B %d %Y  %H:%M WAT')}")
     print(f"{'═'*68}\n")
 
-    # Load Vegas lines
     print("  Loading Vegas O/U lines...", end='', flush=True)
     vmap = get_vegas_lines()
     if vmap: print(f" ✓ {len(vmap)} games with live lines")
     else:    print(" ⚠️  No lines — using model lines")
 
-    # Fetch schedules
     print("  Fetching today's schedule...", end='', flush=True)
     today_data   = get_scoreboard()
     today_events = today_data.get('events',[]) if today_data else []
@@ -581,12 +630,10 @@ def main():
     tom_events = tom_data.get('events',[]) if tom_data else []
     print(" ✓\n")
 
-    all_events = today_events + tom_events
-
+    all_events  = today_events + tom_events
     today_sched = [e for e in today_events if e.get('status',{}).get('type',{}).get('state')=='pre']
     tom_sched   = [e for e in tom_events   if e.get('status',{}).get('type',{}).get('state')=='pre']
-
-    all_sched = [('TODAY',e) for e in today_sched] + [('TOMORROW',e) for e in tom_sched]
+    all_sched   = [('TODAY',e) for e in today_sched] + [('TOMORROW',e) for e in tom_sched]
 
     if not all_sched:
         print("  ⚠️  No scheduled games found.")
@@ -596,9 +643,9 @@ def main():
 
     print(f"  Found {len(today_sched)} today + {len(tom_sched)} tomorrow = {len(all_sched)} total\n")
 
-    summary  = []
-    idx      = 1
-    cur_day  = None
+    summary = []
+    idx     = 1
+    cur_day = None
 
     for label, event in all_sched:
         if label != cur_day:
@@ -622,7 +669,6 @@ def main():
             home_name = home_c['team']['displayName']
             away_name = away_c['team']['displayName']
 
-            # Tipoff in WAT (UTC+1)
             tipoff = "TBD"
             try:
                 t = datetime.strptime(event['date'],'%Y-%m-%dT%H:%MZ') + timedelta(hours=1)
@@ -631,15 +677,15 @@ def main():
 
             print(f"  ⏳ Analyzing: {away_name} @ {home_name}...", flush=True)
 
-            hs  = get_team_stats(home_id, home_name)
-            as_ = get_team_stats(away_id, away_name)
-            hf  = get_recent_form(home_id)
-            af  = get_recent_form(away_id)
-            h_rec  = get_team_record(home_id)
-            a_rec  = get_team_record(away_id)
-            h_b2b  = detect_b2b(all_events, home_id)
-            a_b2b  = detect_b2b(all_events, away_id)
-            vegas  = find_vegas(home_name, away_name, vmap)
+            hs    = get_team_stats(home_id, home_name)
+            as_   = get_team_stats(away_id, away_name)
+            hf    = get_recent_form(home_id)
+            af    = get_recent_form(away_id)
+            h_rec = get_team_record(home_id)
+            a_rec = get_team_record(away_id)
+            h_b2b = detect_b2b(all_events, home_id)
+            a_b2b = detect_b2b(all_events, away_id)
+            vegas = find_vegas(home_name, away_name, vmap)
 
             p = predict(hs, as_, hf, af, h_b2b, a_b2b, vegas)
 
@@ -650,21 +696,21 @@ def main():
             pick = home_name if wp>0.5 else away_name
 
             summary.append({
-                'matchup':  f"{away_name} @ {home_name}",
-                'pick':     pick,
-                'conf':     conf,
-                'ou':       p['ou'],
-                'ou_line':  p['ou_line'],
-                'total':    round(p['total'],1),
-                'fh_ou':    p['fh_ou'],
-                'fh_line':  p['fh_line'],
-                'god':      conf >= 0.70,
-                'tipoff':   tipoff,
-                'day':      label,
-                'edge':     p['edge'],
-                'strong_ou':p['strong_ou'],
+                'matchup':    f"{away_name} @ {home_name}",
+                'pick':       pick,
+                'conf':       round(conf, 4),
+                'ou':         p['ou'],
+                'ou_line':    p['ou_line'],
+                'total':      round(p['total'], 1),
+                'fh_ou':      p['fh_ou'],
+                'fh_line':    p['fh_line'],
+                'god':        conf >= 0.70,
+                'tipoff':     tipoff,
+                'day':        label,
+                'edge':       p['edge'],
+                'strong_ou':  p['strong_ou'],
                 'line_source':p['line_source'],
-                'result':   'pending',
+                'result':     'pending',
             })
             idx += 1
 
