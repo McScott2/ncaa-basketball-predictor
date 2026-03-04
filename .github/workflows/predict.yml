@@ -1,9 +1,8 @@
 name: NBA Oracle — Daily Predictions
-
 on:
   schedule:
-    - cron: '0 6 * * *'
-    - cron: '0 16 * * *'
+    - cron: '0 6 * * *'   # 7AM WAT — morning run (fetch stats + predict)
+    - cron: '0 16 * * *'  # 5PM WAT — evening run (compare results + tune)
   workflow_dispatch:
 
 permissions:
@@ -22,26 +21,39 @@ jobs:
         with:
           python-version: '3.12'
 
-      - run: pip install requests numpy
+      - name: Install dependencies
+        run: pip install requests numpy
+
+      - name: Configure git
+        run: |
+          git config user.name "NBA Oracle Bot"
+          git config user.email "bot@nba-oracle.com"
+
+      - name: Pull latest
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
 
       - name: Fetch NBA stats
         run: python3 fetch_nba_stats.py
 
       - name: Run predictor
-        run: python3 nba_predictor.py || echo "Predictor completed"
+        run: python3 nba_predictor.py || true
+
+      - name: Tune model (self-learning)
+        run: python3 tune_model.py || true
 
       - name: Export dashboard
-        run: python3 export_predictions.py || echo "Export completed"
+        run: python3 export_predictions.py || true
 
       - name: Push updates
         run: |
-          git config user.name "NBA Oracle Bot"
-          git config user.email "bot@nba-oracle.com"
-          git fetch origin main
-          git reset --hard origin/main
-          python3 fetch_nba_stats.py
-          python3 nba_predictor.py || true
-          python3 export_predictions.py || true
-          git add nba_predictions_log.json dashboard/predictions.json nba_team_stats.json || true
+          git add \
+            nba_predictions_log.json \
+            dashboard/predictions.json \
+            nba_team_stats.json \
+            model_weights.json \
+            tune_log.json \
+            || true
           git diff --staged --quiet || git commit -m "🏀 Auto update: $(date +'%Y-%m-%d %H:%M UTC')"
           git push || echo "Nothing to push"
