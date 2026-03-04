@@ -557,14 +557,14 @@
         "pick": "Boston Celtics",
         "conf": 0.95,
         "ou": "OVER",
-        "ou_line": 213.5,
+        "ou_line": 212.5,
         "total": 228.8,
         "fh_ou": "OVER",
-        "fh_line": 101.4,
+        "fh_line": 100.9,
         "god": true,
         "tipoff": "01:30 AM WAT",
         "day": "TODAY",
-        "edge": 15.3,
+        "edge": 16.3,
         "strong_ou": true,
         "line_source": "Vegas",
         "result": "pending"
@@ -638,6 +638,6 @@
         "result": "pending"
       }
     ],
-    "saved_at": "2026-03-04 11:12"
+    "saved_at": "2026-03-04 11:48"
   }
 ]
