@@ -469,6 +469,15 @@ def save_predictions(summary):
         print("  ⚠️  No TODAY games to save — skipping log")
         return
 
+    # FIX v7: Never overwrite today's predictions if they already exist.
+    # This locks in the O/U lines from the first run of the day,
+    # preventing line drift when the bot runs a second time at 5PM.
+    existing = next((e for e in log if e['date'] == date_str), None)
+    if existing and existing.get('predictions'):
+        print(f"  🔒 Predictions for {date_str} already locked — skipping overwrite")
+        print(f"     (lines locked at {existing.get('saved_at','unknown')})")
+        return
+
     log = [e for e in log if e['date'] != date_str]
     log.append({
         'date':        date_str,
@@ -478,6 +487,7 @@ def save_predictions(summary):
     with open(LOG_FILE, 'w') as f:
         json.dump(log, f, indent=2)
     print(f"  💾 {len(today_only)} predictions saved to {LOG_FILE}")
+    print(f"  🔒 Lines locked for {date_str} — will not be overwritten today")
 
 # ── AUTO COMPARE ──────────────────────────────────────────────────────────
 def auto_compare():
