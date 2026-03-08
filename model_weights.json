@@ -1,11 +1,11 @@
 {
-  "version": 9,
-  "updated": "2026-03-08 06:54",
+  "version": 10,
+  "updated": "2026-03-08 16:32",
   "weights": {
-    "pythagorean": 0.33,
+    "pythagorean": 0.34,
     "efficiency": 0.3,
     "four_factors": 0.2,
-    "form": 0.11999999999999998,
+    "form": 0.10999999999999999,
     "home_adv": 0.045,
     "total_bias": 0.0,
     "pace_weight": 1.0,
@@ -14,7 +14,7 @@
     "strong_ou_threshold": 12.0
   },
   "notes": [
-    "pythagorean: 0.320 \u2192 0.330 (win acc low at 55%)",
-    "form: 0.130 \u2192 0.120"
+    "pythagorean: 0.330 \u2192 0.340 (win acc low at 55%)",
+    "form: 0.120 \u2192 0.110"
   ]
 }
