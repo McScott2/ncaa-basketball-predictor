@@ -1122,5 +1122,29 @@
       "b2b_penalty": 0.97,
       "strong_ou_threshold": 20.0
     }
+  },
+  {
+    "date": "2026-03-27",
+    "version": 47,
+    "analysis": {
+      "ou_acc": 44.0,
+      "win_acc": 64.0,
+      "avg_total_error": -8.13
+    },
+    "changes": [
+      "total_bias: +3.00 \u2192 +3.10 (avg error was -8.1pts)"
+    ],
+    "weights": {
+      "pythagorean": 0.4000000000000001,
+      "efficiency": 0.3,
+      "four_factors": 0.2,
+      "form": 0.05,
+      "home_adv": 0.045,
+      "total_bias": 3.1000000000000014,
+      "pace_weight": 1.0,
+      "def_penalty": 0.98,
+      "b2b_penalty": 0.97,
+      "strong_ou_threshold": 20.0
+    }
   }
 ]
