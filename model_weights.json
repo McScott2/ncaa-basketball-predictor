@@ -1,6 +1,6 @@
 {
-  "version": 76,
-  "updated": "2026-04-10 16:54",
+  "version": 77,
+  "updated": "2026-04-11 07:09",
   "weights": {
     "pythagorean": 0.4000000000000001,
     "efficiency": 0.3,
@@ -14,6 +14,6 @@
     "strong_ou_threshold": 20.0
   },
   "notes": [
-    "total_bias: +5.10 \u2192 +5.20 (avg error was -3.9pts)"
+    "strong_ou_threshold: 20.0 \u2192 20.0 (Strong O/U only 40%)"
   ]
 }

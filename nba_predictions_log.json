@@ -6948,7 +6948,11 @@
         "edge": 10.2,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 218,
+        "actual_home": 100,
+        "actual_away": 118,
+        "win_result": "hit"
       },
       {
         "matchup": "Miami Heat @ Washington Wizards",
@@ -6965,7 +6969,11 @@
         "edge": 24.0,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 257,
+        "actual_home": 117,
+        "actual_away": 140,
+        "win_result": "hit"
       },
       {
         "matchup": "Cleveland Cavaliers @ Atlanta Hawks",
@@ -6982,7 +6990,11 @@
         "edge": 4.8,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 226,
+        "actual_home": 124,
+        "actual_away": 102,
+        "win_result": "miss"
       },
       {
         "matchup": "New Orleans Pelicans @ Boston Celtics",
@@ -6999,7 +7011,11 @@
         "edge": 7.4,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 262,
+        "actual_home": 144,
+        "actual_away": 118,
+        "win_result": "hit"
       },
       {
         "matchup": "Philadelphia 76ers @ Indiana Pacers",
@@ -7016,7 +7032,11 @@
         "edge": 7.3,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 199,
+        "actual_home": 94,
+        "actual_away": 105,
+        "win_result": "miss"
       },
       {
         "matchup": "Toronto Raptors @ New York Knicks",
@@ -7033,7 +7053,11 @@
         "edge": 5.3,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 207,
+        "actual_home": 112,
+        "actual_away": 95,
+        "win_result": "hit"
       },
       {
         "matchup": "Orlando Magic @ Chicago Bulls",
@@ -7050,7 +7074,11 @@
         "edge": 17.8,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 230,
+        "actual_home": 103,
+        "actual_away": 127,
+        "win_result": "miss"
       },
       {
         "matchup": "Brooklyn Nets @ Milwaukee Bucks",
@@ -7067,7 +7095,11 @@
         "edge": 12.6,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 233,
+        "actual_home": 125,
+        "actual_away": 108,
+        "win_result": "hit"
       },
       {
         "matchup": "Dallas Mavericks @ San Antonio Spurs",
@@ -7084,7 +7116,11 @@
         "edge": 9.6,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 259,
+        "actual_home": 139,
+        "actual_away": 120,
+        "win_result": "miss"
       },
       {
         "matchup": "Oklahoma City Thunder @ Denver Nuggets",
@@ -7101,7 +7137,11 @@
         "edge": 3.9,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 234,
+        "actual_home": 127,
+        "actual_away": 107,
+        "win_result": "hit"
       },
       {
         "matchup": "Minnesota Timberwolves @ Houston Rockets",
@@ -7118,7 +7158,11 @@
         "edge": 3.2,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 268,
+        "actual_home": 132,
+        "actual_away": 136,
+        "win_result": "miss"
       },
       {
         "matchup": "Memphis Grizzlies @ Utah Jazz",
@@ -7135,7 +7179,11 @@
         "edge": 20.0,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 248,
+        "actual_home": 147,
+        "actual_away": 101,
+        "win_result": "miss"
       },
       {
         "matchup": "LA Clippers @ Portland Trail Blazers",
@@ -7152,7 +7200,11 @@
         "edge": 4.4,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 213,
+        "actual_home": 116,
+        "actual_away": 97,
+        "win_result": "miss"
       },
       {
         "matchup": "Golden State Warriors @ Sacramento Kings",
@@ -7169,7 +7221,11 @@
         "edge": 4.8,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 242,
+        "actual_home": 124,
+        "actual_away": 118,
+        "win_result": "hit"
       },
       {
         "matchup": "Phoenix Suns @ Los Angeles Lakers",
@@ -7186,9 +7242,21 @@
         "edge": 15.9,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 174,
+        "actual_home": 101,
+        "actual_away": 73,
+        "win_result": "hit"
       }
     ],
-    "saved_at": "2026-04-10 07:51"
+    "saved_at": "2026-04-10 07:51",
+    "result": {
+      "hits": 6,
+      "total": 15,
+      "pct": 40.0,
+      "win_hits": 8,
+      "win_total": 15,
+      "win_pct": 53.3
+    }
   }
 ]
