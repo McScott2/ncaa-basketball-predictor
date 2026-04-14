@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-13 17:05",
+  "updated": "2026-04-14 07:57",
   "stats": {
     "total_hits": 158,
     "total_picks": 334,
@@ -8,7 +8,46 @@
     "best_pct": 83.3,
     "days_tracked": 42
   },
-  "nba_today": null,
+  "nba_today": {
+    "date": "2026-04-14",
+    "predictions": [
+      {
+        "matchup": "Miami Heat @ Charlotte Hornets",
+        "pick": "Miami Heat",
+        "conf": 0.5276,
+        "ou": "UNDER",
+        "ou_line": 228.5,
+        "total": 227.1,
+        "fh_ou": "UNDER",
+        "fh_line": 108.5,
+        "god": false,
+        "tipoff": "12:30 AM WAT",
+        "day": "TODAY",
+        "edge": 1.4,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Portland Trail Blazers @ Phoenix Suns",
+        "pick": "Phoenix Suns",
+        "conf": 0.7576,
+        "ou": "OVER",
+        "ou_line": 217.5,
+        "total": 228.7,
+        "fh_ou": "OVER",
+        "fh_line": 103.3,
+        "god": true,
+        "tipoff": "03:00 AM WAT",
+        "day": "TODAY",
+        "edge": 11.2,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      }
+    ],
+    "saved_at": "2026-04-14 07:57"
+  },
   "nba_history": [
     {
       "date": "2026-03-01",
@@ -7598,6 +7637,46 @@
         "win_total": 15,
         "win_pct": 66.7
       }
+    },
+    {
+      "date": "2026-04-14",
+      "predictions": [
+        {
+          "matchup": "Miami Heat @ Charlotte Hornets",
+          "pick": "Miami Heat",
+          "conf": 0.5276,
+          "ou": "UNDER",
+          "ou_line": 228.5,
+          "total": 227.1,
+          "fh_ou": "UNDER",
+          "fh_line": 108.5,
+          "god": false,
+          "tipoff": "12:30 AM WAT",
+          "day": "TODAY",
+          "edge": 1.4,
+          "strong_ou": false,
+          "line_source": "Vegas",
+          "result": "pending"
+        },
+        {
+          "matchup": "Portland Trail Blazers @ Phoenix Suns",
+          "pick": "Phoenix Suns",
+          "conf": 0.7576,
+          "ou": "OVER",
+          "ou_line": 217.5,
+          "total": 228.7,
+          "fh_ou": "OVER",
+          "fh_line": 103.3,
+          "god": true,
+          "tipoff": "03:00 AM WAT",
+          "day": "TODAY",
+          "edge": 11.2,
+          "strong_ou": false,
+          "line_source": "Vegas",
+          "result": "pending"
+        }
+      ],
+      "total": 2
     }
   ]
 }
