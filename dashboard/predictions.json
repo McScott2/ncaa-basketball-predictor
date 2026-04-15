@@ -1,52 +1,52 @@
 {
-  "updated": "2026-04-14 17:12",
+  "updated": "2026-04-15 07:58",
   "stats": {
-    "total_hits": 158,
-    "total_picks": 334,
+    "total_hits": 159,
+    "total_picks": 336,
     "accuracy": 47.3,
     "best_day": "2026-04-02",
     "best_pct": 83.3,
-    "days_tracked": 42
+    "days_tracked": 43
   },
   "nba_today": {
-    "date": "2026-04-14",
+    "date": "2026-04-15",
     "predictions": [
       {
-        "matchup": "Miami Heat @ Charlotte Hornets",
-        "pick": "Miami Heat",
-        "conf": 0.5276,
-        "ou": "UNDER",
-        "ou_line": 228.5,
-        "total": 227.1,
-        "fh_ou": "UNDER",
-        "fh_line": 108.5,
-        "god": false,
+        "matchup": "Orlando Magic @ Philadelphia 76ers",
+        "pick": "Philadelphia 76ers",
+        "conf": 0.8193,
+        "ou": "OVER",
+        "ou_line": 222.5,
+        "total": 223.0,
+        "fh_ou": "OVER",
+        "fh_line": 105.7,
+        "god": true,
         "tipoff": "12:30 AM WAT",
         "day": "TODAY",
-        "edge": 1.4,
+        "edge": 0.5,
         "strong_ou": false,
         "line_source": "Vegas",
         "result": "pending"
       },
       {
-        "matchup": "Portland Trail Blazers @ Phoenix Suns",
-        "pick": "Phoenix Suns",
-        "conf": 0.7576,
+        "matchup": "Golden State Warriors @ LA Clippers",
+        "pick": "LA Clippers",
+        "conf": 0.5552,
         "ou": "OVER",
-        "ou_line": 217.5,
-        "total": 228.7,
+        "ou_line": 221.5,
+        "total": 230.9,
         "fh_ou": "OVER",
-        "fh_line": 103.3,
-        "god": true,
+        "fh_line": 105.2,
+        "god": false,
         "tipoff": "03:00 AM WAT",
         "day": "TODAY",
-        "edge": 11.2,
+        "edge": 9.4,
         "strong_ou": false,
         "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-04-14 07:57"
+    "saved_at": "2026-04-15 07:58"
   },
   "nba_history": [
     {
@@ -7656,7 +7656,11 @@
           "edge": 1.4,
           "strong_ou": false,
           "line_source": "Vegas",
-          "result": "pending"
+          "result": "miss",
+          "actual_total": 253,
+          "actual_home": 127,
+          "actual_away": 126,
+          "win_result": "miss"
         },
         {
           "matchup": "Portland Trail Blazers @ Phoenix Suns",
@@ -7671,6 +7675,58 @@
           "tipoff": "03:00 AM WAT",
           "day": "TODAY",
           "edge": 11.2,
+          "strong_ou": false,
+          "line_source": "Vegas",
+          "result": "hit",
+          "actual_total": 224,
+          "actual_home": 110,
+          "actual_away": 114,
+          "win_result": "miss"
+        }
+      ],
+      "total": 2,
+      "result": {
+        "hits": 1,
+        "total": 2,
+        "pct": 50.0,
+        "win_hits": 0,
+        "win_total": 2,
+        "win_pct": 0.0
+      }
+    },
+    {
+      "date": "2026-04-15",
+      "predictions": [
+        {
+          "matchup": "Orlando Magic @ Philadelphia 76ers",
+          "pick": "Philadelphia 76ers",
+          "conf": 0.8193,
+          "ou": "OVER",
+          "ou_line": 222.5,
+          "total": 223.0,
+          "fh_ou": "OVER",
+          "fh_line": 105.7,
+          "god": true,
+          "tipoff": "12:30 AM WAT",
+          "day": "TODAY",
+          "edge": 0.5,
+          "strong_ou": false,
+          "line_source": "Vegas",
+          "result": "pending"
+        },
+        {
+          "matchup": "Golden State Warriors @ LA Clippers",
+          "pick": "LA Clippers",
+          "conf": 0.5552,
+          "ou": "OVER",
+          "ou_line": 221.5,
+          "total": 230.9,
+          "fh_ou": "OVER",
+          "fh_line": 105.2,
+          "god": false,
+          "tipoff": "03:00 AM WAT",
+          "day": "TODAY",
+          "edge": 9.4,
           "strong_ou": false,
           "line_source": "Vegas",
           "result": "pending"
