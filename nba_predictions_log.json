@@ -7662,7 +7662,11 @@
         "edge": 0.5,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 206,
+        "actual_home": 109,
+        "actual_away": 97,
+        "win_result": "hit"
       },
       {
         "matchup": "Golden State Warriors @ LA Clippers",
@@ -7679,9 +7683,21 @@
         "edge": 9.4,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 247,
+        "actual_home": 121,
+        "actual_away": 126,
+        "win_result": "miss"
       }
     ],
-    "saved_at": "2026-04-15 07:58"
+    "saved_at": "2026-04-15 07:58",
+    "result": {
+      "hits": 1,
+      "total": 2,
+      "pct": 50.0,
+      "win_hits": 1,
+      "win_total": 2,
+      "win_pct": 50.0
+    }
   }
 ]

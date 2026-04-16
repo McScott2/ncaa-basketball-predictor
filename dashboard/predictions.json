@@ -1,53 +1,14 @@
 {
-  "updated": "2026-04-15 17:07",
+  "updated": "2026-04-16 07:57",
   "stats": {
-    "total_hits": 159,
-    "total_picks": 336,
+    "total_hits": 160,
+    "total_picks": 338,
     "accuracy": 47.3,
     "best_day": "2026-04-02",
     "best_pct": 83.3,
-    "days_tracked": 43
+    "days_tracked": 44
   },
-  "nba_today": {
-    "date": "2026-04-15",
-    "predictions": [
-      {
-        "matchup": "Orlando Magic @ Philadelphia 76ers",
-        "pick": "Philadelphia 76ers",
-        "conf": 0.8193,
-        "ou": "OVER",
-        "ou_line": 222.5,
-        "total": 223.0,
-        "fh_ou": "OVER",
-        "fh_line": 105.7,
-        "god": true,
-        "tipoff": "12:30 AM WAT",
-        "day": "TODAY",
-        "edge": 0.5,
-        "strong_ou": false,
-        "line_source": "Vegas",
-        "result": "pending"
-      },
-      {
-        "matchup": "Golden State Warriors @ LA Clippers",
-        "pick": "LA Clippers",
-        "conf": 0.5552,
-        "ou": "OVER",
-        "ou_line": 221.5,
-        "total": 230.9,
-        "fh_ou": "OVER",
-        "fh_line": 105.2,
-        "god": false,
-        "tipoff": "03:00 AM WAT",
-        "day": "TODAY",
-        "edge": 9.4,
-        "strong_ou": false,
-        "line_source": "Vegas",
-        "result": "pending"
-      }
-    ],
-    "saved_at": "2026-04-15 07:58"
-  },
+  "nba_today": null,
   "nba_history": [
     {
       "date": "2026-03-01",
@@ -7712,7 +7673,11 @@
           "edge": 0.5,
           "strong_ou": false,
           "line_source": "Vegas",
-          "result": "pending"
+          "result": "miss",
+          "actual_total": 206,
+          "actual_home": 109,
+          "actual_away": 97,
+          "win_result": "hit"
         },
         {
           "matchup": "Golden State Warriors @ LA Clippers",
@@ -7729,10 +7694,22 @@
           "edge": 9.4,
           "strong_ou": false,
           "line_source": "Vegas",
-          "result": "pending"
+          "result": "hit",
+          "actual_total": 247,
+          "actual_home": 121,
+          "actual_away": 126,
+          "win_result": "miss"
         }
       ],
-      "total": 2
+      "total": 2,
+      "result": {
+        "hits": 1,
+        "total": 2,
+        "pct": 50.0,
+        "win_hits": 1,
+        "win_total": 2,
+        "win_pct": 50.0
+      }
     }
   ]
 }
