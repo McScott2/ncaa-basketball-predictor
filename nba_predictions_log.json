@@ -7699,5 +7699,45 @@
       "win_total": 2,
       "win_pct": 50.0
     }
+  },
+  {
+    "date": "2026-04-17",
+    "predictions": [
+      {
+        "matchup": "Charlotte Hornets @ Orlando Magic",
+        "pick": "Orlando Magic",
+        "conf": 0.6215,
+        "ou": "OVER",
+        "ou_line": 217.5,
+        "total": 223.5,
+        "fh_ou": "OVER",
+        "fh_line": 103.3,
+        "god": false,
+        "tipoff": "12:30 AM WAT",
+        "day": "TODAY",
+        "edge": 6.0,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Golden State Warriors @ Phoenix Suns",
+        "pick": "Phoenix Suns",
+        "conf": 0.5093,
+        "ou": "OVER",
+        "ou_line": 219.5,
+        "total": 235.0,
+        "fh_ou": "OVER",
+        "fh_line": 104.3,
+        "god": false,
+        "tipoff": "03:00 AM WAT",
+        "day": "TODAY",
+        "edge": 15.5,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      }
+    ],
+    "saved_at": "2026-04-17 07:58"
   }
 ]
