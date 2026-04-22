@@ -1,69 +1,52 @@
 {
-  "updated": "2026-04-21 17:05",
+  "updated": "2026-04-22 07:59",
   "stats": {
     "total_hits": 163,
-    "total_picks": 351,
-    "accuracy": 46.4,
+    "total_picks": 354,
+    "accuracy": 46.0,
     "best_day": "2026-04-02",
     "best_pct": 83.3,
-    "days_tracked": 48
+    "days_tracked": 49
   },
   "nba_today": {
-    "date": "2026-04-21",
+    "date": "2026-04-22",
     "predictions": [
       {
-        "matchup": "Philadelphia 76ers @ Boston Celtics",
-        "pick": "Boston Celtics",
-        "conf": 0.9214,
+        "matchup": "Orlando Magic @ Detroit Pistons",
+        "pick": "Detroit Pistons",
+        "conf": 0.8818,
         "ou": "OVER",
-        "ou_line": 216.5,
-        "total": 233.5,
+        "ou_line": 218.5,
+        "total": 226.7,
         "fh_ou": "OVER",
-        "fh_line": 102.8,
+        "fh_line": 103.8,
         "god": true,
         "tipoff": "12:00 AM WAT",
         "day": "TODAY",
-        "edge": 17.0,
+        "edge": 8.2,
         "strong_ou": false,
         "line_source": "Vegas",
         "result": "pending"
       },
       {
-        "matchup": "Portland Trail Blazers @ San Antonio Spurs",
-        "pick": "San Antonio Spurs",
-        "conf": 0.6817,
+        "matchup": "Phoenix Suns @ Oklahoma City Thunder",
+        "pick": "Oklahoma City Thunder",
+        "conf": 0.9075,
         "ou": "OVER",
-        "ou_line": 220.5,
-        "total": 226.0,
+        "ou_line": 215.5,
+        "total": 237.2,
         "fh_ou": "OVER",
-        "fh_line": 104.7,
-        "god": false,
-        "tipoff": "01:00 AM WAT",
-        "day": "TODAY",
-        "edge": 5.5,
-        "strong_ou": false,
-        "line_source": "Vegas",
-        "result": "pending"
-      },
-      {
-        "matchup": "Houston Rockets @ Los Angeles Lakers",
-        "pick": "Los Angeles Lakers",
-        "conf": 0.7972,
-        "ou": "OVER",
-        "ou_line": 206.5,
-        "total": 230.6,
-        "fh_ou": "OVER",
-        "fh_line": 98.1,
+        "fh_line": 102.4,
         "god": true,
-        "tipoff": "03:30 AM WAT",
+        "tipoff": "02:30 AM WAT",
         "day": "TODAY",
-        "edge": 24.1,
+        "edge": 21.7,
         "strong_ou": true,
         "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-04-21 08:03"
+    "saved_at": "2026-04-22 07:59"
   },
   "nba_history": [
     {
@@ -8114,7 +8097,11 @@
           "edge": 17.0,
           "strong_ou": false,
           "line_source": "Vegas",
-          "result": "pending"
+          "result": "miss",
+          "actual_total": 208,
+          "actual_home": 97,
+          "actual_away": 111,
+          "win_result": "miss"
         },
         {
           "matchup": "Portland Trail Blazers @ San Antonio Spurs",
@@ -8131,7 +8118,11 @@
           "edge": 5.5,
           "strong_ou": false,
           "line_source": "Vegas",
-          "result": "pending"
+          "result": "miss",
+          "actual_total": 209,
+          "actual_home": 103,
+          "actual_away": 106,
+          "win_result": "miss"
         },
         {
           "matchup": "Houston Rockets @ Los Angeles Lakers",
@@ -8148,10 +8139,62 @@
           "edge": 24.1,
           "strong_ou": true,
           "line_source": "Vegas",
+          "result": "miss",
+          "actual_total": 195,
+          "actual_home": 101,
+          "actual_away": 94,
+          "win_result": "hit"
+        }
+      ],
+      "total": 3,
+      "result": {
+        "hits": 0,
+        "total": 3,
+        "pct": 0.0,
+        "win_hits": 1,
+        "win_total": 3,
+        "win_pct": 33.3
+      }
+    },
+    {
+      "date": "2026-04-22",
+      "predictions": [
+        {
+          "matchup": "Orlando Magic @ Detroit Pistons",
+          "pick": "Detroit Pistons",
+          "conf": 0.8818,
+          "ou": "OVER",
+          "ou_line": 218.5,
+          "total": 226.7,
+          "fh_ou": "OVER",
+          "fh_line": 103.8,
+          "god": true,
+          "tipoff": "12:00 AM WAT",
+          "day": "TODAY",
+          "edge": 8.2,
+          "strong_ou": false,
+          "line_source": "Vegas",
+          "result": "pending"
+        },
+        {
+          "matchup": "Phoenix Suns @ Oklahoma City Thunder",
+          "pick": "Oklahoma City Thunder",
+          "conf": 0.9075,
+          "ou": "OVER",
+          "ou_line": 215.5,
+          "total": 237.2,
+          "fh_ou": "OVER",
+          "fh_line": 102.4,
+          "god": true,
+          "tipoff": "02:30 AM WAT",
+          "day": "TODAY",
+          "edge": 21.7,
+          "strong_ou": true,
+          "line_source": "Vegas",
           "result": "pending"
         }
       ],
-      "total": 3
+      "total": 2
     }
   ]
 }

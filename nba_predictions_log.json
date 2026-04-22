@@ -8047,7 +8047,11 @@
         "edge": 17.0,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 208,
+        "actual_home": 97,
+        "actual_away": 111,
+        "win_result": "miss"
       },
       {
         "matchup": "Portland Trail Blazers @ San Antonio Spurs",
@@ -8064,7 +8068,11 @@
         "edge": 5.5,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 209,
+        "actual_home": 103,
+        "actual_away": 106,
+        "win_result": "miss"
       },
       {
         "matchup": "Houston Rockets @ Los Angeles Lakers",
@@ -8081,9 +8089,61 @@
         "edge": 24.1,
         "strong_ou": true,
         "line_source": "Vegas",
+        "result": "miss",
+        "actual_total": 195,
+        "actual_home": 101,
+        "actual_away": 94,
+        "win_result": "hit"
+      }
+    ],
+    "saved_at": "2026-04-21 08:03",
+    "result": {
+      "hits": 0,
+      "total": 3,
+      "pct": 0.0,
+      "win_hits": 1,
+      "win_total": 3,
+      "win_pct": 33.3
+    }
+  },
+  {
+    "date": "2026-04-22",
+    "predictions": [
+      {
+        "matchup": "Orlando Magic @ Detroit Pistons",
+        "pick": "Detroit Pistons",
+        "conf": 0.8818,
+        "ou": "OVER",
+        "ou_line": 218.5,
+        "total": 226.7,
+        "fh_ou": "OVER",
+        "fh_line": 103.8,
+        "god": true,
+        "tipoff": "12:00 AM WAT",
+        "day": "TODAY",
+        "edge": 8.2,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Phoenix Suns @ Oklahoma City Thunder",
+        "pick": "Oklahoma City Thunder",
+        "conf": 0.9075,
+        "ou": "OVER",
+        "ou_line": 215.5,
+        "total": 237.2,
+        "fh_ou": "OVER",
+        "fh_line": 102.4,
+        "god": true,
+        "tipoff": "02:30 AM WAT",
+        "day": "TODAY",
+        "edge": 21.7,
+        "strong_ou": true,
+        "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-04-21 08:03"
+    "saved_at": "2026-04-22 07:59"
   }
 ]
