@@ -8124,7 +8124,11 @@
         "edge": 8.2,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 181,
+        "actual_home": 98,
+        "actual_away": 83,
+        "win_result": "hit"
       },
       {
         "matchup": "Phoenix Suns @ Oklahoma City Thunder",
@@ -8141,9 +8145,78 @@
         "edge": 21.7,
         "strong_ou": true,
         "line_source": "Vegas",
+        "result": "hit",
+        "actual_total": 227,
+        "actual_home": 120,
+        "actual_away": 107,
+        "win_result": "hit"
+      }
+    ],
+    "saved_at": "2026-04-22 07:59",
+    "result": {
+      "hits": 1,
+      "total": 2,
+      "pct": 50.0,
+      "win_hits": 2,
+      "win_total": 2,
+      "win_pct": 100.0
+    }
+  },
+  {
+    "date": "2026-04-23",
+    "predictions": [
+      {
+        "matchup": "New York Knicks @ Atlanta Hawks",
+        "pick": "Atlanta Hawks",
+        "conf": 0.634,
+        "ou": "OVER",
+        "ou_line": 216.5,
+        "total": 236.6,
+        "fh_ou": "OVER",
+        "fh_line": 102.8,
+        "god": false,
+        "tipoff": "12:00 AM WAT",
+        "day": "TODAY",
+        "edge": 20.1,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Cleveland Cavaliers @ Toronto Raptors",
+        "pick": "Cleveland Cavaliers",
+        "conf": 0.9195,
+        "ou": "OVER",
+        "ou_line": 219.5,
+        "total": 226.4,
+        "fh_ou": "OVER",
+        "fh_line": 104.3,
+        "god": true,
+        "tipoff": "01:00 AM WAT",
+        "day": "TODAY",
+        "edge": 6.9,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Denver Nuggets @ Minnesota Timberwolves",
+        "pick": "Denver Nuggets",
+        "conf": 0.692,
+        "ou": "UNDER",
+        "ou_line": 234.5,
+        "total": 228.1,
+        "fh_ou": "UNDER",
+        "fh_line": 111.4,
+        "god": false,
+        "tipoff": "02:30 AM WAT",
+        "day": "TODAY",
+        "edge": 6.4,
+        "strong_ou": false,
+        "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-04-22 07:59"
+    "saved_at": "2026-04-23 08:05"
   }
 ]
