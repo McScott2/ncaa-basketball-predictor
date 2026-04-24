@@ -8180,7 +8180,11 @@
         "edge": 20.1,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 217,
+        "actual_home": 109,
+        "actual_away": 108,
+        "win_result": "hit"
       },
       {
         "matchup": "Cleveland Cavaliers @ Toronto Raptors",
@@ -8197,7 +8201,11 @@
         "edge": 6.9,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 230,
+        "actual_home": 126,
+        "actual_away": 104,
+        "win_result": "miss"
       },
       {
         "matchup": "Denver Nuggets @ Minnesota Timberwolves",
@@ -8214,9 +8222,78 @@
         "edge": 6.4,
         "strong_ou": false,
         "line_source": "Vegas",
+        "result": "hit",
+        "actual_total": 209,
+        "actual_home": 113,
+        "actual_away": 96,
+        "win_result": "miss"
+      }
+    ],
+    "saved_at": "2026-04-23 08:05",
+    "result": {
+      "hits": 3,
+      "total": 3,
+      "pct": 100.0,
+      "win_hits": 1,
+      "win_total": 3,
+      "win_pct": 33.3
+    }
+  },
+  {
+    "date": "2026-04-24",
+    "predictions": [
+      {
+        "matchup": "Boston Celtics @ Philadelphia 76ers",
+        "pick": "Boston Celtics",
+        "conf": 0.8266,
+        "ou": "OVER",
+        "ou_line": 215.5,
+        "total": 233.1,
+        "fh_ou": "OVER",
+        "fh_line": 102.4,
+        "god": true,
+        "tipoff": "12:00 AM WAT",
+        "day": "TODAY",
+        "edge": 17.6,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Los Angeles Lakers @ Houston Rockets",
+        "pick": "Los Angeles Lakers",
+        "conf": 0.6151,
+        "ou": "OVER",
+        "ou_line": 206.5,
+        "total": 230.2,
+        "fh_ou": "OVER",
+        "fh_line": 98.1,
+        "god": false,
+        "tipoff": "01:00 AM WAT",
+        "day": "TODAY",
+        "edge": 23.7,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "San Antonio Spurs @ Portland Trail Blazers",
+        "pick": "Portland Trail Blazers",
+        "conf": 0.5345,
+        "ou": "OVER",
+        "ou_line": 220.5,
+        "total": 225.6,
+        "fh_ou": "OVER",
+        "fh_line": 104.7,
+        "god": false,
+        "tipoff": "03:30 AM WAT",
+        "day": "TODAY",
+        "edge": 5.1,
+        "strong_ou": false,
+        "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-04-23 08:05"
+    "saved_at": "2026-04-24 08:13"
   }
 ]
