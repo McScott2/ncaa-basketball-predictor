@@ -8257,7 +8257,11 @@
         "edge": 17.6,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 208,
+        "actual_home": 100,
+        "actual_away": 108,
+        "win_result": "hit"
       },
       {
         "matchup": "Los Angeles Lakers @ Houston Rockets",
@@ -8274,7 +8278,11 @@
         "edge": 23.7,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 220,
+        "actual_home": 108,
+        "actual_away": 112,
+        "win_result": "hit"
       },
       {
         "matchup": "San Antonio Spurs @ Portland Trail Blazers",
@@ -8291,9 +8299,95 @@
         "edge": 5.1,
         "strong_ou": false,
         "line_source": "Vegas",
+        "result": "hit",
+        "actual_total": 228,
+        "actual_home": 108,
+        "actual_away": 120,
+        "win_result": "miss"
+      }
+    ],
+    "saved_at": "2026-04-24 08:13",
+    "result": {
+      "hits": 2,
+      "total": 3,
+      "pct": 66.7,
+      "win_hits": 2,
+      "win_total": 3,
+      "win_pct": 66.7
+    }
+  },
+  {
+    "date": "2026-04-25",
+    "predictions": [
+      {
+        "matchup": "Detroit Pistons @ Orlando Magic",
+        "pick": "Detroit Pistons",
+        "conf": 0.7521,
+        "ou": "OVER",
+        "ou_line": 213.5,
+        "total": 226.1,
+        "fh_ou": "OVER",
+        "fh_line": 101.4,
+        "god": true,
+        "tipoff": "06:00 PM WAT",
+        "day": "TODAY",
+        "edge": 12.6,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Oklahoma City Thunder @ Phoenix Suns",
+        "pick": "Oklahoma City Thunder",
+        "conf": 0.7996,
+        "ou": "OVER",
+        "ou_line": 214.5,
+        "total": 236.6,
+        "fh_ou": "OVER",
+        "fh_line": 101.9,
+        "god": true,
+        "tipoff": "08:30 PM WAT",
+        "day": "TODAY",
+        "edge": 22.1,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "New York Knicks @ Atlanta Hawks",
+        "pick": "Atlanta Hawks",
+        "conf": 0.634,
+        "ou": "OVER",
+        "ou_line": 214.5,
+        "total": 236.2,
+        "fh_ou": "OVER",
+        "fh_line": 101.9,
+        "god": false,
+        "tipoff": "11:00 PM WAT",
+        "day": "TODAY",
+        "edge": 21.7,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Denver Nuggets @ Minnesota Timberwolves",
+        "pick": "Denver Nuggets",
+        "conf": 0.692,
+        "ou": "UNDER",
+        "ou_line": 229.5,
+        "total": 227.7,
+        "fh_ou": "UNDER",
+        "fh_line": 109.0,
+        "god": false,
+        "tipoff": "01:30 AM WAT",
+        "day": "TODAY",
+        "edge": 1.8,
+        "strong_ou": false,
+        "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-04-24 08:13"
+    "saved_at": "2026-04-25 07:38"
   }
 ]
