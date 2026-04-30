@@ -1,22 +1,22 @@
 {
-  "version": 115,
-  "updated": "2026-04-30 08:30",
+  "version": 116,
+  "updated": "2026-04-30 17:23",
   "weights": {
-    "pythagorean": 0.4476,
-    "efficiency": 0.2718,
-    "four_factors": 0.1812,
+    "pythagorean": 0.4526,
+    "efficiency": 0.2688,
+    "four_factors": 0.1792,
     "form": 0.0494,
     "home_adv": 0.045,
-    "total_bias": 3.5000000000000013,
+    "total_bias": 3.4000000000000012,
     "pace_weight": 1.0,
     "def_penalty": 0.98,
     "b2b_penalty": 0.97,
-    "strong_ou_threshold": 17.5
+    "strong_ou_threshold": 17.0
   },
   "notes": [
-    "total_bias: +3.60 \u2192 +3.50 (avg error was +13.1pts)",
-    "strong_ou_threshold: 18.0 \u2192 17.5 (Strong O/U hitting 75%)",
-    "pythagorean: 0.443 \u2192 0.453 (win acc low at 48%)",
+    "total_bias: +3.50 \u2192 +3.40 (avg error was +13.1pts)",
+    "strong_ou_threshold: 17.5 \u2192 17.0 (Strong O/U hitting 75%)",
+    "pythagorean: 0.448 \u2192 0.458 (win acc low at 48%)",
     "form: 0.049 \u2192 0.050"
   ]
 }
