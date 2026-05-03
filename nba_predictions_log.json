@@ -8915,9 +8915,61 @@
         "edge": 26.0,
         "strong_ou": true,
         "line_source": "Vegas",
+        "result": "hit",
+        "actual_total": 209,
+        "actual_home": 100,
+        "actual_away": 109,
+        "win_result": "miss"
+      }
+    ],
+    "saved_at": "2026-05-02 07:52",
+    "result": {
+      "hits": 1,
+      "total": 1,
+      "pct": 100.0,
+      "win_hits": 0,
+      "win_total": 1,
+      "win_pct": 0.0
+    }
+  },
+  {
+    "date": "2026-05-03",
+    "predictions": [
+      {
+        "matchup": "Orlando Magic @ Detroit Pistons",
+        "pick": "Detroit Pistons",
+        "conf": 0.8692,
+        "ou": "OVER",
+        "ou_line": 201.5,
+        "total": 224.5,
+        "fh_ou": "OVER",
+        "fh_line": 95.7,
+        "god": true,
+        "tipoff": "08:30 PM WAT",
+        "day": "TODAY",
+        "edge": 23.0,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Toronto Raptors @ Cleveland Cavaliers",
+        "pick": "Cleveland Cavaliers",
+        "conf": 0.95,
+        "ou": "OVER",
+        "ou_line": 211.5,
+        "total": 224.4,
+        "fh_ou": "OVER",
+        "fh_line": 100.5,
+        "god": true,
+        "tipoff": "12:30 AM WAT",
+        "day": "TODAY",
+        "edge": 12.9,
+        "strong_ou": false,
+        "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-05-02 07:52"
+    "saved_at": "2026-05-03 08:08"
   }
 ]
