@@ -1,52 +1,52 @@
 {
-  "updated": "2026-05-03 16:54",
+  "updated": "2026-05-04 08:37",
   "stats": {
-    "total_hits": 182,
-    "total_picks": 386,
-    "accuracy": 47.2,
+    "total_hits": 184,
+    "total_picks": 388,
+    "accuracy": 47.4,
     "best_day": "2026-04-23",
     "best_pct": 100.0,
-    "days_tracked": 60
+    "days_tracked": 61
   },
   "nba_today": {
-    "date": "2026-05-03",
+    "date": "2026-05-04",
     "predictions": [
       {
-        "matchup": "Orlando Magic @ Detroit Pistons",
-        "pick": "Detroit Pistons",
-        "conf": 0.8692,
+        "matchup": "Philadelphia 76ers @ New York Knicks",
+        "pick": "New York Knicks",
+        "conf": 0.7671,
         "ou": "OVER",
-        "ou_line": 201.5,
-        "total": 224.5,
+        "ou_line": 212.5,
+        "total": 225.1,
         "fh_ou": "OVER",
-        "fh_line": 95.7,
+        "fh_line": 100.9,
         "god": true,
-        "tipoff": "08:30 PM WAT",
+        "tipoff": "01:00 AM WAT",
         "day": "TODAY",
-        "edge": 23.0,
-        "strong_ou": true,
+        "edge": 12.6,
+        "strong_ou": false,
         "line_source": "Vegas",
         "result": "pending"
       },
       {
-        "matchup": "Toronto Raptors @ Cleveland Cavaliers",
-        "pick": "Cleveland Cavaliers",
-        "conf": 0.95,
+        "matchup": "Minnesota Timberwolves @ San Antonio Spurs",
+        "pick": "Minnesota Timberwolves",
+        "conf": 0.6507,
         "ou": "OVER",
-        "ou_line": 211.5,
-        "total": 224.4,
+        "ou_line": 217.5,
+        "total": 224.7,
         "fh_ou": "OVER",
-        "fh_line": 100.5,
-        "god": true,
-        "tipoff": "12:30 AM WAT",
+        "fh_line": 103.3,
+        "god": false,
+        "tipoff": "02:30 AM WAT",
         "day": "TODAY",
-        "edge": 12.9,
+        "edge": 7.2,
         "strong_ou": false,
         "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-05-03 08:08"
+    "saved_at": "2026-05-04 08:37"
   },
   "nba_history": [
     {
@@ -9000,7 +9000,11 @@
           "edge": 23.0,
           "strong_ou": true,
           "line_source": "Vegas",
-          "result": "pending"
+          "result": "hit",
+          "actual_total": 210,
+          "actual_home": 116,
+          "actual_away": 94,
+          "win_result": "hit"
         },
         {
           "matchup": "Toronto Raptors @ Cleveland Cavaliers",
@@ -9015,6 +9019,58 @@
           "tipoff": "12:30 AM WAT",
           "day": "TODAY",
           "edge": 12.9,
+          "strong_ou": false,
+          "line_source": "Vegas",
+          "result": "hit",
+          "actual_total": 216,
+          "actual_home": 114,
+          "actual_away": 102,
+          "win_result": "hit"
+        }
+      ],
+      "total": 2,
+      "result": {
+        "hits": 2,
+        "total": 2,
+        "pct": 100.0,
+        "win_hits": 2,
+        "win_total": 2,
+        "win_pct": 100.0
+      }
+    },
+    {
+      "date": "2026-05-04",
+      "predictions": [
+        {
+          "matchup": "Philadelphia 76ers @ New York Knicks",
+          "pick": "New York Knicks",
+          "conf": 0.7671,
+          "ou": "OVER",
+          "ou_line": 212.5,
+          "total": 225.1,
+          "fh_ou": "OVER",
+          "fh_line": 100.9,
+          "god": true,
+          "tipoff": "01:00 AM WAT",
+          "day": "TODAY",
+          "edge": 12.6,
+          "strong_ou": false,
+          "line_source": "Vegas",
+          "result": "pending"
+        },
+        {
+          "matchup": "Minnesota Timberwolves @ San Antonio Spurs",
+          "pick": "Minnesota Timberwolves",
+          "conf": 0.6507,
+          "ou": "OVER",
+          "ou_line": 217.5,
+          "total": 224.7,
+          "fh_ou": "OVER",
+          "fh_line": 103.3,
+          "god": false,
+          "tipoff": "02:30 AM WAT",
+          "day": "TODAY",
+          "edge": 7.2,
           "strong_ou": false,
           "line_source": "Vegas",
           "result": "pending"
