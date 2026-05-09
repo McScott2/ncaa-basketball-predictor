@@ -9230,7 +9230,11 @@
         "edge": 10.9,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 202,
+        "actual_home": 94,
+        "actual_away": 108,
+        "win_result": "hit"
       },
       {
         "matchup": "San Antonio Spurs @ Minnesota Timberwolves",
@@ -9247,9 +9251,61 @@
         "edge": 7.5,
         "strong_ou": false,
         "line_source": "Vegas",
+        "result": "hit",
+        "actual_total": 223,
+        "actual_home": 108,
+        "actual_away": 115,
+        "win_result": "miss"
+      }
+    ],
+    "saved_at": "2026-05-08 07:49",
+    "result": {
+      "hits": 1,
+      "total": 2,
+      "pct": 50.0,
+      "win_hits": 1,
+      "win_total": 2,
+      "win_pct": 50.0
+    }
+  },
+  {
+    "date": "2026-05-09",
+    "predictions": [
+      {
+        "matchup": "Detroit Pistons @ Cleveland Cavaliers",
+        "pick": "Cleveland Cavaliers",
+        "conf": 0.7951,
+        "ou": "OVER",
+        "ou_line": 211.5,
+        "total": 229.5,
+        "fh_ou": "OVER",
+        "fh_line": 100.5,
+        "god": true,
+        "tipoff": "08:00 PM WAT",
+        "day": "TODAY",
+        "edge": 18.0,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Oklahoma City Thunder @ Los Angeles Lakers",
+        "pick": "Oklahoma City Thunder",
+        "conf": 0.6099,
+        "ou": "OVER",
+        "ou_line": 211.5,
+        "total": 232.9,
+        "fh_ou": "OVER",
+        "fh_line": 100.5,
+        "god": false,
+        "tipoff": "01:30 AM WAT",
+        "day": "TODAY",
+        "edge": 21.4,
+        "strong_ou": true,
+        "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-05-08 07:49"
+    "saved_at": "2026-05-09 08:03"
   }
 ]
