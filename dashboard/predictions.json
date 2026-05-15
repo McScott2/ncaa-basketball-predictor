@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-14 17:53",
+  "updated": "2026-05-15 08:56",
   "stats": {
     "total_hits": 196,
     "total_picks": 406,
@@ -8,7 +8,46 @@
     "best_pct": 100.0,
     "days_tracked": 71
   },
-  "nba_today": null,
+  "nba_today": {
+    "date": "2026-05-15",
+    "predictions": [
+      {
+        "matchup": "Detroit Pistons @ Cleveland Cavaliers",
+        "pick": "Cleveland Cavaliers",
+        "conf": 0.794,
+        "ou": "OVER",
+        "ou_line": 209.5,
+        "total": 228.3,
+        "fh_ou": "OVER",
+        "fh_line": 99.5,
+        "god": true,
+        "tipoff": "12:00 AM WAT",
+        "day": "TODAY",
+        "edge": 18.8,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "San Antonio Spurs @ Minnesota Timberwolves",
+        "pick": "Minnesota Timberwolves",
+        "conf": 0.8211,
+        "ou": "OVER",
+        "ou_line": 218.5,
+        "total": 222.6,
+        "fh_ou": "OVER",
+        "fh_line": 103.8,
+        "god": true,
+        "tipoff": "02:30 AM WAT",
+        "day": "TODAY",
+        "edge": 4.1,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      }
+    ],
+    "saved_at": "2026-05-15 08:56"
+  },
   "nba_history": [
     {
       "date": "2026-03-01",
@@ -9516,6 +9555,46 @@
         "win_total": 1,
         "win_pct": 100.0
       }
+    },
+    {
+      "date": "2026-05-15",
+      "predictions": [
+        {
+          "matchup": "Detroit Pistons @ Cleveland Cavaliers",
+          "pick": "Cleveland Cavaliers",
+          "conf": 0.794,
+          "ou": "OVER",
+          "ou_line": 209.5,
+          "total": 228.3,
+          "fh_ou": "OVER",
+          "fh_line": 99.5,
+          "god": true,
+          "tipoff": "12:00 AM WAT",
+          "day": "TODAY",
+          "edge": 18.8,
+          "strong_ou": true,
+          "line_source": "Vegas",
+          "result": "pending"
+        },
+        {
+          "matchup": "San Antonio Spurs @ Minnesota Timberwolves",
+          "pick": "Minnesota Timberwolves",
+          "conf": 0.8211,
+          "ou": "OVER",
+          "ou_line": 218.5,
+          "total": 222.6,
+          "fh_ou": "OVER",
+          "fh_line": 103.8,
+          "god": true,
+          "tipoff": "02:30 AM WAT",
+          "day": "TODAY",
+          "edge": 4.1,
+          "strong_ou": false,
+          "line_source": "Vegas",
+          "result": "pending"
+        }
+      ],
+      "total": 2
     }
   ]
 }
