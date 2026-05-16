@@ -9524,7 +9524,11 @@
         "edge": 18.8,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 209,
+        "actual_home": 94,
+        "actual_away": 115,
+        "win_result": "miss"
       },
       {
         "matchup": "San Antonio Spurs @ Minnesota Timberwolves",
@@ -9541,9 +9545,21 @@
         "edge": 4.1,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 248,
+        "actual_home": 109,
+        "actual_away": 139,
+        "win_result": "miss"
       }
     ],
-    "saved_at": "2026-05-15 08:56"
+    "saved_at": "2026-05-15 08:56",
+    "result": {
+      "hits": 1,
+      "total": 2,
+      "pct": 50.0,
+      "win_hits": 0,
+      "win_total": 2,
+      "win_pct": 0.0
+    }
   }
 ]
