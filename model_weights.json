@@ -1,6 +1,6 @@
 {
-  "version": 146,
-  "updated": "2026-05-16 08:11",
+  "version": 147,
+  "updated": "2026-05-16 17:00",
   "weights": {
     "pythagorean": 0.4782,
     "efficiency": 0.2635,
@@ -11,9 +11,9 @@
     "pace_weight": 1.0,
     "def_penalty": 0.98,
     "b2b_penalty": 0.97,
-    "strong_ou_threshold": 10.0
+    "strong_ou_threshold": 9.5
   },
   "notes": [
-    "strong_ou_threshold: 10.5 \u2192 10.0 (Strong O/U hitting 83%)"
+    "strong_ou_threshold: 10.0 \u2192 9.5 (Strong O/U hitting 83%)"
   ]
 }
