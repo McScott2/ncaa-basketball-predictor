@@ -9561,5 +9561,28 @@
       "win_total": 2,
       "win_pct": 0.0
     }
+  },
+  {
+    "date": "2026-05-17",
+    "predictions": [
+      {
+        "matchup": "Cleveland Cavaliers @ Detroit Pistons",
+        "pick": "Cleveland Cavaliers",
+        "conf": 0.6087,
+        "ou": "OVER",
+        "ou_line": 206.5,
+        "total": 228.1,
+        "fh_ou": "OVER",
+        "fh_line": 98.1,
+        "god": false,
+        "tipoff": "01:00 AM WAT",
+        "day": "TODAY",
+        "edge": 21.6,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      }
+    ],
+    "saved_at": "2026-05-17 08:28"
   }
 ]
