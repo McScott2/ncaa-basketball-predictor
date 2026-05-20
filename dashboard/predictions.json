@@ -1,35 +1,35 @@
 {
-  "updated": "2026-05-19 18:07",
+  "updated": "2026-05-20 09:46",
   "stats": {
-    "total_hits": 199,
-    "total_picks": 410,
-    "accuracy": 48.5,
+    "total_hits": 200,
+    "total_picks": 411,
+    "accuracy": 48.7,
     "best_day": "2026-04-23",
     "best_pct": 100.0,
-    "days_tracked": 74
+    "days_tracked": 75
   },
   "nba_today": {
-    "date": "2026-05-19",
+    "date": "2026-05-20",
     "predictions": [
       {
-        "matchup": "Cleveland Cavaliers @ New York Knicks",
-        "pick": "Cleveland Cavaliers",
-        "conf": 0.5732,
+        "matchup": "San Antonio Spurs @ Oklahoma City Thunder",
+        "pick": "Oklahoma City Thunder",
+        "conf": 0.95,
         "ou": "OVER",
-        "ou_line": 217.5,
-        "total": 222.2,
+        "ou_line": 216.0,
+        "total": 229.7,
         "fh_ou": "OVER",
-        "fh_line": 103.3,
-        "god": false,
-        "tipoff": "01:00 AM WAT",
+        "fh_line": 102.6,
+        "god": true,
+        "tipoff": "01:30 AM WAT",
         "day": "TODAY",
-        "edge": 4.7,
-        "strong_ou": false,
+        "edge": 13.7,
+        "strong_ou": true,
         "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-05-19 09:57"
+    "saved_at": "2026-05-20 09:46"
   },
   "nba_history": [
     {
@@ -9682,6 +9682,41 @@
           "day": "TODAY",
           "edge": 4.7,
           "strong_ou": false,
+          "line_source": "Vegas",
+          "result": "hit",
+          "actual_total": 219,
+          "actual_home": 115,
+          "actual_away": 104,
+          "win_result": "miss"
+        }
+      ],
+      "total": 1,
+      "result": {
+        "hits": 1,
+        "total": 1,
+        "pct": 100.0,
+        "win_hits": 0,
+        "win_total": 1,
+        "win_pct": 0.0
+      }
+    },
+    {
+      "date": "2026-05-20",
+      "predictions": [
+        {
+          "matchup": "San Antonio Spurs @ Oklahoma City Thunder",
+          "pick": "Oklahoma City Thunder",
+          "conf": 0.95,
+          "ou": "OVER",
+          "ou_line": 216.0,
+          "total": 229.7,
+          "fh_ou": "OVER",
+          "fh_line": 102.6,
+          "god": true,
+          "tipoff": "01:30 AM WAT",
+          "day": "TODAY",
+          "edge": 13.7,
+          "strong_ou": true,
           "line_source": "Vegas",
           "result": "pending"
         }
