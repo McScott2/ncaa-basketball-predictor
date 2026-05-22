@@ -9720,9 +9720,44 @@
         "edge": 5.7,
         "strong_ou": false,
         "line_source": "Vegas",
+        "result": "miss",
+        "actual_total": 202,
+        "actual_home": 109,
+        "actual_away": 93,
+        "win_result": "miss"
+      }
+    ],
+    "saved_at": "2026-05-21 09:54",
+    "result": {
+      "hits": 0,
+      "total": 1,
+      "pct": 0.0,
+      "win_hits": 0,
+      "win_total": 1,
+      "win_pct": 0.0
+    }
+  },
+  {
+    "date": "2026-05-22",
+    "predictions": [
+      {
+        "matchup": "Oklahoma City Thunder @ San Antonio Spurs",
+        "pick": "Oklahoma City Thunder",
+        "conf": 0.8977,
+        "ou": "OVER",
+        "ou_line": 217.5,
+        "total": 229.7,
+        "fh_ou": "OVER",
+        "fh_line": 103.3,
+        "god": true,
+        "tipoff": "01:30 AM WAT",
+        "day": "TODAY",
+        "edge": 12.2,
+        "strong_ou": true,
+        "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-05-21 09:54"
+    "saved_at": "2026-05-22 09:39"
   }
 ]
