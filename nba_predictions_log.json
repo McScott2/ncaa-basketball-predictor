@@ -9825,9 +9825,44 @@
         "edge": 11.2,
         "strong_ou": true,
         "line_source": "Vegas",
+        "result": "miss",
+        "actual_total": 185,
+        "actual_home": 103,
+        "actual_away": 82,
+        "win_result": "miss"
+      }
+    ],
+    "saved_at": "2026-05-24 08:38",
+    "result": {
+      "hits": 0,
+      "total": 1,
+      "pct": 0.0,
+      "win_hits": 0,
+      "win_total": 1,
+      "win_pct": 0.0
+    }
+  },
+  {
+    "date": "2026-05-25",
+    "predictions": [
+      {
+        "matchup": "New York Knicks @ Cleveland Cavaliers",
+        "pick": "Cleveland Cavaliers",
+        "conf": 0.7722,
+        "ou": "OVER",
+        "ou_line": 217.5,
+        "total": 222.2,
+        "fh_ou": "OVER",
+        "fh_line": 103.3,
+        "god": true,
+        "tipoff": "01:00 AM WAT",
+        "day": "TODAY",
+        "edge": 4.7,
+        "strong_ou": false,
+        "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-05-24 08:38"
+    "saved_at": "2026-05-25 10:21"
   }
 ]
