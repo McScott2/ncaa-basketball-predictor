@@ -9930,9 +9930,21 @@
         "edge": 9.6,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 209,
+        "actual_home": 118,
+        "actual_away": 91,
+        "win_result": "miss"
       }
     ],
-    "saved_at": "2026-05-28 10:15"
+    "saved_at": "2026-05-28 10:15",
+    "result": {
+      "hits": 0,
+      "total": 1,
+      "pct": 0.0,
+      "win_hits": 0,
+      "win_total": 1,
+      "win_pct": 0.0
+    }
   }
 ]
