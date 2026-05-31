@@ -1,36 +1,14 @@
 {
-  "updated": "2026-05-30 17:08",
+  "updated": "2026-05-31 08:54",
   "stats": {
-    "total_hits": 205,
-    "total_picks": 419,
-    "accuracy": 48.9,
+    "total_hits": 206,
+    "total_picks": 420,
+    "accuracy": 49.0,
     "best_day": "2026-04-23",
     "best_pct": 100.0,
-    "days_tracked": 83
+    "days_tracked": 84
   },
-  "nba_today": {
-    "date": "2026-05-30",
-    "predictions": [
-      {
-        "matchup": "San Antonio Spurs @ Oklahoma City Thunder",
-        "pick": "Oklahoma City Thunder",
-        "conf": 0.95,
-        "ou": "OVER",
-        "ou_line": 212.5,
-        "total": 228.7,
-        "fh_ou": "OVER",
-        "fh_line": 100.9,
-        "god": true,
-        "tipoff": "01:00 AM WAT",
-        "day": "TODAY",
-        "edge": 16.2,
-        "strong_ou": true,
-        "line_source": "Vegas",
-        "result": "pending"
-      }
-    ],
-    "saved_at": "2026-05-30 08:34"
-  },
+  "nba_today": null,
   "nba_history": [
     {
       "date": "2026-03-01",
@@ -9998,10 +9976,22 @@
           "edge": 16.2,
           "strong_ou": true,
           "line_source": "Vegas",
-          "result": "pending"
+          "result": "hit",
+          "actual_total": 214,
+          "actual_home": 103,
+          "actual_away": 111,
+          "win_result": "miss"
         }
       ],
-      "total": 1
+      "total": 1,
+      "result": {
+        "hits": 1,
+        "total": 1,
+        "pct": 100.0,
+        "win_hits": 0,
+        "win_total": 1,
+        "win_pct": 0.0
+      }
     }
   ]
 }
