@@ -1,36 +1,14 @@
 {
-  "updated": "2026-06-08 18:26",
+  "updated": "2026-06-09 09:55",
   "stats": {
-    "total_hits": 206,
-    "total_picks": 422,
-    "accuracy": 48.8,
+    "total_hits": 207,
+    "total_picks": 423,
+    "accuracy": 48.9,
     "best_day": "2026-04-23",
     "best_pct": 100.0,
-    "days_tracked": 86
+    "days_tracked": 87
   },
-  "nba_today": {
-    "date": "2026-06-08",
-    "predictions": [
-      {
-        "matchup": "San Antonio Spurs @ New York Knicks",
-        "pick": "New York Knicks",
-        "conf": 0.8736,
-        "ou": "OVER",
-        "ou_line": 216.5,
-        "total": 220.7,
-        "fh_ou": "OVER",
-        "fh_line": 102.8,
-        "god": true,
-        "tipoff": "01:30 AM WAT",
-        "day": "TODAY",
-        "edge": 4.2,
-        "strong_ou": false,
-        "line_source": "Vegas",
-        "result": "pending"
-      }
-    ],
-    "saved_at": "2026-06-08 11:09"
-  },
+  "nba_today": null,
   "nba_history": [
     {
       "date": "2026-03-01",
@@ -10103,10 +10081,22 @@
           "edge": 4.2,
           "strong_ou": false,
           "line_source": "Vegas",
-          "result": "pending"
+          "result": "hit",
+          "actual_total": 226,
+          "actual_home": 111,
+          "actual_away": 115,
+          "win_result": "miss"
         }
       ],
-      "total": 1
+      "total": 1,
+      "result": {
+        "hits": 1,
+        "total": 1,
+        "pct": 100.0,
+        "win_hits": 0,
+        "win_total": 1,
+        "win_pct": 0.0
+      }
     }
   ]
 }
