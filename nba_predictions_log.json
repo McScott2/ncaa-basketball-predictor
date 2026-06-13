@@ -10121,5 +10121,28 @@
       "win_total": 1,
       "win_pct": 100.0
     }
+  },
+  {
+    "date": "2026-06-13",
+    "predictions": [
+      {
+        "matchup": "New York Knicks @ San Antonio Spurs",
+        "pick": "New York Knicks",
+        "conf": 0.7375,
+        "ou": "OVER",
+        "ou_line": 216.5,
+        "total": 219.7,
+        "fh_ou": "OVER",
+        "fh_line": 102.8,
+        "god": true,
+        "tipoff": "01:30 AM WAT",
+        "day": "TODAY",
+        "edge": 3.2,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      }
+    ],
+    "saved_at": "2026-06-13 09:25"
   }
 ]
