@@ -10140,9 +10140,21 @@
         "edge": 3.2,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 184,
+        "actual_home": 90,
+        "actual_away": 94,
+        "win_result": "hit"
       }
     ],
-    "saved_at": "2026-06-13 09:25"
+    "saved_at": "2026-06-13 09:25",
+    "result": {
+      "hits": 0,
+      "total": 1,
+      "pct": 0.0,
+      "win_hits": 1,
+      "win_total": 1,
+      "win_pct": 100.0
+    }
   }
 ]
