@@ -1,19 +1,19 @@
 {
-  "version": 219,
-  "updated": "2026-06-21 17:40",
+  "version": 220,
+  "updated": "2026-06-22 12:16",
   "weights": {
     "pythagorean": 0.5,
     "efficiency": 0.2546,
     "four_factors": 0.1547,
     "form": 0.05,
     "home_adv": 0.045,
-    "total_bias": -5.099999999999999,
+    "total_bias": -5.199999999999998,
     "pace_weight": 1.0,
     "def_penalty": 0.98,
     "b2b_penalty": 0.97,
     "strong_ou_threshold": 8.0
   },
   "notes": [
-    "total_bias: -5.00 \u2192 -5.10 (avg error was +15.2pts)"
+    "total_bias: -5.10 \u2192 -5.20 (avg error was +15.2pts)"
   ]
 }
