@@ -6315,5 +6315,27 @@
       "b2b_penalty": 0.97,
       "strong_ou_threshold": 8.0
     }
+  },
+  {
+    "date": "2026-07-11",
+    "version": 259,
+    "analysis": {
+      "ou_acc": 28.6,
+      "win_acc": 57.1,
+      "avg_total_error": 15.21
+    },
+    "changes": [],
+    "weights": {
+      "pythagorean": 0.5,
+      "efficiency": 0.2546,
+      "four_factors": 0.1547,
+      "form": 0.05,
+      "home_adv": 0.045,
+      "total_bias": -8.0,
+      "pace_weight": 1.0,
+      "def_penalty": 0.98,
+      "b2b_penalty": 0.97,
+      "strong_ou_threshold": 8.0
+    }
   }
 ]
