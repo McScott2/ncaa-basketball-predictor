@@ -1,6 +1,6 @@
 {
-  "version": 310,
-  "updated": "2026-08-06 08:46",
+  "version": 311,
+  "updated": "2026-08-07 07:24",
   "weights": {
     "pythagorean": 0.5,
     "efficiency": 0.2546,
