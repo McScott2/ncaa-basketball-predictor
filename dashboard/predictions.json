@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-02 20:26",
+  "updated": "2026-10-03 11:26",
   "stats": {
     "total_hits": 207,
     "total_picks": 425,
@@ -8,7 +8,29 @@
     "best_pct": 100.0,
     "days_tracked": 89
   },
-  "nba_today": null,
+  "nba_today": {
+    "date": "2026-10-03",
+    "predictions": [
+      {
+        "matchup": "Miami Heat @ Toronto Raptors",
+        "pick": "Miami Heat",
+        "conf": 0.6994,
+        "ou": "UNDER",
+        "ou_line": 242.5,
+        "total": 210.9,
+        "fh_ou": "UNDER",
+        "fh_line": 115.2,
+        "god": false,
+        "tipoff": "12:00 AM WAT",
+        "day": "TODAY",
+        "edge": 31.6,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      }
+    ],
+    "saved_at": "2026-10-03 11:26"
+  },
   "nba_history": [
     {
       "date": "2026-03-01",
@@ -10167,6 +10189,29 @@
         "win_total": 1,
         "win_pct": 100.0
       }
+    },
+    {
+      "date": "2026-10-03",
+      "predictions": [
+        {
+          "matchup": "Miami Heat @ Toronto Raptors",
+          "pick": "Miami Heat",
+          "conf": 0.6994,
+          "ou": "UNDER",
+          "ou_line": 242.5,
+          "total": 210.9,
+          "fh_ou": "UNDER",
+          "fh_line": 115.2,
+          "god": false,
+          "tipoff": "12:00 AM WAT",
+          "day": "TODAY",
+          "edge": 31.6,
+          "strong_ou": true,
+          "line_source": "Vegas",
+          "result": "pending"
+        }
+      ],
+      "total": 1
     }
   ]
 }

@@ -10156,5 +10156,28 @@
       "win_total": 1,
       "win_pct": 100.0
     }
+  },
+  {
+    "date": "2026-10-03",
+    "predictions": [
+      {
+        "matchup": "Miami Heat @ Toronto Raptors",
+        "pick": "Miami Heat",
+        "conf": 0.6994,
+        "ou": "UNDER",
+        "ou_line": 242.5,
+        "total": 210.9,
+        "fh_ou": "UNDER",
+        "fh_line": 115.2,
+        "god": false,
+        "tipoff": "12:00 AM WAT",
+        "day": "TODAY",
+        "edge": 31.6,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      }
+    ],
+    "saved_at": "2026-10-03 11:26"
   }
 ]
