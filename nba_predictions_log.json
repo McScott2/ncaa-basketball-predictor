@@ -10175,9 +10175,61 @@
         "edge": 31.6,
         "strong_ou": true,
         "line_source": "Vegas",
+        "result": "hit",
+        "actual_total": 234,
+        "actual_home": 105,
+        "actual_away": 129,
+        "win_result": "hit"
+      }
+    ],
+    "saved_at": "2026-10-03 11:26",
+    "result": {
+      "hits": 1,
+      "total": 1,
+      "pct": 100.0,
+      "win_hits": 1,
+      "win_total": 1,
+      "win_pct": 100.0
+    }
+  },
+  {
+    "date": "2026-10-04",
+    "predictions": [
+      {
+        "matchup": "Utah Jazz @ Denver Nuggets",
+        "pick": "Denver Nuggets",
+        "conf": 0.95,
+        "ou": "UNDER",
+        "ou_line": 241.5,
+        "total": 219.8,
+        "fh_ou": "UNDER",
+        "fh_line": 114.7,
+        "god": true,
+        "tipoff": "12:00 AM WAT",
+        "day": "TODAY",
+        "edge": 21.7,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Golden State Warriors @ LA Clippers",
+        "pick": "LA Clippers",
+        "conf": 0.5516,
+        "ou": "UNDER",
+        "ou_line": 235.5,
+        "total": 217.7,
+        "fh_ou": "UNDER",
+        "fh_line": 111.9,
+        "god": false,
+        "tipoff": "12:00 AM WAT",
+        "day": "TODAY",
+        "edge": 17.8,
+        "strong_ou": true,
+        "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-10-03 11:26"
+    "saved_at": "2026-10-04 12:07"
   }
 ]
