@@ -1,11 +1,11 @@
 {
-  "version": 428,
-  "updated": "2026-10-04 19:17",
+  "version": 429,
+  "updated": "2026-10-05 14:13",
   "weights": {
-    "pythagorean": 0.5,
-    "efficiency": 0.2546,
-    "four_factors": 0.1547,
-    "form": 0.05,
+    "pythagorean": 0.4921,
+    "efficiency": 0.2565,
+    "four_factors": 0.1522,
+    "form": 0.0492,
     "home_adv": 0.045,
     "total_bias": -8.0,
     "pace_weight": 1.0,
@@ -13,5 +13,8 @@
     "b2b_penalty": 0.97,
     "strong_ou_threshold": 8.0
   },
-  "notes": []
+  "notes": [
+    "strong_ou_threshold: 8.0 \u2192 8.0 (Strong O/U hitting 100%)",
+    "efficiency: 0.255 \u2192 0.261 (win acc strong at 75%)"
+  ]
 }

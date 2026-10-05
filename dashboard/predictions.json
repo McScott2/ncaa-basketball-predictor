@@ -1,52 +1,103 @@
 {
-  "updated": "2026-10-04 19:17",
+  "updated": "2026-10-05 14:13",
   "stats": {
-    "total_hits": 208,
-    "total_picks": 426,
-    "accuracy": 48.8,
+    "total_hits": 210,
+    "total_picks": 428,
+    "accuracy": 49.1,
     "best_day": "2026-04-23",
     "best_pct": 100.0,
-    "days_tracked": 90
+    "days_tracked": 91
   },
   "nba_today": {
-    "date": "2026-10-04",
+    "date": "2026-10-05",
     "predictions": [
       {
-        "matchup": "Utah Jazz @ Denver Nuggets",
-        "pick": "Denver Nuggets",
-        "conf": 0.95,
+        "matchup": "Memphis Grizzlies @ Atlanta Hawks",
+        "pick": "Atlanta Hawks",
+        "conf": 0.7874,
         "ou": "UNDER",
-        "ou_line": 241.5,
-        "total": 219.8,
+        "ou_line": 233.5,
+        "total": 227.0,
         "fh_ou": "UNDER",
-        "fh_line": 114.7,
+        "fh_line": 110.9,
         "god": true,
         "tipoff": "12:00 AM WAT",
         "day": "TODAY",
-        "edge": 21.7,
+        "edge": 6.5,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Phoenix Suns @ Detroit Pistons",
+        "pick": "Detroit Pistons",
+        "conf": 0.8026,
+        "ou": "OVER",
+        "ou_line": 221.5,
+        "total": 223.6,
+        "fh_ou": "OVER",
+        "fh_line": 105.2,
+        "god": true,
+        "tipoff": "12:00 AM WAT",
+        "day": "TODAY",
+        "edge": 2.1,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "New York Knicks @ Philadelphia 76ers",
+        "pick": "New York Knicks",
+        "conf": 0.5791,
+        "ou": "UNDER",
+        "ou_line": 231.5,
+        "total": 214.3,
+        "fh_ou": "UNDER",
+        "fh_line": 110.0,
+        "god": false,
+        "tipoff": "12:00 AM WAT",
+        "day": "TODAY",
+        "edge": 17.2,
         "strong_ou": true,
         "line_source": "Vegas",
         "result": "pending"
       },
       {
-        "matchup": "Golden State Warriors @ LA Clippers",
-        "pick": "LA Clippers",
-        "conf": 0.5516,
+        "matchup": "Minnesota Timberwolves @ Milwaukee Bucks",
+        "pick": "Milwaukee Bucks",
+        "conf": 0.5816,
+        "ou": "UNDER",
+        "ou_line": 237.5,
+        "total": 217.1,
+        "fh_ou": "UNDER",
+        "fh_line": 112.8,
+        "god": false,
+        "tipoff": "01:00 AM WAT",
+        "day": "TODAY",
+        "edge": 20.4,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Los Angeles Lakers @ Sacramento Kings",
+        "pick": "Los Angeles Lakers",
+        "conf": 0.7071,
         "ou": "UNDER",
         "ou_line": 235.5,
-        "total": 217.7,
+        "total": 222.9,
         "fh_ou": "UNDER",
         "fh_line": 111.9,
-        "god": false,
-        "tipoff": "12:00 AM WAT",
+        "god": true,
+        "tipoff": "03:00 AM WAT",
         "day": "TODAY",
-        "edge": 17.8,
+        "edge": 12.6,
         "strong_ou": true,
         "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-10-04 12:07"
+    "saved_at": "2026-10-05 14:13"
   },
   "nba_history": [
     {
@@ -10260,7 +10311,11 @@
           "edge": 21.7,
           "strong_ou": true,
           "line_source": "Vegas",
-          "result": "pending"
+          "result": "hit",
+          "actual_total": 206,
+          "actual_home": 97,
+          "actual_away": 109,
+          "win_result": "miss"
         },
         {
           "matchup": "Golden State Warriors @ LA Clippers",
@@ -10277,10 +10332,113 @@
           "edge": 17.8,
           "strong_ou": true,
           "line_source": "Vegas",
+          "result": "hit",
+          "actual_total": 205,
+          "actual_home": 104,
+          "actual_away": 101,
+          "win_result": "hit"
+        }
+      ],
+      "total": 2,
+      "result": {
+        "hits": 2,
+        "total": 2,
+        "pct": 100.0,
+        "win_hits": 1,
+        "win_total": 2,
+        "win_pct": 50.0
+      }
+    },
+    {
+      "date": "2026-10-05",
+      "predictions": [
+        {
+          "matchup": "Memphis Grizzlies @ Atlanta Hawks",
+          "pick": "Atlanta Hawks",
+          "conf": 0.7874,
+          "ou": "UNDER",
+          "ou_line": 233.5,
+          "total": 227.0,
+          "fh_ou": "UNDER",
+          "fh_line": 110.9,
+          "god": true,
+          "tipoff": "12:00 AM WAT",
+          "day": "TODAY",
+          "edge": 6.5,
+          "strong_ou": false,
+          "line_source": "Vegas",
+          "result": "pending"
+        },
+        {
+          "matchup": "Phoenix Suns @ Detroit Pistons",
+          "pick": "Detroit Pistons",
+          "conf": 0.8026,
+          "ou": "OVER",
+          "ou_line": 221.5,
+          "total": 223.6,
+          "fh_ou": "OVER",
+          "fh_line": 105.2,
+          "god": true,
+          "tipoff": "12:00 AM WAT",
+          "day": "TODAY",
+          "edge": 2.1,
+          "strong_ou": false,
+          "line_source": "Vegas",
+          "result": "pending"
+        },
+        {
+          "matchup": "New York Knicks @ Philadelphia 76ers",
+          "pick": "New York Knicks",
+          "conf": 0.5791,
+          "ou": "UNDER",
+          "ou_line": 231.5,
+          "total": 214.3,
+          "fh_ou": "UNDER",
+          "fh_line": 110.0,
+          "god": false,
+          "tipoff": "12:00 AM WAT",
+          "day": "TODAY",
+          "edge": 17.2,
+          "strong_ou": true,
+          "line_source": "Vegas",
+          "result": "pending"
+        },
+        {
+          "matchup": "Minnesota Timberwolves @ Milwaukee Bucks",
+          "pick": "Milwaukee Bucks",
+          "conf": 0.5816,
+          "ou": "UNDER",
+          "ou_line": 237.5,
+          "total": 217.1,
+          "fh_ou": "UNDER",
+          "fh_line": 112.8,
+          "god": false,
+          "tipoff": "01:00 AM WAT",
+          "day": "TODAY",
+          "edge": 20.4,
+          "strong_ou": true,
+          "line_source": "Vegas",
+          "result": "pending"
+        },
+        {
+          "matchup": "Los Angeles Lakers @ Sacramento Kings",
+          "pick": "Los Angeles Lakers",
+          "conf": 0.7071,
+          "ou": "UNDER",
+          "ou_line": 235.5,
+          "total": 222.9,
+          "fh_ou": "UNDER",
+          "fh_line": 111.9,
+          "god": true,
+          "tipoff": "03:00 AM WAT",
+          "day": "TODAY",
+          "edge": 12.6,
+          "strong_ou": true,
+          "line_source": "Vegas",
           "result": "pending"
         }
       ],
-      "total": 2
+      "total": 5
     }
   ]
 }
