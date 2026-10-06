@@ -1,6 +1,6 @@
 {
-  "version": 430,
-  "updated": "2026-10-05 22:21",
+  "version": 431,
+  "updated": "2026-10-06 13:08",
   "weights": {
     "pythagorean": 0.4921,
     "efficiency": 0.2625,
@@ -14,7 +14,6 @@
     "strong_ou_threshold": 8.0
   },
   "notes": [
-    "strong_ou_threshold: 8.0 \u2192 8.0 (Strong O/U hitting 100%)",
-    "efficiency: 0.257 \u2192 0.263 (win acc strong at 75%)"
+    "strong_ou_threshold: 8.0 \u2192 8.0 (Strong O/U hitting 100%)"
   ]
 }
