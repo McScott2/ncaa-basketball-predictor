@@ -1,10 +1,10 @@
 {
-  "version": 432,
-  "updated": "2026-10-06 20:49",
+  "version": 433,
+  "updated": "2026-10-07 13:03",
   "weights": {
-    "pythagorean": 0.4921,
-    "efficiency": 0.2625,
-    "four_factors": 0.1522,
+    "pythagorean": 0.4924,
+    "efficiency": 0.2585,
+    "four_factors": 0.1499,
     "form": 0.0492,
     "home_adv": 0.045,
     "total_bias": -8.0,
@@ -14,6 +14,8 @@
     "strong_ou_threshold": 8.0
   },
   "notes": [
-    "strong_ou_threshold: 8.0 \u2192 8.0 (Strong O/U hitting 100%)"
+    "strong_ou_threshold: 8.0 \u2192 8.0 (Strong O/U hitting 100%)",
+    "pythagorean: 0.492 \u2192 0.500 (win acc low at 47%)",
+    "form: 0.049 \u2192 0.050"
   ]
 }
