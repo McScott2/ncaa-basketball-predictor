@@ -1,11 +1,11 @@
 {
-  "version": 433,
-  "updated": "2026-10-07 13:03",
+  "version": 434,
+  "updated": "2026-10-07 21:04",
   "weights": {
-    "pythagorean": 0.4924,
+    "pythagorean": 0.5,
     "efficiency": 0.2585,
     "four_factors": 0.1499,
-    "form": 0.0492,
+    "form": 0.05,
     "home_adv": 0.045,
     "total_bias": -8.0,
     "pace_weight": 1.0,
