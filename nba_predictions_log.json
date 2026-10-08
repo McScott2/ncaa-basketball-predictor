@@ -10483,7 +10483,11 @@
         "edge": 16.0,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 235,
+        "actual_home": 123,
+        "actual_away": 112,
+        "win_result": "hit"
       },
       {
         "matchup": "Orlando Magic @ Memphis Grizzlies",
@@ -10500,7 +10504,11 @@
         "edge": 22.6,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 240,
+        "actual_home": 118,
+        "actual_away": 122,
+        "win_result": "miss"
       },
       {
         "matchup": "Milwaukee Bucks @ Oklahoma City Thunder",
@@ -10517,7 +10525,11 @@
         "edge": 7.0,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 254,
+        "actual_home": 126,
+        "actual_away": 128,
+        "win_result": "miss"
       },
       {
         "matchup": "Phoenix Suns @ Chicago Bulls",
@@ -10534,7 +10546,11 @@
         "edge": 18.3,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 241,
+        "actual_home": 124,
+        "actual_away": 117,
+        "win_result": "hit"
       },
       {
         "matchup": "Golden State Warriors @ Portland Trail Blazers",
@@ -10551,9 +10567,129 @@
         "edge": 18.0,
         "strong_ou": true,
         "line_source": "Vegas",
+        "result": "miss",
+        "actual_total": 241,
+        "actual_home": 123,
+        "actual_away": 118,
+        "win_result": "miss"
+      }
+    ],
+    "saved_at": "2026-10-07 13:03",
+    "result": {
+      "hits": 1,
+      "total": 5,
+      "pct": 20.0,
+      "win_hits": 2,
+      "win_total": 5,
+      "win_pct": 40.0
+    }
+  },
+  {
+    "date": "2026-10-08",
+    "predictions": [
+      {
+        "matchup": "Boston Celtics @ Cleveland Cavaliers",
+        "pick": "Boston Celtics",
+        "conf": 0.5504,
+        "ou": "UNDER",
+        "ou_line": 222.5,
+        "total": 219.7,
+        "fh_ou": "UNDER",
+        "fh_line": 105.7,
+        "god": false,
+        "tipoff": "12:00 AM WAT",
+        "day": "TODAY",
+        "edge": 2.8,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "New Orleans Pelicans @ Miami Heat",
+        "pick": "Miami Heat",
+        "conf": 0.7752,
+        "ou": "UNDER",
+        "ou_line": 242.5,
+        "total": 211.0,
+        "fh_ou": "UNDER",
+        "fh_line": 115.2,
+        "god": true,
+        "tipoff": "12:30 AM WAT",
+        "day": "TODAY",
+        "edge": 31.5,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Philadelphia 76ers @ Brooklyn Nets",
+        "pick": "Philadelphia 76ers",
+        "conf": 0.7332,
+        "ou": "UNDER",
+        "ou_line": 231.5,
+        "total": 215.2,
+        "fh_ou": "UNDER",
+        "fh_line": 110.0,
+        "god": true,
+        "tipoff": "12:30 AM WAT",
+        "day": "TODAY",
+        "edge": 16.3,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Washington Wizards @ New York Knicks",
+        "pick": "New York Knicks",
+        "conf": 0.95,
+        "ou": "UNDER",
+        "ou_line": 231.5,
+        "total": 213.5,
+        "fh_ou": "UNDER",
+        "fh_line": 110.0,
+        "god": true,
+        "tipoff": "12:30 AM WAT",
+        "day": "TODAY",
+        "edge": 18.0,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Atlanta Hawks @ San Antonio Spurs",
+        "pick": "Atlanta Hawks",
+        "conf": 0.6939,
+        "ou": "UNDER",
+        "ou_line": 231.5,
+        "total": 226.6,
+        "fh_ou": "UNDER",
+        "fh_line": 110.0,
+        "god": false,
+        "tipoff": "01:00 AM WAT",
+        "day": "TODAY",
+        "edge": 4.9,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Sacramento Kings @ Los Angeles Lakers",
+        "pick": "Los Angeles Lakers",
+        "conf": 0.8561,
+        "ou": "UNDER",
+        "ou_line": 236.5,
+        "total": 222.9,
+        "fh_ou": "UNDER",
+        "fh_line": 112.3,
+        "god": true,
+        "tipoff": "03:30 AM WAT",
+        "day": "TODAY",
+        "edge": 13.6,
+        "strong_ou": true,
+        "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-10-07 13:03"
+    "saved_at": "2026-10-08 13:10"
   }
 ]
