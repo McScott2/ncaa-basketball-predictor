@@ -1,22 +1,22 @@
 {
-  "version": 436,
-  "updated": "2026-10-08 21:05",
+  "version": 437,
+  "updated": "2026-10-09 12:57",
   "weights": {
     "pythagorean": 0.5,
     "efficiency": 0.2585,
     "four_factors": 0.1499,
     "form": 0.05,
     "home_adv": 0.045,
-    "total_bias": -7.800000000000001,
+    "total_bias": -7.700000000000001,
     "pace_weight": 1.0,
     "def_penalty": 0.98,
     "b2b_penalty": 0.97,
     "strong_ou_threshold": 8.0
   },
   "notes": [
-    "total_bias: -7.90 \u2192 -7.80 (avg error was -5.7pts)",
-    "strong_ou_threshold: 8.0 \u2192 8.0 (Strong O/U hitting 79%)",
-    "pythagorean: 0.500 \u2192 0.500 (win acc low at 47%)",
+    "total_bias: -7.80 \u2192 -7.70 (avg error was -8.1pts)",
+    "strong_ou_threshold: 8.0 \u2192 8.0 (Strong O/U hitting 78%)",
+    "pythagorean: 0.500 \u2192 0.500 (win acc low at 50%)",
     "form: 0.050 \u2192 0.050"
   ]
 }
