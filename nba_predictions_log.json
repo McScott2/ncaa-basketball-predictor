@@ -11015,7 +11015,11 @@
         "edge": 17.3,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 185,
+        "actual_home": 119,
+        "actual_away": 66,
+        "win_result": "miss"
       },
       {
         "matchup": "Oklahoma City Thunder @ Atlanta Hawks",
@@ -11032,7 +11036,11 @@
         "edge": 0.7,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 223,
+        "actual_home": 113,
+        "actual_away": 110,
+        "win_result": "miss"
       },
       {
         "matchup": "Brooklyn Nets @ Washington Wizards",
@@ -11049,7 +11057,11 @@
         "edge": 27.8,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 253,
+        "actual_home": 122,
+        "actual_away": 131,
+        "win_result": "miss"
       },
       {
         "matchup": "Minnesota Timberwolves @ New York Knicks",
@@ -11066,7 +11078,11 @@
         "edge": 19.6,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 226,
+        "actual_home": 104,
+        "actual_away": 122,
+        "win_result": "miss"
       },
       {
         "matchup": "San Antonio Spurs @ Utah Jazz",
@@ -11083,9 +11099,112 @@
         "edge": 16.6,
         "strong_ou": true,
         "line_source": "Vegas",
+        "result": "hit",
+        "actual_total": 228,
+        "actual_home": 119,
+        "actual_away": 109,
+        "win_result": "miss"
+      }
+    ],
+    "saved_at": "2026-10-12 15:02",
+    "result": {
+      "hits": 4,
+      "total": 5,
+      "pct": 80.0,
+      "win_hits": 0,
+      "win_total": 5,
+      "win_pct": 0.0
+    }
+  },
+  {
+    "date": "2026-10-13",
+    "predictions": [
+      {
+        "matchup": "Cleveland Cavaliers @ Orlando Magic",
+        "pick": "Cleveland Cavaliers",
+        "conf": 0.875,
+        "ou": "UNDER",
+        "ou_line": 233.5,
+        "total": 210.3,
+        "fh_ou": "UNDER",
+        "fh_line": 110.9,
+        "god": true,
+        "tipoff": "12:00 AM WAT",
+        "day": "TODAY",
+        "edge": 23.2,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "New York Knicks @ Toronto Raptors",
+        "pick": "New York Knicks",
+        "conf": 0.8894,
+        "ou": "UNDER",
+        "ou_line": 231.5,
+        "total": 212.8,
+        "fh_ou": "UNDER",
+        "fh_line": 110.0,
+        "god": true,
+        "tipoff": "12:00 AM WAT",
+        "day": "TODAY",
+        "edge": 18.7,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Indiana Pacers @ Oklahoma City Thunder",
+        "pick": "Oklahoma City Thunder",
+        "conf": 0.8057,
+        "ou": "OVER",
+        "ou_line": 231.5,
+        "total": 235.0,
+        "fh_ou": "OVER",
+        "fh_line": 110.0,
+        "god": true,
+        "tipoff": "01:00 AM WAT",
+        "day": "TODAY",
+        "edge": 3.5,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Golden State Warriors @ Los Angeles Lakers",
+        "pick": "Los Angeles Lakers",
+        "conf": 0.7701,
+        "ou": "UNDER",
+        "ou_line": 236.5,
+        "total": 221.9,
+        "fh_ou": "UNDER",
+        "fh_line": 112.3,
+        "god": true,
+        "tipoff": "03:00 AM WAT",
+        "day": "TODAY",
+        "edge": 14.6,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Portland Trail Blazers @ Sacramento Kings",
+        "pick": "Sacramento Kings",
+        "conf": 0.7506,
+        "ou": "UNDER",
+        "ou_line": 235.5,
+        "total": 216.9,
+        "fh_ou": "UNDER",
+        "fh_line": 111.9,
+        "god": true,
+        "tipoff": "03:00 AM WAT",
+        "day": "TODAY",
+        "edge": 18.6,
+        "strong_ou": true,
+        "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-10-12 15:02"
+    "saved_at": "2026-10-13 13:57"
   }
 ]
