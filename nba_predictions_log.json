@@ -11470,7 +11470,11 @@
         "edge": 25.2,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 251,
+        "actual_home": 136,
+        "actual_away": 115,
+        "win_result": "hit"
       },
       {
         "matchup": "Boston Celtics @ Philadelphia 76ers",
@@ -11487,7 +11491,11 @@
         "edge": 0.6,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 245,
+        "actual_home": 120,
+        "actual_away": 125,
+        "win_result": "hit"
       },
       {
         "matchup": "Toronto Raptors @ Detroit Pistons",
@@ -11504,7 +11512,11 @@
         "edge": 8.2,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 254,
+        "actual_home": 129,
+        "actual_away": 125,
+        "win_result": "hit"
       },
       {
         "matchup": "Milwaukee Bucks @ Indiana Pacers",
@@ -11521,7 +11533,11 @@
         "edge": 3.0,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 255,
+        "actual_home": 127,
+        "actual_away": 128,
+        "win_result": "miss"
       },
       {
         "matchup": "Atlanta Hawks @ Dallas Mavericks",
@@ -11538,7 +11554,11 @@
         "edge": 4.7,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 246,
+        "actual_home": 111,
+        "actual_away": 135,
+        "win_result": "miss"
       },
       {
         "matchup": "Sacramento Kings @ San Antonio Spurs",
@@ -11555,7 +11575,11 @@
         "edge": 13.4,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 223,
+        "actual_home": 126,
+        "actual_away": 97,
+        "win_result": "hit"
       },
       {
         "matchup": "Charlotte Hornets @ Memphis Grizzlies",
@@ -11572,7 +11596,11 @@
         "edge": 8.3,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 215,
+        "actual_home": 117,
+        "actual_away": 98,
+        "win_result": "hit"
       },
       {
         "matchup": "Washington Wizards @ New Orleans Pelicans",
@@ -11589,7 +11617,11 @@
         "edge": 28.1,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 213,
+        "actual_home": 107,
+        "actual_away": 106,
+        "win_result": "hit"
       },
       {
         "matchup": "Minnesota Timberwolves @ Chicago Bulls",
@@ -11606,7 +11638,11 @@
         "edge": 18.8,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 249,
+        "actual_home": 133,
+        "actual_away": 116,
+        "win_result": "miss"
       },
       {
         "matchup": "Portland Trail Blazers @ Golden State Warriors",
@@ -11623,7 +11659,11 @@
         "edge": 16.4,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 246,
+        "actual_home": 128,
+        "actual_away": 118,
+        "win_result": "hit"
       },
       {
         "matchup": "Utah Jazz @ Phoenix Suns",
@@ -11640,7 +11680,11 @@
         "edge": 24.2,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 235,
+        "actual_home": 116,
+        "actual_away": 119,
+        "win_result": "miss"
       },
       {
         "matchup": "Denver Nuggets @ Los Angeles Lakers",
@@ -11657,9 +11701,21 @@
         "edge": 14.1,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 227,
+        "actual_home": 106,
+        "actual_away": 121,
+        "win_result": "miss"
       }
     ],
-    "saved_at": "2026-10-16 11:07"
+    "saved_at": "2026-10-16 11:07",
+    "result": {
+      "hits": 5,
+      "total": 12,
+      "pct": 41.7,
+      "win_hits": 7,
+      "win_total": 12,
+      "win_pct": 58.3
+    }
   }
 ]
