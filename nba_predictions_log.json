@@ -11717,5 +11717,62 @@
       "win_total": 12,
       "win_pct": 58.3
     }
+  },
+  {
+    "date": "2026-10-20",
+    "predictions": [
+      {
+        "matchup": "Boston Celtics @ Detroit Pistons",
+        "pick": "Boston Celtics",
+        "conf": 0.7555,
+        "ou": "OVER",
+        "ou_line": 222.5,
+        "total": 226.4,
+        "fh_ou": "OVER",
+        "fh_line": 105.7,
+        "god": true,
+        "tipoff": "08:00 PM WAT",
+        "day": "TODAY",
+        "edge": 3.9,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Philadelphia 76ers @ New York Knicks",
+        "pick": "New York Knicks",
+        "conf": 0.7719,
+        "ou": "UNDER",
+        "ou_line": 231.5,
+        "total": 216.7,
+        "fh_ou": "UNDER",
+        "fh_line": 110.0,
+        "god": true,
+        "tipoff": "12:00 AM WAT",
+        "day": "TODAY",
+        "edge": 14.8,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Oklahoma City Thunder @ San Antonio Spurs",
+        "pick": "Oklahoma City Thunder",
+        "conf": 0.8979,
+        "ou": "UNDER",
+        "ou_line": 232.5,
+        "total": 223.6,
+        "fh_ou": "UNDER",
+        "fh_line": 110.4,
+        "god": true,
+        "tipoff": "02:30 AM WAT",
+        "day": "TODAY",
+        "edge": 8.9,
+        "strong_ou": true,
+        "line_source": "Vegas",
+        "result": "pending"
+      }
+    ],
+    "saved_at": "2026-10-20 11:16"
   }
 ]
