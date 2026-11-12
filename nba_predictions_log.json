@@ -15390,7 +15390,11 @@
         "edge": 6.7,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 215,
+        "actual_home": 114,
+        "actual_away": 101,
+        "win_result": "hit"
       },
       {
         "matchup": "Cleveland Cavaliers @ New York Knicks",
@@ -15407,7 +15411,11 @@
         "edge": 2.6,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 222,
+        "actual_home": 107,
+        "actual_away": 115,
+        "win_result": "hit"
       },
       {
         "matchup": "Boston Celtics @ Toronto Raptors",
@@ -15424,7 +15432,11 @@
         "edge": 7.5,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 191,
+        "actual_home": 93,
+        "actual_away": 98,
+        "win_result": "hit"
       },
       {
         "matchup": "San Antonio Spurs @ Chicago Bulls",
@@ -15441,7 +15453,11 @@
         "edge": 18.8,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 243,
+        "actual_home": 119,
+        "actual_away": 124,
+        "win_result": "miss"
       },
       {
         "matchup": "Denver Nuggets @ Memphis Grizzlies",
@@ -15458,7 +15474,11 @@
         "edge": 3.9,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 241,
+        "actual_home": 118,
+        "actual_away": 123,
+        "win_result": "hit"
       },
       {
         "matchup": "Los Angeles Lakers @ Milwaukee Bucks",
@@ -15475,7 +15495,11 @@
         "edge": 2.4,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 235,
+        "actual_home": 112,
+        "actual_away": 123,
+        "win_result": "hit"
       },
       {
         "matchup": "Brooklyn Nets @ New Orleans Pelicans",
@@ -15492,7 +15516,11 @@
         "edge": 15.9,
         "strong_ou": true,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 256,
+        "actual_home": 111,
+        "actual_away": 145,
+        "win_result": "miss"
       },
       {
         "matchup": "Orlando Magic @ Utah Jazz",
@@ -15509,7 +15537,11 @@
         "edge": 0.9,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 231,
+        "actual_home": 108,
+        "actual_away": 123,
+        "win_result": "miss"
       },
       {
         "matchup": "Golden State Warriors @ Houston Rockets",
@@ -15526,7 +15558,11 @@
         "edge": 0.5,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 223,
+        "actual_home": 115,
+        "actual_away": 108,
+        "win_result": "hit"
       },
       {
         "matchup": "Oklahoma City Thunder @ Portland Trail Blazers",
@@ -15543,9 +15579,95 @@
         "edge": 0.4,
         "strong_ou": false,
         "line_source": "Vegas",
+        "result": "hit",
+        "actual_total": 226,
+        "actual_home": 118,
+        "actual_away": 108,
+        "win_result": "miss"
+      }
+    ],
+    "saved_at": "2026-11-11 13:55",
+    "result": {
+      "hits": 3,
+      "total": 10,
+      "pct": 30.0,
+      "win_hits": 6,
+      "win_total": 10,
+      "win_pct": 60.0
+    }
+  },
+  {
+    "date": "2026-11-12",
+    "predictions": [
+      {
+        "matchup": "Toronto Raptors @ Philadelphia 76ers",
+        "pick": "Philadelphia 76ers",
+        "conf": 0.9017,
+        "ou": "UNDER",
+        "ou_line": 222.5,
+        "total": 219.2,
+        "fh_ou": "UNDER",
+        "fh_line": 105.7,
+        "god": true,
+        "tipoff": "01:00 AM WAT",
+        "day": "TODAY",
+        "edge": 3.3,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Detroit Pistons @ Washington Wizards",
+        "pick": "Detroit Pistons",
+        "conf": 0.8694,
+        "ou": "OVER",
+        "ou_line": 220.5,
+        "total": 224.5,
+        "fh_ou": "OVER",
+        "fh_line": 104.7,
+        "god": true,
+        "tipoff": "01:00 AM WAT",
+        "day": "TODAY",
+        "edge": 4.0,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Dallas Mavericks @ Minnesota Timberwolves",
+        "pick": "Minnesota Timberwolves",
+        "conf": 0.6409,
+        "ou": "UNDER",
+        "ou_line": 226.5,
+        "total": 219.7,
+        "fh_ou": "UNDER",
+        "fh_line": 107.6,
+        "god": false,
+        "tipoff": "02:00 AM WAT",
+        "day": "TODAY",
+        "edge": 6.8,
+        "strong_ou": false,
+        "line_source": "Vegas",
+        "result": "pending"
+      },
+      {
+        "matchup": "Charlotte Hornets @ Phoenix Suns",
+        "pick": "Phoenix Suns",
+        "conf": 0.7964,
+        "ou": "OVER",
+        "ou_line": 214.5,
+        "total": 221.1,
+        "fh_ou": "OVER",
+        "fh_line": 101.9,
+        "god": true,
+        "tipoff": "03:00 AM WAT",
+        "day": "TODAY",
+        "edge": 6.6,
+        "strong_ou": false,
+        "line_source": "Vegas",
         "result": "pending"
       }
     ],
-    "saved_at": "2026-11-11 13:55"
+    "saved_at": "2026-11-12 14:56"
   }
 ]
