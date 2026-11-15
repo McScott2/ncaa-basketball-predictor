@@ -1,20 +1,20 @@
 {
-  "version": 511,
-  "updated": "2026-11-15 13:46",
+  "version": 512,
+  "updated": "2026-11-15 20:52",
   "weights": {
     "pythagorean": 0.5,
     "efficiency": 0.2585,
     "four_factors": 0.1499,
     "form": 0.05,
     "home_adv": 0.045,
-    "total_bias": -2.3000000000000127,
+    "total_bias": -2.2000000000000126,
     "pace_weight": 1.0,
     "def_penalty": 0.98,
     "b2b_penalty": 0.97,
-    "strong_ou_threshold": 13.5
+    "strong_ou_threshold": 14.0
   },
   "notes": [
-    "total_bias: -2.40 \u2192 -2.30 (avg error was -6.8pts)",
-    "strong_ou_threshold: 13.0 \u2192 13.5 (Strong O/U only 45%)"
+    "total_bias: -2.30 \u2192 -2.20 (avg error was -6.8pts)",
+    "strong_ou_threshold: 13.5 \u2192 14.0 (Strong O/U only 45%)"
   ]
 }
