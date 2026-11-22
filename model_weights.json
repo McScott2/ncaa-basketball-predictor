@@ -1,6 +1,6 @@
 {
-  "version": 524,
-  "updated": "2026-11-21 21:29",
+  "version": 525,
+  "updated": "2026-11-22 14:24",
   "weights": {
     "pythagorean": 0.5,
     "efficiency": 0.2585,
@@ -13,8 +13,5 @@
     "b2b_penalty": 0.97,
     "strong_ou_threshold": 16.0
   },
-  "notes": [
-    "total_bias: -1.10 \u2192 -1.00 (avg error was -4.2pts)",
-    "strong_ou_threshold: 16.5 \u2192 16.0 (Strong O/U hitting 80%)"
-  ]
+  "notes": []
 }
