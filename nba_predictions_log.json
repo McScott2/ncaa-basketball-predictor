@@ -17630,7 +17630,11 @@
         "edge": 7.0,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "miss",
+        "actual_total": 190,
+        "actual_home": 86,
+        "actual_away": 104,
+        "win_result": "hit"
       },
       {
         "matchup": "Boston Celtics @ Washington Wizards",
@@ -17647,7 +17651,11 @@
         "edge": 10.0,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 247,
+        "actual_home": 116,
+        "actual_away": 131,
+        "win_result": "hit"
       },
       {
         "matchup": "Dallas Mavericks @ Denver Nuggets",
@@ -17664,10 +17672,22 @@
         "edge": 4.9,
         "strong_ou": false,
         "line_source": "Vegas",
-        "result": "pending"
+        "result": "hit",
+        "actual_total": 221,
+        "actual_home": 101,
+        "actual_away": 120,
+        "win_result": "miss"
       }
     ],
-    "saved_at": "2026-11-24 02:46"
+    "saved_at": "2026-11-24 02:46",
+    "result": {
+      "hits": 2,
+      "total": 3,
+      "pct": 66.7,
+      "win_hits": 2,
+      "win_total": 3,
+      "win_pct": 66.7
+    }
   },
   {
     "date": "2026-11-25",
